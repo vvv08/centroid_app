@@ -11,7 +11,7 @@ export const getDashboard = async () => {
         })
         return result.data
     }catch(err){
-        console.log("Error: ", err.response.data.Error)
+        console.log("Error: ", err)
         throw err
     }
 }
