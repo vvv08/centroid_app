@@ -54,7 +54,7 @@ const Dashboard = ({ data }) => {
               </button>
             </div>
           </div>
-            <div className="centroid_DashboardContent">
+            {data.dashboard[0] && <div className="centroid_DashboardContent">
               <table id="example" className="display" style={{ width: "100%" }}>
                 <thead>
                   <tr>
@@ -79,7 +79,7 @@ const Dashboard = ({ data }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.dashboard[0] &&
+                  {
                     data.dashboard.map((obj) => {
                       return (
                         <tr key={obj.Id}>
@@ -124,7 +124,7 @@ const Dashboard = ({ data }) => {
                     })}
                 </tbody>
               </table>
-            </div>
+            </div>}
         </div>
       </div>
     </>
