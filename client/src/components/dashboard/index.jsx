@@ -45,7 +45,7 @@ const Dashboard = ({ data }) => {
               <button className="centroid_AddButton" onClick={() => {navigate('/addEntry')}}>Add entry</button>
             </div>
           </div>
-          <div className="centroid_DashboardContent">
+          {data.dashboard && <div className="centroid_DashboardContent">
             <table id="example" className="display" style={{ width: "100%" }}>
               <thead>
                 <tr>
@@ -102,7 +102,7 @@ const Dashboard = ({ data }) => {
                 })}
               </tbody>
             </table>
-          </div>
+          </div>}
         </div>
       </div>
     </>
