@@ -16,12 +16,12 @@ const Home = () => {
         setDashboardData(result);
       })
       .catch((err) => {
-        if(err.response.data.status === "authenticationError"){
-          alert(err.response.data.message)
-          navigate('/login')
-        }else{
-          alert(err.response.data.Message)
-          navigate('/maintenance')
+        if (err.response.data.status === "authenticationError") {
+          alert(err.response.data.message);
+          navigate("/login");
+        } else {
+          alert(err.response.data.Message);
+          navigate("/maintenance");
         }
       })
       .finally(() => {
@@ -34,13 +34,7 @@ const Home = () => {
       <div className="centroid_homeWrapper">
         <Navbar />
         <div className="centroid_homeDashboard">
-          {!loading && dashboardData.dashboard[0] ? (
-            <Dashboard data={dashboardData} />
-          ) : (
-            <div className="centroid_homeLoading">
-              <p>Loading...</p>
-            </div>
-          )}
+          <Dashboard data={dashboardData} />
         </div>
       </div>
     </>
