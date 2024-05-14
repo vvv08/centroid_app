@@ -9,7 +9,7 @@ router.get('/', [verifyToken] ,(req,res) => {
     getDashboard().then((result) => {
         res.status(200).json(result)
     }).catch((err) => {
-        res.status(500).json({"Message" : "Internal server error" , "Error" : err.message})
+        res.status(500).json({"Message" : "Internal server error" , "Error" : err})
     })
 })
 
