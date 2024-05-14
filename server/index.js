@@ -24,7 +24,7 @@ app.use(express.json());
 
 //To block requests from unknow URLs
 const allowedOrigins = [  
-    "http://localhost:5176"
+    process.env.SOURCE_URL_1
     // Add more origins if needed
 ];
 
@@ -45,6 +45,6 @@ app.use('/api/v1/masterData',masterRoutes);
 app.use('/api/v1/userList',userRoutes);
 app.use('/api/v1/graphData',graphRoutes)
 
-app.listen(3000, () => {
+app.listen(7000, () => {
     console.log("Server started")
 })
