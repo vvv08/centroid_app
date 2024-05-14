@@ -39,13 +39,13 @@ const Dashboard = ({ data }) => {
             <h2>Dashboard</h2>
             <div className="centroid_DashboardUpdates">
               <p>Last Updated: </p>
-              <p>{data.latest[0].latest_update}</p>
+              {data && <p>{data.latest.latest_update}</p>}
             </div>
             <div className="centroid_DasboardAdd">
               <button className="centroid_AddButton" onClick={() => {navigate('/addEntry')}}>Add entry</button>
             </div>
           </div>
-          {data.dashboard && <div className="centroid_DashboardContent">
+          {data && <div className="centroid_DashboardContent">
             <table id="example" className="display" style={{ width: "100%" }}>
               <thead>
                 <tr>

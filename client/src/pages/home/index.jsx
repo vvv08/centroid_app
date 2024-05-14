@@ -6,14 +6,20 @@ import { getDashboard } from "../../repository/dashboardRepository";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const [dashboardData, setDashboardData] = useState([]);
+  const [dashboardData, setDashboardData] = useState({
+    dashboard: "",
+    latest: "",
+  });
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     setLoading(true);
     getDashboard()
       .then((result) => {
-        setDashboardData(result);
+        setDashboardData({
+          dashboard: result.dashboard,
+          latest: result.latest[0],
+        });
       })
       .catch((err) => {
         if (err.response.data.status === "authenticationError") {
@@ -29,15 +35,13 @@ const Home = () => {
       });
   }, []);
 
-  console.log(dashboardData)
-
   return (
     <>
       <div className="centroid_homeWrapper">
         <Navbar />
-        <div className="centroid_homeDashboard">
-          <Dashboard data={dashboardData} />
-        </div>
+          <div className="centroid_homeDashboard">
+            <Dashboard data={dashboardData} />
+          </div>
       </div>
     </>
   );
