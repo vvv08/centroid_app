@@ -70,7 +70,7 @@ const Dashboard = ({ data }) => {
                 </tr>
               </thead>
               <tbody>
-                {data.dashboard.map((obj) => {
+                {data.dashboard && data.dashboard.map((obj) => {
                   return (
                     <tr key={obj.Id}>
                       <td>{obj.date}</td>
