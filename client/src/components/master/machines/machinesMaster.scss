@@ -1,0 +1,14 @@
+.centroid_machinesMasterWrapper{
+    display: flex;
+    justify-content: center;
+    .centroid_machinesMasterContainer{
+        width: 60%;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        .centroid_machinesMasterAdd{
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

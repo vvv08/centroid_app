@@ -1,0 +1,16 @@
+.centroid_homeWrapper{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .centroid_homeLoading{
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        p{
+            font-size: 20px;
+            font-weight: 500;
+        }
+    }
+}

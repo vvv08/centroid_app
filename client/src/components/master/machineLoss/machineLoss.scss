@@ -1,0 +1,14 @@
+.centroid_machineLossMasterWrapper{
+    display: flex;
+    justify-content: center;
+    .centroid_machineLossMasterContainer{
+        width: 60%;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        .centroid_machineLossMasterAdd{
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

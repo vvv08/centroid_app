@@ -1,0 +1,71 @@
+*{
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    --centroidBackground: #E1EBEE;
+    --centroidRed: #fd5c63;
+    --centroidWhite: #FAF9F6;
+    --centroidBlue: #00308F;
+    --centroidDeleteRed:#BF0426;
+    --centroidDeleteRed_dark:#800c22;
+    --centroidEditGreen: #40c057;
+    --centroidEditGreen_dark: #1c802e;
+    --centroidAddBlue:#1e90ff;
+    --centroidAddBlue_dark:#0f559b;
+    --centroidMaroon:#AA0000;
+    --centroidMaroon_dark:#660000;
+    --centroidEditYellow:#FEBE10;
+    --centroidPrintWhite:#ffffff;
+}
+
+.centroid_AddButton{
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    color: var(--centroidBackground);
+    background-color: var(--centroidAddBlue);
+}
+.centroid_AddButton:hover{
+    background-color: var(--centroidAddBlue_dark);
+    transition: 0.4s;
+}
+
+.centroid_DeleteButton{
+    width: 50px;
+    height: 25px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    color: var(--centroidBackground);
+    background-color: var(--centroidDeleteRed);
+}
+.centroid_DeleteButton:hover{
+    background-color: var(--centroidDeleteRed_dark);
+    transition: 0.4s;
+}
+
+.centroid_EditButton{
+    width: 50px;
+    height: 25px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    color: var(--centroidBackground);
+    background-color: var(--centroidEditGreen);
+}
+.centroid_EditButton:hover{
+    background-color: var(--centroidEditGreen_dark);
+    transition: 0.4s;
+}
+
+.centroid_inactive_row{
+    color: var(--centroidDeleteRed);
+}
+

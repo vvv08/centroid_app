@@ -1,0 +1,68 @@
+.centroid_ORPrintFormatWrapper {
+  width: 100%;
+  top: 60px;
+  background-color: var(--centroidPrintWhite);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0px 0px 0px;
+  .centroid_ORPrintFormatWrapperContainer {
+    width: 90%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    .centroid_ORPrintFormatTop {
+        display: flex;
+        width: 100%;
+        .centroid_ORPrintFormatLogo{
+            border-bottom: 5px solid var(--centroidRed);
+            flex: 1;
+            img{
+                width:300px;
+                object-fit: contain;
+            }
+        }
+        .centroid_ORPrintFormatDate{
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 5px solid var(--centroidRed);
+        }
+        .centroid_ORPrintFormatAddress{
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 5px solid var(--centroidRed);
+            p{
+                width: 80%;
+            }
+        }
+    }
+    .centroid_ORPrintFormatHeader{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        margin-bottom: 20px;
+       .centroid_ORPrintFormatTopic{
+        h1{
+
+        }
+       }
+       .centroid_ORPrintFormatRange{
+        p{
+            
+        }
+       } 
+    }
+    .centroid_ORPrintFormatContent{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+  }
+}

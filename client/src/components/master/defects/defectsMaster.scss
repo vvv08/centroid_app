@@ -1,0 +1,14 @@
+.centroid_defectsMasterWrapper{
+    display: flex;
+    justify-content: center;
+    .centroid_defectsMasterContainer{
+        width: 60%;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        .centroid_defectsMasterAdd{
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

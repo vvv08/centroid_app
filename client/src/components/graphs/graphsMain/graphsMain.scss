@@ -1,0 +1,49 @@
+.centroid_graphMainWrapper{
+    .centroid_graphMainContainer{
+     display: flex;
+     flex-direction: column;
+     gap: 30px;
+     .centroid_graphMainList{
+         ul{
+             list-style: none;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             gap: 30px;
+             height: 50px;
+             .centroid_graphMainSelectedTab{
+                 text-decoration: underline 3px;
+                 text-underline-offset: 6px;
+                 color: var(--centroidBlue)
+             }
+             li{
+                 font-weight: 500;
+                 cursor: pointer;
+             }
+         }
+     }
+     .centroid_graphMainDateFilter{
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         gap: 50px;
+         height: 70px;
+         .centroid_graphMainDate{
+             display: flex;
+             align-items: center;
+             gap: 10px;
+         }
+     }
+     .centroid_graphMainContent{
+         p{
+             display: flex;
+             justify-content: center;
+             height: 100px;
+             align-items: center;
+             font-size: 18px;
+         }
+         display: flex;
+         justify-content: center;
+     }
+    } 
+ }

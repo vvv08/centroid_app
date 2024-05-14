@@ -1,0 +1,14 @@
+.centroid_operatorMasterWrapper{
+    display: flex;
+    justify-content: center;
+    .centroid_operatorMasterContainer{
+        width: 60%;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        .centroid_operatorMasterAdd{
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

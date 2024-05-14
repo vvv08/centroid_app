@@ -1,0 +1,95 @@
+.cetroid_loginWrapper{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--centroidWhite);
+    .centroid_loginContainer{
+        width: 80%;
+        height: 80%;
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--centroidBlue);
+        @media(max-width:700px){
+            flex-direction: column;
+            width: 90%;
+            h1{
+                font-size: 24px;
+                text-align: center;
+            }
+        }
+        .centroid_loginContainerLeft{
+            flex: 1;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 30px;
+            img{
+                width: 400px;
+                object-fit: contain;
+            }
+            h1{
+                text-align: center;
+                width: 80%;
+                color: var(--centroidMaroon);
+            }
+            @media(max-width:700px){
+                flex: 1;
+            }
+        }
+        .centroid_loginContainerRight{
+            height: 100%;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            @media(max-width:700px){
+                flex: 5;
+                width: 100%;
+            }
+            form{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap:30px;
+                width: 100%;
+                h1{
+                    font-weight: 500;
+                }
+                input{
+                    width: 60%;
+                    height: 40px;
+                    font-size: 18px;
+                    border: none;
+                    border-bottom: 1px solid var(--centroidBlue);
+                    border-radius: 10px;
+                    padding-left: 15px;
+                }
+                button{
+                    width: 120px;
+                    height: 40px;
+                    background-color:  var(--centroidMaroon);
+                    border-radius: 3px;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 16px;
+                    transition: 0s, background-color 0.5s;
+                    @media(max-width:700px){
+                        font-size: 16px;
+                    }
+                }
+                button:hover{
+                    background-color: var(--centroidMaroon_dark);
+                }
+                button:active{
+                    box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+                }
+            }
+        }
+    }
+}

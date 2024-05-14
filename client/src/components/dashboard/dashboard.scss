@@ -1,0 +1,43 @@
+.centroid_DashboardWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .centroid_DashboardContainer{
+        width: 95%;
+        .centroid_DashboardHeader{
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            height: 50px;
+            h2{
+                display: flex;
+                align-items: center;
+                font-size: 28px;
+            }
+            .centroid_DashboardUpdates{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                p{
+                    font-weight: 500;
+                }
+            }
+            .centroid_DasboardAdd{
+                display: flex;
+                align-items: center;
+            }
+        }
+        .centroid_DashboardContent{
+            table{
+                th{
+                    font-size: 12px;
+                    text-align: center;
+                }
+                td{
+                    font-size: 12px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}

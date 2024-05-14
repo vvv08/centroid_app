@@ -1,0 +1,14 @@
+.centroid_inspectorsMasterWrapper{
+    display: flex;
+    justify-content: center;
+    .centroid_inspectorsMasterContainer{
+        width: 60%;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        .centroid_inspectorsMasterAdd{
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

@@ -1,0 +1,11 @@
+.centroid_userListWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .centroid_userListLoading{
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

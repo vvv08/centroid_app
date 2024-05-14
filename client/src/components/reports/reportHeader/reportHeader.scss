@@ -1,0 +1,45 @@
+.centroid_reportHeaderWrapper{
+   .centroid_reportHeaderContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    .centroid_reportHeaderList{
+        ul{
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            height: 50px;
+            .centroid_reportHeaderSelectedTab{
+                text-decoration: underline 3px;
+                text-underline-offset: 6px;
+                color: var(--centroidBlue)
+            }
+            li{
+                font-weight: 500;
+                cursor: pointer;
+            }
+        }
+    }
+    .centroid_reportHeaderDateFilter{
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        .centroid_reportHeaderDate{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    }
+    .centroid_reportHeaderContent{
+        p{
+            display: flex;
+            justify-content: center;
+            height: 100px;
+            align-items: center;
+            font-size: 18px;
+        }
+    }
+   } 
+}
