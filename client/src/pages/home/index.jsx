@@ -34,7 +34,7 @@ const Home = () => {
       <div className="centroid_homeWrapper">
         <Navbar />
         <div className="centroid_homeDashboard">
-          <Dashboard data={dashboardData} />
+          {dashboardData[0] && <Dashboard data={dashboardData} />}
         </div>
       </div>
     </>
