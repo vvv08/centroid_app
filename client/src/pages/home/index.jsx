@@ -33,7 +33,7 @@ const Home = () => {
     <>
       <div className="centroid_homeWrapper">
         <Navbar />
-        {dashboardData && <div className="centroid_homeDashboard">
+        {dashboardData[0] && <div className="centroid_homeDashboard">
           <Dashboard data={dashboardData} />
         </div>}
       </div>
