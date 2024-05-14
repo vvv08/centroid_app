@@ -3,7 +3,7 @@ import { db } from '../../server/config/connection.js'
 export const getReports = ({from,to}) => {
     return new Promise(async (resolve,reject) => {
         try{
-            const [res_month] = await db.query("select sum(production_qty) as production, sum(rejection_qty) as rejection, (sum(production_qty) - sum(rejection_qty)) as production_loss, time_format(sum(timediff(idle_time_to , idle_time_from)),'%H') as total_down_time , date_format(date, '%m-%Y') as month from rejection_dashboard group by date_format(date, '%m-%Y') order by date_format(date, '%m-%Y') asc;");
+            const [res_month] = await db.query(`select sum(production_qty) as production, sum(rejection_qty) as rejection, (sum(production_qty) - sum(rejection_qty)) as production_loss, time_format(sum(timediff(idle_time_to , idle_time_from)),'%H') as total_down_time , date_format(date, '%m-%Y') as month from rejection_dashboard  where r.date between "${from}" and "${to}" group by date_format(date, '%m-%Y') order by date_format(date, '%m-%Y') asc;`);
 
             const [res_machine] = await db.query(`select sum(r.production_qty) as production, sum(r.rejection_qty) as rejection, (sum(r.production_qty) - sum(r.rejection_qty)) as production_loss, time_format(sum(timediff(r.production_to , r.production_from)),'%H') as total_production_time ,time_format(sum(timediff(r.idle_time_to , r.idle_time_from)),'%H') as total_down_time , m.name as machine from rejection_dashboard r right join machines m on r.machine_id = m.machine_id where r.date between "${from}" and "${to}" group by r.machine_id;`);
 
