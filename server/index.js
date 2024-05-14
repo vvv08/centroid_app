@@ -45,6 +45,6 @@ app.use('/api/v1/masterData',masterRoutes);
 app.use('/api/v1/userList',userRoutes);
 app.use('/api/v1/graphData',graphRoutes)
 
-app.listen(6000, () => {
+app.listen(3001, () => {
     console.log("Server started")
 })
