@@ -29,6 +29,8 @@ const Home = () => {
       });
   }, []);
 
+  console.log(dashboardData)
+
   return (
     <>
       <div className="centroid_homeWrapper">
