@@ -39,7 +39,7 @@ const Dashboard = ({ data }) => {
             <h2>Dashboard</h2>
             <div className="centroid_DashboardUpdates">
               <p>Last Updated: </p>
-              {data[0] && <p>{data.latest[0].latest_update}</p>}
+              <p>{data.latest[0].latest_update}</p>
             </div>
             <div className="centroid_DasboardAdd">
               <button className="centroid_AddButton" onClick={() => {navigate('/addEntry')}}>Add entry</button>
