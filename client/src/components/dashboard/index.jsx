@@ -5,7 +5,7 @@ import { deletedEntry } from "../../repository/dashboardRepository";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-const Dashboard = ({ data }) => {
+const Dashboard = ({ data,refresh,ref_state }) => {
   const navigate = useNavigate();
 
   const handleDelete = (id) => {
@@ -13,6 +13,7 @@ const Dashboard = ({ data }) => {
       deletedEntry(id)
         .then((result) => {
           alert("Deleted successfully");
+          refresh(!ref_state);
           navigate("/");
         })
         .catch((err) => {
@@ -37,24 +38,8 @@ const Dashboard = ({ data }) => {
     <>
       <div className="centroid_DashboardWrapper">
         <div className="centroid_DashboardContainer">
-          <div className="centroid_DashboardHeader">
-            <h2>Dashboard</h2>
-            <div className="centroid_DashboardUpdates">
-              <p>Last Updated: </p>
-              <p>{data.latest.latest_update}</p>
-            </div>
-            <div className="centroid_DasboardAdd">
-              <button
-                className="centroid_AddButton"
-                onClick={() => {
-                  navigate("/addEntry");
-                }}
-              >
-                Add entry
-              </button>
-            </div>
-          </div>
-            {data.dashboard[0] && <div className="centroid_DashboardContent">
+          <div className="centroid_DashboardContent">
+            <div className="centroid_DashboardTable">
               <table id="example" className="display" style={{ width: "100%" }}>
                 <thead>
                   <tr>
@@ -79,52 +64,52 @@ const Dashboard = ({ data }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    data.dashboard.map((obj) => {
-                      return (
-                        <tr key={obj.Id}>
-                          <td>{obj.date}</td>
-                          <td>{obj.description}</td>
-                          <td>{obj.production_from}</td>
-                          <td>{obj.production_to}</td>
-                          <td>{obj.machine}</td>
-                          <td>{obj.idle_time_from}</td>
-                          <td>{obj.idle_time_to}</td>
-                          <td>{obj.machine_loss}</td>
-                          <td>{obj.operation}</td>
-                          <td>{obj.part_number}</td>
-                          <td>{obj.operator}</td>
-                          <td>{obj.inspector}</td>
-                          <td>{obj.batch_number}</td>
-                          <td>{obj.defect}</td>
-                          <td>{obj.production_qty}</td>
-                          <td>{obj.rejection_qty}</td>
-                          <td>
-                            <EditIcon
-                              style={{ fontSize: "22px", cursor: "pointer" }}
-                              onClick={() => {
-                                navigate(`/editEntry/${obj.Id}`);
-                              }}
-                            />
-                          </td>
-                          <td>
-                            <DeleteIcon
-                              style={{
-                                color: "var(--centroidDeleteRed)",
-                                fontSize: "22px",
-                                cursor: "pointer",
-                              }}
-                              onClick={() => {
-                                handleDelete(obj.Id);
-                              }}
-                            />
-                          </td>
-                        </tr>
-                      );
-                    })}
+                  {data.dashboard.map((obj) => {
+                    return (
+                      <tr key={obj.Id}>
+                        <td>{obj.date}</td>
+                        <td>{obj.description}</td>
+                        <td>{obj.production_from}</td>
+                        <td>{obj.production_to}</td>
+                        <td>{obj.machine}</td>
+                        <td>{obj.idle_time_from}</td>
+                        <td>{obj.idle_time_to}</td>
+                        <td>{obj.machine_loss}</td>
+                        <td>{obj.operation}</td>
+                        <td>{obj.part_number}</td>
+                        <td>{obj.operator}</td>
+                        <td>{obj.inspector}</td>
+                        <td>{obj.batch_number}</td>
+                        <td>{obj.defect}</td>
+                        <td>{obj.production_qty}</td>
+                        <td>{obj.rejection_qty}</td>
+                        <td>
+                          <EditIcon
+                            style={{ fontSize: "22px", cursor: "pointer" }}
+                            onClick={() => {
+                              navigate(`/editEntry/${obj.Id}`);
+                            }}
+                          />
+                        </td>
+                        <td>
+                          <DeleteIcon
+                            style={{
+                              color: "var(--centroidDeleteRed)",
+                              fontSize: "22px",
+                              cursor: "pointer",
+                            }}
+                            onClick={() => {
+                              handleDelete(obj.Id);
+                            }}
+                          />
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
-            </div>}
+            </div>
+          </div>
         </div>
       </div>
     </>

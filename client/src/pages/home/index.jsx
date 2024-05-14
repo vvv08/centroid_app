@@ -6,6 +6,7 @@ import { getDashboard } from "../../repository/dashboardRepository";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const [refresh,setRefresh] = useState(false)
   const [dashboardData, setDashboardData] = useState({
     dashboard: "",
     latest: "",
@@ -33,15 +34,32 @@ const Home = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [refresh]);
 
   return (
     <>
       <div className="centroid_homeWrapper">
         <Navbar />
-          <div className="centroid_homeDashboard">
-            <Dashboard data={dashboardData} />
+        <div className="centroid_DashboardHeader">
+          <h2>Dashboard</h2>
+          <div className="centroid_DashboardUpdates">
+            <p>Last Updated: </p>
+            <p>{dashboardData.latest.latest_update}</p>
           </div>
+          <div className="centroid_DasboardAdd">
+            <button
+              className="centroid_AddButton"
+              onClick={() => {
+                navigate("/addEntry");
+              }}
+            >
+              Add entry
+            </button>
+          </div>
+        </div>
+        {dashboardData.dashboard && <div className="centroid_homeDashboard">
+          <Dashboard data={dashboardData} refresh = {setRefresh} ref_state = {refresh}/>
+        </div>}
       </div>
     </>
   );
