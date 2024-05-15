@@ -16,7 +16,7 @@ const GraphMain = ({closeNav}) => {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = padZero(currentDate.getMonth() + 1); // Months are zero-based (0 = January)
-  const day = padZero(currentDate.getDate() + 1);
+  const day = padZero(currentDate.getDate() + 1); //To show till next day
   const curr_date = `${year}-${month}-${day}`;
 
   const [tabState, setTabState] = useState("A");

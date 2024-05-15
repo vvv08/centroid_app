@@ -10,6 +10,7 @@ import reportRoutes from '../server/routes/reports.js';
 import masterRoutes from '../server/routes/master.js';
 import userRoutes from '../server/routes/users.js';
 import graphRoutes from '../server/routes/graphs.js';
+import downtimeRoutes from '../server/routes/downtime.js';
 
 const app = express();
 
@@ -43,7 +44,8 @@ app.use('/api/v1/login',authRoutes);
 app.use('/api/v1/reports',reportRoutes);
 app.use('/api/v1/masterData',masterRoutes);
 app.use('/api/v1/userList',userRoutes);
-app.use('/api/v1/graphData',graphRoutes)
+app.use('/api/v1/graphData',graphRoutes);
+app.use('/api/v1/downtime',downtimeRoutes);
 
 app.listen(3001, () => {
     console.log("Server started")

@@ -20,11 +20,9 @@ const AddDashboardData = () => {
     rejection_qty: "",
     defect: "",
     remarks:"",
-    machine_loss:"",
-    idle_time_from:"",
-    idle_time_to:"",
     production_from:"",
-    production_to:""
+    production_to:"",
+    total_mix:""
   });
 
   const handleInputChange = (e) => {
@@ -77,24 +75,16 @@ const AddDashboardData = () => {
         setInputs((state) => ({ ...state, remarks: e.target.value }));
         break;
       }
-      case "machine_loss": {
-        setInputs((state) => ({ ...state, machine_loss: e.target.value }));
-        break;
-      }
-      case "idle_time_from": {
-        setInputs((state) => ({ ...state, idle_time_from: e.target.value }));
-        break;
-      }
-      case "idle_time_to": {
-        setInputs((state) => ({ ...state, idle_time_to: e.target.value }));
-        break;
-      }
       case "production_from": {
         setInputs((state) => ({ ...state, production_from: e.target.value }));
         break;
       }
       case "production_to": {
         setInputs((state) => ({ ...state, production_to: e.target.value }));
+        break;
+      }
+      case "total_mix": {
+        setInputs((state) => ({ ...state, total_mix: e.target.value }));
         break;
       }
     }
@@ -201,47 +191,6 @@ const AddDashboardData = () => {
               {inputs.machine > 0 && <p>{dataLists.machines.filter((f) => f.machine_id === Number(inputs.machine))[0].name}</p>}
             </div>
             <div className="centroid_addDashboardData_list">
-              <label htmlFor="idle_time_from">Machine idle from</label>
-              <input
-                id="idle_time_from"
-                type="datetime-local"
-                onChange={handleInputChange}
-                value={inputs.idle_time_from}
-                required
-              />
-              {inputs.idle_time_from && <p>{inputs.idle_time_from}</p>}
-            </div>
-            <div className="centroid_addDashboardData_list">
-              <label htmlFor="idle_time_to">Machine idle till</label>
-              <input
-                id="idle_time_to"
-                type="datetime-local"
-                onChange={handleInputChange}
-                value={inputs.idle_time_to}
-                min={inputs.idle_time_from}
-                required
-              />
-              {inputs.idle_time_to && <p>{inputs.idle_time_to}</p>}
-            </div>
-            <div className="centroid_addDashboardData_list">
-              <label htmlFor="machine_loss">Idle time reason</label>
-              <select
-                id="machine_loss"
-                type="text"
-                onChange={handleInputChange}
-                value={inputs.machine_loss}
-                required
-              >
-                <option value={0}>Select</option>
-                {dataLists.machine_loss && dataLists.machine_loss.map((obj) => {
-                  return(
-                    <option value={obj.machine_loss_id} key={obj.machine_loss_id}>{obj.description}</option>
-                  )
-                })}
-              </select>
-              {inputs.machine_loss > 0 && <p>{dataLists.machine_loss.filter((f) => f.machine_loss_id === Number(inputs.machine_loss))[0].description}</p>}
-            </div>
-            <div className="centroid_addDashboardData_list">
               <label htmlFor="operation">Choose Operation</label>
               <select
                 id="operation"
@@ -334,13 +283,24 @@ const AddDashboardData = () => {
               {inputs.defect > 0 && <p>{dataLists.defects.filter((f) => f.defect_id === Number(inputs.defect))[0].description}</p>}
             </div>
             <div className="centroid_addDashboardData_input">
+              <label htmlFor="total_mix">Total mix</label>
+              <input
+                id="total_mix"
+                type="number"
+                onChange={handleInputChange}
+                value={inputs.total_mix}
+                max={99999}
+                required
+              />
+            </div>
+            <div className="centroid_addDashboardData_input">
               <label htmlFor="production_qty">Production Quantity</label>
               <input
                 id="production_qty"
                 type="number"
                 onChange={handleInputChange}
                 value={inputs.production_qty}
-                max={99999}
+                max={inputs.total_mix}
                 required
               />
             </div>

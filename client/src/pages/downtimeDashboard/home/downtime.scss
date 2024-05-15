@@ -1,0 +1,39 @@
+.centroid_DowntimeDashboardHomeWrapper{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .centroid_DowntimeDashboardHomeHeader{
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        height: 50px;
+        h2{
+            display: flex;
+            align-items: center;
+            font-size: 28px;
+        }
+        .centroid_DowntimeDashboardHomeUpdates{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            p{
+                font-weight: 500;
+            }
+        }
+        .centroid_DowntimeDashboardHomeAdd{
+            display: flex;
+            align-items: center;
+        }
+    }
+    .centroid_homeLoading{
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        p{
+            font-size: 20px;
+            font-weight: 500;
+        }
+    }
+}

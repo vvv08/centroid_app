@@ -12,6 +12,9 @@ import EditMaster from './pages/master/editMaster';
 import UserList from './pages/users';
 import AddUser from './pages/users/addUser';
 import Graphs from './pages/graphs';
+import AddDowntime from './pages/downtimeDashboard/addDowntime';
+import DowntimeDashboardHome from './pages/downtimeDashboard/home';
+import EditDowntime from './pages/downtimeDashboard/editDowntimeDashboard';
 
 function App() {
   
@@ -63,6 +66,18 @@ function App() {
     {
       path:"/graphs",
       element:<Graphs/>
+    },
+    {
+      path:"/addDowntime",
+      element:<AddDowntime/>
+    },
+    {
+      path:"/downtimeDashboard",
+      element:<DowntimeDashboardHome/>
+    },
+    {
+      path:"/editDowntime/:id",
+      element:<EditDowntime/>
     }
   ])
 

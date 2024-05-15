@@ -20,11 +20,9 @@ const EditDashboardData = ({id}) => {
     rejection_qty: "",
     defect: "",
     remarks:"",
-    machine_loss:"",
-    idle_time_from:"",
-    idle_time_to:"",
     production_from:"",
-    production_to:""
+    production_to:"",
+    total_mix:""
   });
 
   const handleInputChange = (e) => {
@@ -77,24 +75,16 @@ const EditDashboardData = ({id}) => {
         setInputs((state) => ({ ...state, remarks: e.target.value }));
         break;
       }
-      case "machine_loss": {
-        setInputs((state) => ({ ...state, machine_loss: e.target.value }));
-        break;
-      }
-      case "idle_time_from": {
-        setInputs((state) => ({ ...state, idle_time_from: e.target.value }));
-        break;
-      }
-      case "idle_time_to": {
-        setInputs((state) => ({ ...state, idle_time_to: e.target.value }));
-        break;
-      }
       case "production_from": {
         setInputs((state) => ({ ...state, production_from: e.target.value }));
         break;
       }
       case "production_to": {
         setInputs((state) => ({ ...state, production_to: e.target.value }));
+        break;
+      }
+      case "total_mix": {
+        setInputs((state) => ({ ...state, total_mix: e.target.value }));
         break;
       }
     }
@@ -135,11 +125,9 @@ const EditDashboardData = ({id}) => {
         rejection_qty: result.rejection_qty || "",
         defect: result.defect_id || "",
         remarks:result.remarks || "",
-        machine_loss:result.machine_loss_id || "",
-        idle_time_from:result.idle_time_from || "",
-        idle_time_to:result.idle_time_to || "",
         production_from:result.production_from || "",
-        production_to:result.production_to || ""
+        production_to:result.production_to || "",
+        total_mix:result.total_mix || ""
       })
     })
     getInputData().then((result) => {
@@ -221,44 +209,6 @@ const EditDashboardData = ({id}) => {
                 })}
               </select>
               {inputs.machine > 0 && dataLists.defects &&  <p>{dataLists.machines.filter((f) => f.machine_id === Number(inputs.machine))[0].name}</p>}
-            </div>}
-            <div className="centroid_editDashboardData_list">
-              <label htmlFor="idle_time_from">Machine idle from</label>
-              <input
-                id="idle_time_from"
-                type="datetime-local"
-                onChange={handleInputChange}             
-                value={inputs.idle_time_from}
-              />
-              {inputs.idle_time_from && <p>{inputs.idle_time_from}</p>}
-            </div>
-            <div className="centroid_editDashboardData_list">
-              <label htmlFor="idle_time_to">Machine idle till</label>
-              <input
-                id="idle_time_to"
-                type="datetime-local"
-                onChange={handleInputChange}
-                min={inputs.idle_time_from}
-                value={inputs.idle_time_to}
-              />
-              {inputs.idle_time_to && <p>{inputs.idle_time_to}</p>}
-            </div>
-            {dataLists.machine_loss && dataLists.machine_loss.filter((f) => f.machine_loss_id === Number(inputs.machine_loss))[0] && <div className="centroid_editDashboardData_list">
-              <label htmlFor="machine_loss">Idle time reason</label>
-              <select
-                id="machine_loss"
-                type="text"
-                onChange={handleInputChange}
-                value={inputs.machine_loss}
-              >
-                <option value={0}>Select</option>
-                {dataLists.machine_loss && dataLists.machine_loss.map((obj) => {
-                  return(
-                    <option value={obj.machine_loss_id} key={obj.machine_loss_id}>{obj.description}</option>
-                  )
-                })}
-              </select>
-              {inputs.machine_loss > 0 && dataLists.machine_loss && <p>{dataLists.machine_loss.filter((f) => f.machine_loss_id === Number(inputs.machine_loss))[0].description}</p>}
             </div>}
             {dataLists.operations && dataLists.operations.filter((f) => f.operation_id === Number(inputs.operation))[0] && <div className="centroid_editDashboardData_list">
               <label htmlFor="operation">Choose Operation</label>
@@ -353,13 +303,24 @@ const EditDashboardData = ({id}) => {
               {inputs.defect > 0 && dataLists.defects &&  <p>{dataLists.defects.filter((f) => f.defect_id === Number(inputs.defect))[0].description}</p>}
             </div>}
             <div className="centroid_editDashboardData_input">
+              <label htmlFor="total_mix">Total Mix</label>
+              <input
+                id="total_mix"
+                type="number"
+                onChange={handleInputChange}
+                value={inputs.total_mix}
+                max={99999}
+                required
+              />
+            </div>
+            <div className="centroid_editDashboardData_input">
               <label htmlFor="production_qty">Production Quantity</label>
               <input
                 id="production_qty"
                 type="number"
                 onChange={handleInputChange}
                 value={inputs.production_qty}
-                max={99999}
+                max={inputs.total_mix}
                 required
               />
             </div>
@@ -381,7 +342,6 @@ const EditDashboardData = ({id}) => {
                 type="text"
                 onChange={handleInputChange}
                 value={inputs.remarks}
-                required
               />
             </div>
             <div className="centroid_formSubmitContainer">

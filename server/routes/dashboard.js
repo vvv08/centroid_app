@@ -37,11 +37,9 @@ router.post('/addEntry',[verifyToken],(req,res) => {
         production_qty:parseFloat(req.body.production_qty),
         rejection_qty:parseFloat(req.body.rejection_qty),
         remarks:req.body.remarks,
-        idle_time_from:req.body.idle_time_from,
-        idle_time_to:req.body.idle_time_to,
-        machine_loss:Number(req.body.machine_loss),
         production_from:req.body.production_from,
-        production_to:req.body.production_to
+        production_to:req.body.production_to,
+        total_mix:parseFloat(req.body.total_mix)
     }
     addEntry(entryInputs).then((result) => {
         res.status(200).json(result)
@@ -90,11 +88,9 @@ router.post('/editEntry', [verifyToken], (req,res) => {
         rejection_qty: parseFloat(req.body.rejection_qty),
         defect: Number(req.body.defect),
         remarks:req.body.remarks,
-        machine_loss:Number(req.body.machine_loss),
-        idle_time_from:req.body.idle_time_from,
-        idle_time_to:req.body.idle_time_to,
         production_from:req.body.production_from,
-        production_to:req.body.production_to
+        production_to:req.body.production_to,
+        total_mix:parseFloat(req.body.total_mix)
     }
     editEntry(edit_entry).then((result) => {
         res.status(200).json(result)

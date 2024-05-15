@@ -1,10 +1,10 @@
-.centroid_DashboardWrapper{
+.centroid_DowntimeDashboardWrapper{
     display: flex;
     align-items: center;
     justify-content: center;
-    .centroid_DashboardContainer{
-        .centroid_DashboardContent{
-            width: 80%;
+    .centroid_DowntimeDashboardContainer{
+        width: 80%;
+        .centroid_DowntimeDashboardContent{
             table{
                 th{
                     font-size: 14px;

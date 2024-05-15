@@ -48,15 +48,13 @@ const Dashboard = ({ data,refresh,ref_state }) => {
                     <th>Production start</th>
                     <th>Production end</th>
                     <th>Machine</th>
-                    <th>Machine idle from</th>
-                    <th>Machine idle till</th>
-                    <th>Idle time reason</th>
                     <th>Operation</th>
                     <th>Part No.</th>
                     <th>Operator</th>
                     <th>Inspector</th>
                     <th>Batch No.</th>
                     <th>Defect</th>
+                    <th>Total Mix</th>
                     <th>Production Qty</th>
                     <th>Rejection Qty</th>
                     <th></th>
@@ -72,15 +70,13 @@ const Dashboard = ({ data,refresh,ref_state }) => {
                         <td>{obj.production_from}</td>
                         <td>{obj.production_to}</td>
                         <td>{obj.machine}</td>
-                        <td>{obj.idle_time_from}</td>
-                        <td>{obj.idle_time_to}</td>
-                        <td>{obj.machine_loss}</td>
                         <td>{obj.operation}</td>
                         <td>{obj.part_number}</td>
                         <td>{obj.operator}</td>
                         <td>{obj.inspector}</td>
                         <td>{obj.batch_number}</td>
                         <td>{obj.defect}</td>
+                        <td>{obj.total_mix}</td>
                         <td>{obj.production_qty}</td>
                         <td>{obj.rejection_qty}</td>
                         <td>

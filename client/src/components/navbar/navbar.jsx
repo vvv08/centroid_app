@@ -37,6 +37,7 @@ const Navbar = () => {
           <div className="centroid_navBarList">
             <ul>
                 <Link to="/" style={{"textDecoration":"none", "color":"black"}}><li>Dashboard</li></Link>
+                <Link to="/downtimeDashboard" style={{"textDecoration":"none", "color":"black"}}><li>Downtime</li></Link>
                 <Link to="/reports" style={{"textDecoration":"none", "color":"black"}}><li>Reports</li></Link>
                 <Link to="/graphs" style={{"textDecoration":"none", "color":"black"}}><li>Graphs</li></Link>
                 <Link to="/masterData" style={{"textDecoration":"none", "color":"black"}}><li>Master Data</li></Link>
