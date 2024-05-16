@@ -8,9 +8,7 @@ const PieChartGraph = ({ data }) => {
       <PieChart
         series={[
           {
-            arcLabel: (item) => `${item.label} (${item.value})`,
-            arcLabelMinAngle: 45,
-            data: data,
+            data: data
           },
         ]}
         sx={{
