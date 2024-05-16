@@ -15,11 +15,11 @@ const PieChartGraph = ({ data }) => {
         ]}
         sx={{
         [`& .${pieArcLabelClasses.root}`]: {
-          fill: 'white',
+          fill: 'var(--centroidPiechartLabel)',
           fontWeight: 'bold',
         },
       }}
-        width={900}
+        width={1400}
         height={400}
       />
     </>
