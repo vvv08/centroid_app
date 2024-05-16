@@ -19,7 +19,7 @@ const PieChartGraph = ({ data }) => {
           fontWeight: 'bold',
         },
       }}
-        width={840}
+        width={900}
         height={400}
       />
     </>
