@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import "./machineWiseReport.scss";
+import "./machineDowntime.scss";
 
-const MachineWiseReport = ({ data,sum_data }) => {
+const MachineDowntimeReport = ({ data,sum_data }) => {
   useEffect(() => {
     //new DataTable("#example");
     $(document).ready(function () {
@@ -16,10 +16,8 @@ const MachineWiseReport = ({ data,sum_data }) => {
             <thead>
               <tr>
                 <th>Machine</th>
-                <th>Total mix (Kg)</th>
-                <th>Production Qty (Kg)</th>
-                <th>Rejection Qty (Kg)</th>
-                <th>Material loss (Kg)</th>
+                <th>Reason</th>
+                <th>Down time (Hours)</th>
               </tr>
             </thead>
             <tbody>
@@ -27,23 +25,19 @@ const MachineWiseReport = ({ data,sum_data }) => {
                 return (
                   <tr key={index}>
                     <td>{obj.machine}</td>
-                    <td>{obj.total_mix}</td>
-                    <td>{obj.production}</td>
-                    <td>{obj.rejection}</td>
-                    <td>{obj.material_loss}</td>
+                    <td>{obj.reason}</td>
+                    <td>{obj.time_loss}</td>
                   </tr>
                 );
               })}
             </tbody>
             <tfoot>
-            <tr>
+              <tr>
                 <th>Total</th>
-                <th>{sum_data.total_mix}</th>
-                <th>{sum_data.production}</th>
-                <th>{sum_data.rejection}</th>
-                <th>{sum_data.material_loss}</th>
-            </tr>
-        </tfoot>
+                <th></th>
+                <th>{sum_data.time_loss}</th>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
@@ -51,5 +45,4 @@ const MachineWiseReport = ({ data,sum_data }) => {
   );
 };
 
-export default MachineWiseReport;
-
+export default MachineDowntimeReport;

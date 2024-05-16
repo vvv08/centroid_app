@@ -39,7 +39,7 @@ const DowntimeDashboardHome = () => {
   return (
     <>
       <div className="centroid_DowntimeDashboardHomeWrapper">
-        <Navbar/>
+        <Navbar current_tab={"downtime"}/>
         <div className="centroid_DowntimeDashboardHomeHeader">
           <h2>Downtime Dashboard</h2>
           <div className="centroid_DowntimeDashboardHomeUpdates">

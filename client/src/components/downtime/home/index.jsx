@@ -49,6 +49,7 @@ const DowntimeDashboard = ({data,ref_state,refresh }) => {
                     <th>Machine idle till</th>
                     <th>Idle time reason</th>
                     <th>Inspector</th>
+                    <th>Remarks</th>
                     <th></th>
                     <th></th>
                   </tr>
@@ -63,6 +64,7 @@ const DowntimeDashboard = ({data,ref_state,refresh }) => {
                         <td>{obj.idle_to}</td>
                         <td>{obj.machine_loss}</td>
                         <td>{obj.inspector}</td>
+                        <td>{obj.remarks}</td>
                         <td>
                           <EditIcon
                             style={{ fontSize: "22px", cursor: "pointer" }}

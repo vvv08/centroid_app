@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import "./operatorWiseReport.scss";
+import "./dateWiseReport.scss";
+import { dateFormatter } from "../../../../../../server/validations/validations";
 
-const OperatorWiseReport = ({ data,sum_data }) => {
+const DateWiseReport = ({ data,sum_data }) => {
   useEffect(() => {
     //new DataTable("#example");
     $(document).ready(function () {
@@ -10,13 +11,12 @@ const OperatorWiseReport = ({ data,sum_data }) => {
   }, []);
   return (
     <>
-      <div className="centroid_operatorWiseReportWrapper">
-        <div className="centroid_operatorWiseReportContainer">
+      <div className="centroid_dateWiseReportWrapper">
+        <div className="centroid_dateWiseReportContainer">
           <table id="example" className="display" style={{ width: "100%" }}>
             <thead>
               <tr>
-                <th>Operator</th>
-                <th>Operation</th>
+                <th>Date</th>
                 <th>Total mix (Kg)</th>
                 <th>Production Qty (Kg)</th>
                 <th>Rejection Qty (Kg)</th>
@@ -27,8 +27,7 @@ const OperatorWiseReport = ({ data,sum_data }) => {
               {data.map((obj, index) => {
                 return (
                   <tr key={index}>
-                    <td>{obj.operator}</td>
-                    <td>{obj.operation}</td>
+                    <td>{dateFormatter(obj.date)}</td>
                     <td>{obj.total_mix}</td>
                     <td>{obj.production}</td>
                     <td>{obj.rejection}</td>
@@ -40,7 +39,6 @@ const OperatorWiseReport = ({ data,sum_data }) => {
             <tfoot>
             <tr>
                 <th>Total</th>
-                <th></th>
                 <th>{sum_data.total_mix}</th>
                 <th>{sum_data.production}</th>
                 <th>{sum_data.rejection}</th>
@@ -54,5 +52,4 @@ const OperatorWiseReport = ({ data,sum_data }) => {
   );
 };
 
-export default OperatorWiseReport;
-
+export default DateWiseReport;

@@ -8,7 +8,7 @@ const Graphs = () => {
   return (
     <>
       <div className="centroid_graphsWrapper">
-        {!closeNav && <Navbar/>}
+        {!closeNav && <Navbar current_tab={"graphs"}/>}
         <GraphMain closeNav = {setCloseNav}/>
       </div>
     </>

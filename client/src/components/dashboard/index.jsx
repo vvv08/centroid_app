@@ -57,6 +57,7 @@ const Dashboard = ({ data,refresh,ref_state }) => {
                     <th>Total Mix</th>
                     <th>Production Qty</th>
                     <th>Rejection Qty</th>
+                    <th>Remarks</th>
                     <th></th>
                     <th></th>
                   </tr>
@@ -79,6 +80,7 @@ const Dashboard = ({ data,refresh,ref_state }) => {
                         <td>{obj.total_mix}</td>
                         <td>{obj.production_qty}</td>
                         <td>{obj.rejection_qty}</td>
+                        <td>{obj.remarks}</td>
                         <td>
                           <EditIcon
                             style={{ fontSize: "22px", cursor: "pointer" }}

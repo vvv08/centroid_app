@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import "./lossReasonReport.scss";
+import { dateFormatter } from "../../../../../../server/validations/validations";
 
-const LossReasonWiseReport = ({ data }) => {
+const LossReasonWiseReport = ({ data,sum_data }) => {
   useEffect(() => {
     //new DataTable("#example");
     $(document).ready(function () {
@@ -15,20 +16,29 @@ const LossReasonWiseReport = ({ data }) => {
           <table id="example" className="display" style={{ width: "100%" }}>
             <thead>
               <tr>
+                <th>Date</th>
                 <th>Reason</th>
-                <th>Total down time</th>
+                <th>Down time (Hours)</th>
               </tr>
             </thead>
             <tbody>
               {data.map((obj, index) => {
                 return (
                   <tr key={index}>
+                    <td>{dateFormatter(obj.date)}</td>
                     <td>{obj.reason}</td>
-                    <td>{obj.total_down_time}</td>
+                    <td>{obj.time_loss}</td>
                   </tr>
                 );
               })}
             </tbody>
+            <tfoot>
+            <tr>
+                <th>Total</th>
+                <th></th>
+                <th>{sum_data.time_loss}</th>
+            </tr>
+        </tfoot>
           </table>
         </div>
       </div>

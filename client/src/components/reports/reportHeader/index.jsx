@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "./reportHeader.scss";
 import { getReports } from "../../../repository/reportsRepository";
-import MonthWiseReport from "../citeriaWiseReport/monthWise";
+import OperationReasonWiseReport from "../citeriaWiseReport/operationReasonWise";
 import MachineWiseReport from "../citeriaWiseReport/machineWise";
 import OperationWiseReport from "../citeriaWiseReport/operationWise";
 import OperatorWiseReport from "../citeriaWiseReport/operatorWise";
 import DefectWiseReport from "../citeriaWiseReport/defectWise";
 import LossReasonWiseReport from "../citeriaWiseReport/lossReason";
-import { padZero } from "../../../../../server/validations/validations";
+import {
+  padZero,
+  dateFormatter,
+} from "../../../../../server/validations/validations";
+import DateWiseReport from "../citeriaWiseReport/dateWise";
+import MachineDowntimeReport from "../citeriaWiseReport/machineDowntime";
 
 const ReportHeader = () => {
-
   const navigate = useNavigate();
   //To get current date
   const currentDate = new Date();
@@ -20,7 +24,7 @@ const ReportHeader = () => {
   const day = padZero(currentDate.getDate() + 1);
   const curr_date = `${year}-${month}-${day}`;
 
-  const [tabState, setTabState] = useState("A");
+  const [tabState, setTabState] = useState("G");
   const [loading, setLoading] = useState(true);
 
   const [filterDate, setFilterDate] = useState({
@@ -42,12 +46,16 @@ const ReportHeader = () => {
   };
 
   const [reportData, setReportData] = useState({
-    month_wise: "",
-    operator_wise: "",
-    operation_wise: "",
-    defect_wise: "",
-    machine_wise: "",
-    loss_reason: "",
+    date_wise: "",
+    date_wise_total:"",
+    date_downtime : "",
+    date_downtime_sum : "",
+    part_rejection : "",
+    part_operation_rejection : "",
+    operation_reason : "",
+    machine_wise : "",
+    operator_wise : "",
+    machine_downtime : ""
   });
   const tabChange = (tab) => {
     setTabState(tab);
@@ -58,12 +66,16 @@ const ReportHeader = () => {
     getReports(filterDate)
       .then((result) => {
         setReportData({
-          month_wise: result.month_wise,
-          operator_wise: result.operator_wise,
-          operation_wise: result.operation_wise,
-          defect_wise: result.defect_wise,
-          machine_wise: result.machine_wise,
-          loss_reason: result.loss_reason,
+          date_wise: result.date_wise,
+          date_wise_total : result.date_wise_total,
+          date_downtime: result.date_downtime,
+          date_downtime_sum : result.date_downtime_sum,
+          part_rejection: result.part_rejection,
+          part_operation_rejection : result.part_operation_rejection,
+          operation_reason : result.operation_reason,
+          machine_wise : result.machine_wise,
+          operator_wise : result.operator_wise,
+          machine_downtime : result.machine_downtime
         });
       })
       .catch((err) => {
@@ -88,63 +100,15 @@ const ReportHeader = () => {
             <ul>
               <li
                 onClick={() => {
-                  tabChange("A");
+                  tabChange("G");
                 }}
                 className={
-                  tabState === "A"
+                  tabState === "G"
                     ? "centroid_reportHeaderSelectedTab"
                     : undefined
                 }
               >
-                Date Wise
-              </li>
-              <li
-                onClick={() => {
-                  tabChange("B");
-                }}
-                className={
-                  tabState === "B"
-                    ? "centroid_reportHeaderSelectedTab"
-                    : undefined
-                }
-              >
-                Machine Wise
-              </li>
-              <li
-                onClick={() => {
-                  tabChange("C");
-                }}
-                className={
-                  tabState === "C"
-                    ? "centroid_reportHeaderSelectedTab"
-                    : undefined
-                }
-              >
-                Operator Wise
-              </li>
-              <li
-                onClick={() => {
-                  tabChange("D");
-                }}
-                className={
-                  tabState === "D"
-                    ? "centroid_reportHeaderSelectedTab"
-                    : undefined
-                }
-              >
-                Operation Wise
-              </li>
-              <li
-                onClick={() => {
-                  tabChange("E");
-                }}
-                className={
-                  tabState === "E"
-                    ? "centroid_reportHeaderSelectedTab"
-                    : undefined
-                }
-              >
-                Defect Wise
+                Rejection Summary
               </li>
               <li
                 onClick={() => {
@@ -156,8 +120,81 @@ const ReportHeader = () => {
                     : undefined
                 }
               >
-                Down time
+                Down time Summary
               </li>
+              <li
+                onClick={() => {
+                  tabChange("E");
+                }}
+                className={
+                  tabState === "E"
+                    ? "centroid_reportHeaderSelectedTab"
+                    : undefined
+                }
+              >
+                Part vs Reason
+              </li>
+              <li
+                onClick={() => {
+                  tabChange("D");
+                }}
+                className={
+                  tabState === "D"
+                    ? "centroid_reportHeaderSelectedTab"
+                    : undefined
+                }
+              >
+                Part vs Operation
+              </li> 
+              <li
+                onClick={() => {
+                  tabChange("A");
+                }}
+                className={
+                  tabState === "A"
+                    ? "centroid_reportHeaderSelectedTab"
+                    : undefined
+                }
+              >
+                Operation vs Reason
+              </li>
+              <li
+                onClick={() => {
+                  tabChange("B");
+                }}
+                className={
+                  tabState === "B"
+                    ? "centroid_reportHeaderSelectedTab"
+                    : undefined
+                }
+              >
+                Machine Rejection
+              </li>
+              <li
+                onClick={() => {
+                  tabChange("C");
+                }}
+                className={
+                  tabState === "C"
+                    ? "centroid_reportHeaderSelectedTab"
+                    : undefined
+                }
+              >
+                Operator Rejection
+              </li>
+              <li
+                onClick={() => {
+                  tabChange("H");
+                }}
+                className={
+                  tabState === "H"
+                    ? "centroid_reportHeaderSelectedTab"
+                    : undefined
+                }
+              >
+                Machine Downtime
+              </li>
+                           
             </ul>
           </div>
           <div className="centroid_reportHeaderDateFilter">
@@ -169,7 +206,7 @@ const ReportHeader = () => {
                 value={filterDate.fromDate}
                 onChange={handleFilterChange}
               />
-              <p>{filterDate.fromDate}</p>
+              <p>{dateFormatter(filterDate.fromDate)}</p>
             </div>
             <div className="centroid_reportHeaderDate">
               <label htmlFor="toDate">To</label>
@@ -179,7 +216,7 @@ const ReportHeader = () => {
                 value={filterDate.toDate}
                 onChange={handleFilterChange}
               />
-              <p>{filterDate.toDate}</p>
+              <p>{dateFormatter(filterDate.toDate)}</p>
             </div>
             <button
               className="centroid_DeleteButton"
@@ -195,23 +232,29 @@ const ReportHeader = () => {
           </div>
           {!loading && reportData ? (
             <div className="centroid_reportHeaderContent">
-              {tabState === "A" && reportData.month_wise && (
-                <MonthWiseReport data={reportData.month_wise} />
+              {tabState === "A" && reportData.operation_reason && (
+                <OperationReasonWiseReport data={reportData.operation_reason} sum_data = {reportData.date_wise_total} />
               )}
               {tabState === "B" && reportData.machine_wise && (
-                <MachineWiseReport data={reportData.machine_wise} />
+                <MachineWiseReport data={reportData.machine_wise} sum_data = {reportData.date_wise_total}  />
               )}
-              {tabState === "C" && reportData.operation_wise && (
-                <OperatorWiseReport data={reportData.operator_wise} />
+              {tabState === "C" && reportData.operator_wise && (
+                <OperatorWiseReport data={reportData.operator_wise} sum_data = {reportData.date_wise_total} />
               )}
-              {tabState === "D" && reportData.operation_wise && (
-                <OperationWiseReport data={reportData.operation_wise} />
+              {tabState === "D" && reportData.part_operation_rejection && (
+                <OperationWiseReport data={reportData.part_operation_rejection} sum_data = {reportData.date_wise_total}/>
               )}
-              {tabState === "E" && (
-                <DefectWiseReport data={reportData.defect_wise} />
+              {tabState === "E" && reportData.part_rejection && (
+                <DefectWiseReport data={reportData.part_rejection} sum_data = {reportData.date_wise_total} />
               )}
-              {tabState === "F" && (
-                <LossReasonWiseReport data={reportData.loss_reason} />
+              {tabState === "F" && reportData.date_downtime && (
+                <LossReasonWiseReport data={reportData.date_downtime} sum_data = {reportData.date_downtime_sum}/>
+              )}
+              {tabState === "G" && reportData.date_wise && (
+                <DateWiseReport data={reportData.date_wise} sum_data = {reportData.date_wise_total}/>
+              )}
+              {tabState === "H" && reportData.machine_downtime && (
+                <MachineDowntimeReport data={reportData.machine_downtime} sum_data = {reportData.date_downtime_sum}/>
               )}
             </div>
           ) : (

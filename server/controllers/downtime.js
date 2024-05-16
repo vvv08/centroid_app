@@ -5,7 +5,7 @@ export const getDowntimeData = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const [dashboard] = await db.query(
-        "select d.downtime_id as id,DATE_FORMAT(d.date, '%d-%m-%Y %H:%i') as date, DATE_FORMAT(d.idle_from, '%d-%m-%Y %H:%i') as idle_from,DATE_FORMAT(d.idle_to, '%d-%m-%Y %H:%i') as idle_to,ml.description as machine_loss,m.name as machine,i.name as inspector from downtime_dashboard d inner join machine_loss ml on d.machine_loss_id = ml.machine_loss_id inner join machines m on d.machine_id = m.machine_id inner join inspectors i on d.inspector_id = i.inspector_id;"
+        "select d.downtime_id as id,DATE_FORMAT(d.date, '%d-%m-%Y %H:%i') as date, DATE_FORMAT(d.idle_from, '%d-%m-%Y %H:%i') as idle_from,DATE_FORMAT(d.idle_to, '%d-%m-%Y %H:%i') as idle_to,ml.description as machine_loss,m.name as machine,i.name as inspector , d.remarks from downtime_dashboard d inner join machine_loss ml on d.machine_loss_id = ml.machine_loss_id inner join machines m on d.machine_id = m.machine_id inner join inspectors i on d.inspector_id = i.inspector_id;"
       );
       const [latest] = await db.query(
         "select DATE_FORMAT(max(date), '%d-%m-%Y') as latest_update from downtime_dashboard ;"

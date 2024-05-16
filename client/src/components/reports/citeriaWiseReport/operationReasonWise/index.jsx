@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import "./operatorWiseReport.scss";
+import "./operationReasonWiseReport.scss";
 
-const OperatorWiseReport = ({ data,sum_data }) => {
+const OperationReasonWiseReport = ({ data , sum_data }) => {
   useEffect(() => {
     //new DataTable("#example");
     $(document).ready(function () {
@@ -10,15 +10,15 @@ const OperatorWiseReport = ({ data,sum_data }) => {
   }, []);
   return (
     <>
-      <div className="centroid_operatorWiseReportWrapper">
-        <div className="centroid_operatorWiseReportContainer">
+      <div className="centroid_operationReasonWiseReportWrapper">
+        <div className="centroid_operationReasonWiseReportContainer">
           <table id="example" className="display" style={{ width: "100%" }}>
             <thead>
               <tr>
-                <th>Operator</th>
                 <th>Operation</th>
+                <th>Reason</th>
                 <th>Total mix (Kg)</th>
-                <th>Production Qty (Kg)</th>
+                <th>Production (Kg)</th>
                 <th>Rejection Qty (Kg)</th>
                 <th>Material loss (Kg)</th>
               </tr>
@@ -27,8 +27,8 @@ const OperatorWiseReport = ({ data,sum_data }) => {
               {data.map((obj, index) => {
                 return (
                   <tr key={index}>
-                    <td>{obj.operator}</td>
                     <td>{obj.operation}</td>
+                    <td>{obj.reason}</td>
                     <td>{obj.total_mix}</td>
                     <td>{obj.production}</td>
                     <td>{obj.rejection}</td>
@@ -38,15 +38,15 @@ const OperatorWiseReport = ({ data,sum_data }) => {
               })}
             </tbody>
             <tfoot>
-            <tr>
+              <tr>
                 <th>Total</th>
                 <th></th>
                 <th>{sum_data.total_mix}</th>
                 <th>{sum_data.production}</th>
                 <th>{sum_data.rejection}</th>
                 <th>{sum_data.material_loss}</th>
-            </tr>
-        </tfoot>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
@@ -54,5 +54,4 @@ const OperatorWiseReport = ({ data,sum_data }) => {
   );
 };
 
-export default OperatorWiseReport;
-
+export default OperationReasonWiseReport;

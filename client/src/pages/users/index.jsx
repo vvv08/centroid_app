@@ -28,7 +28,7 @@ const UserList = () => {
   return (
     <>
       <div className="centroid_userListWrapper">
-        <Navbar />
+        <Navbar current_tab={"users"}/>
         {!loading && users[0] ? <UserListMain data = {users}/> : <div className="centroid_userListLoading"><p>Loading...</p></div>}
       </div>
     </>

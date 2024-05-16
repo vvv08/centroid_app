@@ -39,7 +39,7 @@ const Home = () => {
   return (
     <>
       <div className="centroid_homeWrapper">
-        <Navbar />
+        <Navbar current_tab={"dashboard"}/>
         <div className="centroid_DashboardHeader">
           <h2>Dashboard</h2>
           <div className="centroid_DashboardUpdates">

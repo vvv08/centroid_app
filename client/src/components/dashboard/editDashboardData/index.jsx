@@ -229,7 +229,7 @@ const EditDashboardData = ({id}) => {
               {inputs.operation > 0 && dataLists.defects &&  <p>{dataLists.operations.filter((f) => f.operation_id === Number(inputs.operation))[0].operation_description}</p>}
             </div>}
             <div className="centroid_editDashboardData_input">
-              <label htmlFor="part_number">Part No.</label>
+              <label htmlFor="part_number">Part No. / Name</label>
               <input
                 id="part_number"
                 type="text"

@@ -7,7 +7,7 @@ const MasterData = () => {
   return (
     <>
       <div className="centroid_masterWrapper">
-        <Navbar/>
+        <Navbar current_tab={"master"}/>
         <MasterMain/>
       </div>
     </>

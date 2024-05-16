@@ -7,7 +7,7 @@ const Reports = () => {
   return (
     <>
       <div className="centroid_reportsWrapper">
-        <Navbar />
+        <Navbar current_tab={"reports"}/>
         <ReportHeader/>
       </div>
     </>

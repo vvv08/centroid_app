@@ -139,7 +139,7 @@ const MasterMain = () => {
             {tabState === "D" && masterData.inspectors &&  <InspectorsMaster data = {masterData.inspectors} />}
             {tabState === "E" && masterData.defects &&  <DefectsMaster data = {masterData.defects} />}
             {tabState === "F" && masterData.machine_loss &&  <MachineLossMaster data = {masterData.machine_loss} />}
-            {tabState === "G" && masterData.shifts &&  <ShiftsMaster data = {masterData.shifts} />}
+            {tabState === "G" && masterData.shifts &&  <ShiftsMaster data = {masterData.shifts}/>}
           </div> : 
           <div className="centroid_masterMainContent">
               <p>Loading...</p>
