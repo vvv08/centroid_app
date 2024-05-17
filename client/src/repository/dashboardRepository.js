@@ -1,9 +1,9 @@
 import makeRequest from "../utils/axios"
 
 //API to get data for dashboard
-export const getDashboard = async () => {
+export const getDashboard = async ({fromDate,toDate}) => {
     try{
-        const result = await makeRequest.get('/',
+        const result = await makeRequest.get(`/?from=${fromDate}&to=${toDate}`,
         {
           headers: {
             authorization: "Bearer " + localStorage.getItem("token"),

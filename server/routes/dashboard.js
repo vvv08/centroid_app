@@ -6,7 +6,11 @@ const router = express.Router();
 
 //fetch data for dashboard
 router.get('/', [verifyToken] ,(req,res) => {
-    getDashboard().then((result) => {
+    let filterDates = {
+        from : req.query.from,
+        to:req.query.to
+    }
+    getDashboard(filterDates).then((result) => {
         res.status(200).json(result)
     }).catch((err) => {
         res.status(500).json(err)
