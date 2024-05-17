@@ -3,6 +3,7 @@ import "./editDowntimeComp.scss";
 import { useNavigate } from "react-router-dom";
 import { editDowntime, getDowntimeEntry } from "../../../repository/downtime";
 import { getInputData } from "../../../repository/dashboardRepository";
+import { dateFormatter,timeFormatter } from "../../../../../server/validations/validations";
 
 const EditDowntimeData = ({id}) => {
   const navigate = useNavigate();
@@ -103,7 +104,7 @@ const EditDowntimeData = ({id}) => {
                 onChange={handleInputChange}
                 required
               />
-              {inputs.entry_date && <p>{inputs.entry_date}</p>}
+              {inputs.entry_date && <p>{`${dateFormatter(inputs.entry_date.substr(0 , 10))}, ${timeFormatter(inputs.entry_date.substr(11,5))}`}</p>}
             </div>
             {dataLists.machines && dataLists.machines.filter((f) => f.machine_id === Number(inputs.machine))[0] && <div className="centroid_editDowntimeData_list">
               <label htmlFor="machine">Choose Machine</label>
@@ -131,7 +132,7 @@ const EditDowntimeData = ({id}) => {
                 onChange={handleInputChange}             
                 value={inputs.idle_time_from}
               />
-              {inputs.idle_time_from && <p>{inputs.idle_time_from}</p>}
+              {inputs.idle_time_from && <p>{`${dateFormatter(inputs.idle_time_from.substr(0 , 10))}, ${timeFormatter(inputs.idle_time_from.substr(11,5))}`}</p>}
             </div>
             <div className="centroid_editDowntimeData_list">
               <label htmlFor="idle_time_to">Machine idle till</label>
@@ -142,7 +143,7 @@ const EditDowntimeData = ({id}) => {
                 min={inputs.idle_time_from}
                 value={inputs.idle_time_to}
               />
-              {inputs.idle_time_to && <p>{inputs.idle_time_to}</p>}
+              {inputs.idle_time_to && <p>{`${dateFormatter(inputs.idle_time_to.substr(0 , 10))}, ${timeFormatter(inputs.idle_time_to.substr(11,5))}`}</p>}
             </div>
             {dataLists.machine_loss && dataLists.machine_loss.filter((f) => f.machine_loss_id === Number(inputs.machine_loss))[0] && <div className="centroid_editDowntimeData_list">
               <label htmlFor="machine_loss">Idle time reason</label>

@@ -16,7 +16,7 @@ const MachineWiseReport = ({ data,sum_data }) => {
             <thead>
               <tr>
                 <th>Machine</th>
-                <th>Total mix (Kg)</th>
+                <th>Total supplied Qty (Kg)</th>
                 <th>Production Qty (Kg)</th>
                 <th>Rejection Qty (Kg)</th>
                 <th>Material loss (Kg)</th>

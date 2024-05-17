@@ -38,3 +38,43 @@ export const dateFormatter = (inputDate) => {
     }
     return date;
   };
+
+export const timeFormatter = (inputTime) => {
+  const twelveHour = inputTime.substr(0,2) - 12;
+  const minutes = inputTime.substr(3,2);
+  if(inputTime.substr(0,2) != 0){
+    if(twelveHour > 0){
+      if(twelveHour == 1){
+        return `01:${minutes} pm`
+      }else if(twelveHour == 2){
+        return `02:${minutes} pm`
+      }else if(twelveHour == 3){
+        return `03:${minutes} pm`
+      }else if(twelveHour == 4){
+        return `04:${minutes} pm`
+      }else if(twelveHour == 5){
+        return `05:${minutes} pm`
+      }else if(twelveHour == 6){
+        return `06:${minutes} pm`
+      }else if(twelveHour == 7){
+        return `07:${minutes} pm`
+      }else if(twelveHour == 8){
+        return `08:${minutes} pm`
+      }else if(twelveHour == 9){
+        return `09:${minutes} pm`
+      }else if(twelveHour == 10){
+        return `10:${minutes} pm`
+      }else if(twelveHour == 11){
+        return `11:${minutes} pm`
+      }else if(twelveHour == 12){
+        return `12:${minutes} pm`
+      }
+    }else if(twelveHour === 0){
+      return `${inputTime} pm`
+    }else{
+      return `${inputTime} am`
+    }
+  }else{
+    return `12:${minutes} am`
+  }
+} 

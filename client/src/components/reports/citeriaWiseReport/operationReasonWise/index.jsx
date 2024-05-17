@@ -16,8 +16,8 @@ const OperationReasonWiseReport = ({ data , sum_data }) => {
             <thead>
               <tr>
                 <th>Operation</th>
-                <th>Reason</th>
-                <th>Total mix (Kg)</th>
+                <th>Reason for rejection</th>
+                <th>Total supplied Qty (Kg)</th>
                 <th>Production (Kg)</th>
                 <th>Rejection Qty (Kg)</th>
                 <th>Material loss (Kg)</th>

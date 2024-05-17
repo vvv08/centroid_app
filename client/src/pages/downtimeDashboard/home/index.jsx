@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import DowntimeDashboard from "../../../components/downtime/home";
 import Navbar from "../../../components/navbar/navbar";
 import { getDowntimeData } from "../../../repository/downtime";
+import { dateFormatter } from "../../../../../server/validations/validations";
 
 const DowntimeDashboardHome = () => {
   const [refresh,setRefresh] = useState(false)
@@ -44,7 +45,7 @@ const DowntimeDashboardHome = () => {
           <h2>Downtime Dashboard</h2>
           <div className="centroid_DowntimeDashboardHomeUpdates">
             <p>Last Updated: </p>
-            <p>{dashboardData.latest.latest_update}</p>
+            <p>{dateFormatter(dashboardData.latest.latest_update)}</p>
           </div>
           <div className="centroid_DowntimeDashboardHomeAdd">
             <button

@@ -7,6 +7,7 @@ import { getUsers } from "../../repository/users";
 const UserList = () => {
     const [users, setUsers] = useState([]);
     const [loading,setLoading] = useState(true)
+    const [refresh,setRefresh] = useState(false);
   useEffect(() => {
     setLoading(true)
     getUsers()
@@ -24,12 +25,12 @@ const UserList = () => {
       }).finally(() => {
         setLoading(false)
       });
-  }, []);
+  }, [refresh]);
   return (
     <>
       <div className="centroid_userListWrapper">
         <Navbar current_tab={"users"}/>
-        {!loading && users[0] ? <UserListMain data = {users}/> : <div className="centroid_userListLoading"><p>Loading...</p></div>}
+        {!loading && users[0] ? <UserListMain data = {users} ref_state = {refresh} refresh = {setRefresh}/> : <div className="centroid_userListLoading"><p>Loading...</p></div>}
       </div>
     </>
   );

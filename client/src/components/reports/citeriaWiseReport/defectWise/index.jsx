@@ -16,8 +16,8 @@ const DefectWiseReport = ({ data, sum_data }) => {
             <thead>
               <tr>
                 <th>Part</th>
-                <th>Reason</th>
-                <th>Total mix (Kg)</th>
+                <th>Reason for rejection</th>
+                <th>Total supplied Qty (Kg)</th>
                 <th>Production Qty (Kg)</th>
                 <th>Rejection Qty (Kg)</th>
                 <th>Material  (Kg)</th>

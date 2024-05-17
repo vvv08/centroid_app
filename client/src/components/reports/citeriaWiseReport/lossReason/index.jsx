@@ -17,7 +17,7 @@ const LossReasonWiseReport = ({ data,sum_data }) => {
             <thead>
               <tr>
                 <th>Date</th>
-                <th>Reason</th>
+                <th>Reason for rejection</th>
                 <th>Down time (Hours)</th>
               </tr>
             </thead>

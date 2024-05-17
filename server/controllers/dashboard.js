@@ -5,10 +5,10 @@ export const getDashboard = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const result1 = await db.query(
-        "SELECT r.Id , r.total_mix , DATE_FORMAT(r.date, '%d-%m-%Y %H:%i') as date , s.description, DATE_FORMAT(r.production_from ,'%d-%m-%Y %H:%i') as production_from, DATE_FORMAT(r.production_to ,'%d-%m-%Y %H:%i') as production_to ,  m.name as machine , os.operation_description as operation , r.part_number , o.name as operator , i.name as inspector , r.batch_number , d.description as defect , r.production_qty , r.rejection_qty , r.remarks FROM rejection_dashboard r inner join defects d on r.defect_id = d.defect_id inner join operators o on r.operator_id = o.operator_id inner join operations os on r.operation_id = os.operation_id inner join inspectors i on r.inspector_id = i.inspector_id inner join machines m on r.machine_id = m.machine_id inner join shifts s on r.shift_id = s.shift_id"
+        "SELECT r.Id , r.total_mix , DATE_FORMAT(r.date, '%Y-%m-%d %H:%i') as date , s.description, DATE_FORMAT(r.production_from ,'%Y-%m-%d %H:%i') as production_from, DATE_FORMAT(r.production_to ,'%Y-%m-%d %H:%i') as production_to ,  m.name as machine , os.operation_description as operation , r.part_number , o.name as operator , i.name as inspector , r.batch_number , d.description as defect , r.production_qty , r.rejection_qty , r.remarks FROM rejection_dashboard r inner join defects d on r.defect_id = d.defect_id inner join operators o on r.operator_id = o.operator_id inner join operations os on r.operation_id = os.operation_id inner join inspectors i on r.inspector_id = i.inspector_id inner join machines m on r.machine_id = m.machine_id inner join shifts s on r.shift_id = s.shift_id;"
       );
       const result2 = await db.query(
-        "select DATE_FORMAT(max(date), '%d-%m-%Y') as latest_update from rejection_dashboard;"
+        "select DATE_FORMAT(max(date), '%Y-%m-%d') as latest_update from rejection_dashboard;"
       );
       //resolve([].concat(result1[0],result2[0]));
       resolve({

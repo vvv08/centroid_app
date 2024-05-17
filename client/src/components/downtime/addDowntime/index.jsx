@@ -3,6 +3,7 @@ import "./addDowntimeComp.scss";
 import { useNavigate } from "react-router-dom";
 import { getInputData } from "../../../repository/dashboardRepository";
 import { addDowntime } from "../../../repository/downtime";
+import { dateFormatter,timeFormatter } from "../../../../../server/validations/validations";
 
 const AddDowntimeComp = () => {
   const navigate = useNavigate();
@@ -90,7 +91,7 @@ const AddDowntimeComp = () => {
                 value={inputs.entry_date}
                 required
               />
-              {inputs.entry_date && <p>{inputs.entry_date}</p>}
+              {inputs.entry_date && <p>{`${dateFormatter(inputs.entry_date.substr(0 , 10))}, ${timeFormatter(inputs.entry_date.substr(11,5))}`}</p>}
             </div>
             <div className="centroid_addDowntimeComp_list">
               <label htmlFor="machine">Choose Machine</label>
@@ -119,7 +120,7 @@ const AddDowntimeComp = () => {
                 value={inputs.idle_time_from}
                 required
               />
-              {inputs.idle_time_from && <p>{inputs.idle_time_from}</p>}
+              {inputs.idle_time_from && <p>{`${dateFormatter(inputs.idle_time_from.substr(0 , 10))}, ${timeFormatter(inputs.idle_time_from.substr(11,5))}`}</p>}
             </div>
             <div className="centroid_addDowntimeComp_list">
               <label htmlFor="idle_time_to">Machine idle till</label>
@@ -131,7 +132,7 @@ const AddDowntimeComp = () => {
                 min={inputs.idle_time_from}
                 required
               />
-              {inputs.idle_time_to && <p>{inputs.idle_time_to}</p>}
+              {inputs.idle_time_to && <p>{`${dateFormatter(inputs.idle_time_to.substr(0 , 10))}, ${timeFormatter(inputs.idle_time_to.substr(11,5))}`}</p>}
             </div>
             <div className="centroid_addDowntimeComp_list">
               <label htmlFor="machine_loss">Idle time reason</label>

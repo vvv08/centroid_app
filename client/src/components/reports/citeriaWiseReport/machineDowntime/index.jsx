@@ -16,7 +16,7 @@ const MachineDowntimeReport = ({ data,sum_data }) => {
             <thead>
               <tr>
                 <th>Machine</th>
-                <th>Reason</th>
+                <th>Reason for downtime</th>
                 <th>Down time (Hours)</th>
               </tr>
             </thead>

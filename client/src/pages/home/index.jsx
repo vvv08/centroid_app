@@ -4,6 +4,7 @@ import Navbar from "../../components/navbar/navbar";
 import Dashboard from "../../components/dashboard";
 import { getDashboard } from "../../repository/dashboardRepository";
 import { useNavigate } from "react-router-dom";
+import { dateFormatter } from "../../../../server/validations/validations"
 
 const Home = () => {
   const [refresh,setRefresh] = useState(false)
@@ -44,7 +45,7 @@ const Home = () => {
           <h2>Dashboard</h2>
           <div className="centroid_DashboardUpdates">
             <p>Last Updated: </p>
-            <p>{dashboardData.latest.latest_update}</p>
+            <p>{dateFormatter(dashboardData.latest.latest_update)}</p>
           </div>
           <div className="centroid_DasboardAdd">
             <button

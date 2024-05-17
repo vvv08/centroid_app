@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { deleteDowntime } from "../../../repository/downtime";
+import { dateFormatter,timeFormatter } from "../../../../../server/validations/validations";
 
 const DowntimeDashboard = ({data,ref_state,refresh }) => {
   const navigate = useNavigate();
@@ -58,10 +59,10 @@ const DowntimeDashboard = ({data,ref_state,refresh }) => {
                   {data.dashboard.map((obj) => {
                     return (
                       <tr key={obj.id}>
-                        <td>{obj.date}</td>
+                        <td>{`${dateFormatter(obj.date.substr(0 , 10))}, ${timeFormatter(obj.date.substr(11,5))}`}</td>
                         <td>{obj.machine}</td>
-                        <td>{obj.idle_from}</td>
-                        <td>{obj.idle_to}</td>
+                        <td>{`${dateFormatter(obj.idle_from.substr(0 , 10))}, ${timeFormatter(obj.idle_from.substr(11,5))}`}</td>
+                        <td>{`${dateFormatter(obj.idle_to.substr(0 , 10))}, ${timeFormatter(obj.idle_to.substr(11,5))}`}</td>
                         <td>{obj.machine_loss}</td>
                         <td>{obj.inspector}</td>
                         <td>{obj.remarks}</td>

@@ -1,27 +1,23 @@
-import React, { useState } from "react";
-import "./addDefect.scss";
+import React, { useEffect, useState } from "react";
+import "./addUserForm.scss";
 import { useNavigate } from "react-router-dom";
-import { addDefectMaster } from "../../../../repository/master";
+import { addUser } from "../../../repository/users";
 
-const AddDefectMaster = () => {
+const AddUserForm = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [pass_Match, setPass_Match] = useState(false);
   const [inputs, setInputs] = useState({
     name: "",
-    status: "",
-    type:"",
-    password_one:"",
-    password_confirmed:""
+    type: "",
+    password_one: "",
+    password_confirmed: "",
   });
 
   const handleInputChange = (e) => {
     switch (e.target.id) {
       case "name": {
         setInputs((state) => ({ ...state, name: e.target.value }));
-        break;
-      }
-      case "status": {
-        setInputs((state) => ({ ...state, status: e.target.value }));
         break;
       }
       case "type": {
@@ -33,7 +29,10 @@ const AddDefectMaster = () => {
         break;
       }
       case "password_confirmed": {
-        setInputs((state) => ({ ...state, password_confirmed: e.target.value }));
+        setInputs((state) => ({
+          ...state,
+          password_confirmed: e.target.value,
+        }));
         break;
       }
     }
@@ -42,10 +41,10 @@ const AddDefectMaster = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    addDefectMaster(inputs)
+    addUser(inputs)
       .then((result) => {
-        alert("Defect added");
-        navigate("/masterData");
+        alert("User added");
+        navigate("/userList");
       })
       .catch((err) => {
         if (err.response.data.status === "authenticationError") {
@@ -61,33 +60,80 @@ const AddDefectMaster = () => {
       });
   };
 
+  useEffect(() => {
+    if (inputs.password_one) {
+      if (inputs.password_one === inputs.password_confirmed) {
+        setPass_Match(true);
+      } else {
+        setPass_Match(false);
+      }
+    }
+  }, [inputs.password_confirmed]);
+
   return (
     <>
-      <div className="centroid_addDefectWrapper">
-        <div className="centroid_addDefectContainer">
+      <div className="centroid_addUserWrapper">
+        <div className="centroid_addUserContainer">
           <form onSubmit={handleSubmit}>
-            <div className="centroid_addDefect_input">
-              <label htmlFor="description">Description</label>
-              <input id="description" type="text" required onChange={handleInputChange} value={inputs.description}/>
+            <div className="centroid_addUser_input">
+              <label htmlFor="name">Name</label>
+              <input
+                id="name"
+                type="text"
+                required
+                onChange={handleInputChange}
+                value={inputs.name}
+              />
             </div>
-            <div className="centroid_addDefect_list">
-              <label htmlFor="status">Choose Status</label>
-              <select id="status" type="text" required onChange={handleInputChange} value={inputs.status}>
-                <option value={""}>Select</option>
-                <option value={"active"}>Active</option>
-                <option value={"inactive"}>Inactive</option>
-              </select>
-              {inputs.status && <p>{inputs.status}</p>}
-            </div>
-            <div className="centroid_formSubmitContainer">
-              <button
-                type="submit"
-                className="centroid_AddButton"
-                disabled={loading}
+            <div className="centroid_addUser_list">
+              <label htmlFor="type">Choose Type</label>
+              <select
+                id="type"
+                type="text"
+                required
+                onChange={handleInputChange}
+                value={inputs.type}
               >
-                {loading ? "adding" : "Add"}
-              </button>
+                <option value={""}>Select</option>
+                <option value={"emp"}>emp</option>
+                <option value={"admin"}>Admin</option>
+              </select>
+              {inputs.type && <p>{inputs.type}</p>}
             </div>
+            <div className="centroid_addUser_input">
+              <label htmlFor="password_one">Password</label>
+              <input
+                id="password_one"
+                type="password"
+                required
+                onChange={handleInputChange}
+                value={inputs.password_one}
+              />
+            </div>
+            <div className="centroid_addUser_input">
+              <label htmlFor="password_confirmed">Confirm password</label>
+              <input
+                id="password_confirmed"
+                type="password"
+                required
+                onChange={handleInputChange}
+                value={inputs.password_confirmed}
+              />
+            </div>
+            {!pass_Match && inputs.password_confirmed && (
+              <p style={{"color" : "var(--centroidMaroon"}}>Passwords not matching</p>
+            )}
+            {pass_Match && (
+              <div className="centroid_formSubmitContainer">
+                <button
+                  type="submit"
+                  className="centroid_AddButton"
+                  disabled={loading}
+                >
+                  {loading ? "adding" : "Add"}
+                </button>
+              </div>
+            )}
           </form>
         </div>
       </div>
@@ -95,4 +141,4 @@ const AddDefectMaster = () => {
   );
 };
 
-export default AddDefectMaster;
+export default AddUserForm;

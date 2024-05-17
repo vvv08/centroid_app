@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./addDasboardData.scss";
 import { useNavigate } from "react-router-dom";
 import { addEntry, getInputData } from "../../../repository/dashboardRepository";
+import { dateFormatter,timeFormatter } from "../../../../../server/validations/validations";
 
 const AddDashboardData = () => {
   const navigate = useNavigate();
@@ -129,7 +130,7 @@ const AddDashboardData = () => {
                 value={inputs.entry_date}
                 required
               />
-              {inputs.entry_date && <p>{inputs.entry_date}</p>}
+              {inputs.entry_date && <p>{`${dateFormatter(inputs.entry_date.substr(0 , 10))}, ${timeFormatter(inputs.entry_date.substr(11,5))}`}</p>}
             </div>
             <div className="centroid_addDashboardData_list">
               <label htmlFor="shift">Choose Shift</label>
@@ -140,14 +141,14 @@ const AddDashboardData = () => {
                 value={inputs.shift}
                 required
               >
-                <option value={0}>Select</option>
+                <option value="">Select</option>
                 {dataLists.shifts && dataLists.shifts.map((obj) => {
                   return(
                     <option value={obj.shift_id} key={obj.shift_id}>{obj.shift}</option>
                   )
                 })}
               </select>
-              {inputs.shift > 0 && <p>{dataLists.shifts.filter((f) => f.shift_id === Number(inputs.shift))[0].description}</p>}
+              {inputs.shift && <p>{dataLists.shifts.filter((f) => f.shift_id === Number(inputs.shift))[0].description}</p>}
             </div>
             <div className="centroid_addDashboardData_list">
               <label htmlFor="production_from">Production start</label>
@@ -158,7 +159,7 @@ const AddDashboardData = () => {
                 value={inputs.production_from}
                 required
               />
-              {inputs.production_from && <p>{inputs.production_from}</p>}
+              {inputs.production_from && <p>{`${dateFormatter(inputs.production_from.substr(0 , 10))}, ${timeFormatter(inputs.production_from.substr(11,5))}`}</p>}
             </div>
             <div className="centroid_addDashboardData_list">
               <label htmlFor="production_to">Production end</label>
@@ -170,7 +171,7 @@ const AddDashboardData = () => {
                 min={inputs.production_from}
                 required
               />
-              {inputs.production_to && <p>{inputs.production_to}</p>}
+              {inputs.production_to && <p>{`${dateFormatter(inputs.production_to.substr(0 , 10))}, ${timeFormatter(inputs.production_to.substr(11,5))}`}</p>}
             </div>
             <div className="centroid_addDashboardData_list">
               <label htmlFor="machine">Choose Machine</label>
@@ -181,14 +182,14 @@ const AddDashboardData = () => {
                 value={inputs.machine}
                 required
               >
-                <option value={0}>Select</option>
+                <option value="">Select</option>
                 {dataLists.machines && dataLists.machines.map((obj) => {
                   return(
                     <option value={obj.machine_id} key={obj.machine_id}>{obj.name}</option>
                   )
                 })}
               </select>
-              {inputs.machine > 0 && <p>{dataLists.machines.filter((f) => f.machine_id === Number(inputs.machine))[0].name}</p>}
+              {inputs.machine && <p>{dataLists.machines.filter((f) => f.machine_id === Number(inputs.machine))[0].name}</p>}
             </div>
             <div className="centroid_addDashboardData_list">
               <label htmlFor="operation">Choose Operation</label>
@@ -199,14 +200,14 @@ const AddDashboardData = () => {
                 value={inputs.operation}
                 required
               >
-                <option value={0}>Select</option>
+                <option value="">Select</option>
                 {dataLists.operations && dataLists.operations.map((obj) => {
                   return(
                     <option value={obj.operation_id} key={obj.operation_id}>{obj.operation_description}</option>
                   )
                 })}
               </select>
-              {inputs.operation > 0 && <p>{dataLists.operations.filter((f) => f.operation_id === Number(inputs.operation))[0].operation_description}</p>}
+              {inputs.operation && <p>{dataLists.operations.filter((f) => f.operation_id === Number(inputs.operation))[0].operation_description}</p>}
             </div>
             <div className="centroid_addDashboardData_input">
               <label htmlFor="part_number">Part No. / Name</label>
@@ -227,14 +228,14 @@ const AddDashboardData = () => {
                 value={inputs.operator}
                 required
               >
-                <option value={0}>Select</option>
+                <option value="">Select</option>
                 {dataLists.operators && dataLists.operators.map((obj) => {
                   return(
                     <option value={obj.operator_id} key={obj.operator_id}>{obj.name}</option>
                   )
                 })}
               </select>
-              {inputs.operator > 0 && <p>{dataLists.operators.filter((f) => f.operator_id === Number(inputs.operator))[0].name}</p>}
+              {inputs.operator && <p>{dataLists.operators.filter((f) => f.operator_id === Number(inputs.operator))[0].name}</p>}
             </div>
             <div className="centroid_addDashboardData_list">
               <label htmlFor="inspector">Choose Inspector</label>
@@ -245,14 +246,14 @@ const AddDashboardData = () => {
                 value={inputs.inspector}
                 required
               >
-                <option value={0}>Select</option>
+                <option value="">Select</option>
                 {dataLists.inspectors && dataLists.inspectors.map((obj) => {
                   return(
                     <option value={obj.inspector_id} key={obj.inspector_id}>{obj.name}</option>
                   )
                 })}
               </select>
-              {inputs.inspector > 0 && <p>{dataLists.inspectors.filter((f) => f.inspector_id === Number(inputs.inspector))[0].name}</p>}
+              {inputs.inspector && <p>{dataLists.inspectors.filter((f) => f.inspector_id === Number(inputs.inspector))[0].name}</p>}
             </div>
             <div className="centroid_addDashboardData_input">
               <label htmlFor="batch_number">Batch No.</label>
@@ -265,7 +266,7 @@ const AddDashboardData = () => {
               />
             </div>
             <div className="centroid_addDashboardData_list">
-              <label htmlFor="defect">Choose Defect</label>
+              <label htmlFor="defect">Reason for rejection</label>
               <select
                 id="defect"
                 type="text"
@@ -273,17 +274,17 @@ const AddDashboardData = () => {
                 value={inputs.defect}
                 required
               >
-                <option value={0}>Select</option>
+                <option value="">Select</option>
                 {dataLists.defects && dataLists.defects.map((obj) => {
                   return(
                     <option value={obj.defect_id} key={obj.defect_id}>{obj.description}</option>
                   )
                 })}
               </select>
-              {inputs.defect > 0 && <p>{dataLists.defects.filter((f) => f.defect_id === Number(inputs.defect))[0].description}</p>}
+              {inputs.defect && <p>{dataLists.defects.filter((f) => f.defect_id === Number(inputs.defect))[0].description}</p>}
             </div>
             <div className="centroid_addDashboardData_input">
-              <label htmlFor="total_mix">Total mix</label>
+              <label htmlFor="total_mix">Total supplied quantity</label>
               <input
                 id="total_mix"
                 type="number"
