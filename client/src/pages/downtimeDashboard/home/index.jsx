@@ -58,9 +58,9 @@ const DowntimeDashboardHome = () => {
             </button>
           </div>
         </div>
-        {dashboardData.dashboard && <div className="centroid_DowntimeDashboardHomeDashboard">
+        {dashboardData.dashboard && !loading ? <div className="centroid_DowntimeDashboardHomeDashboard">
           <DowntimeDashboard data={dashboardData} ref_state = {refresh} refresh = {setRefresh}/>
-        </div>}
+        </div> : <div className="centroid_homeLoading"><p>Loading...</p></div>}
       </div>
     </>
   );
