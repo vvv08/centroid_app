@@ -117,8 +117,10 @@ const Home = () => {
               Clear
             </button>
           </div>
-        {dashboardData.dashboard && !loading && <div className="centroid_homeDashboard">
+        {dashboardData.dashboard && !loading ? <div className="centroid_homeDashboard">
           <Dashboard data={dashboardData} refresh = {setRefresh} ref_state = {refresh}/>
+        </div> : <div className="centroid_homeLoading">
+          <p>Loading...</p>
         </div>}
       </div>
     </>
