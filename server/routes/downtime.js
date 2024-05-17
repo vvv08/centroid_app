@@ -6,7 +6,11 @@ const router = express.Router();
 
 //To fetch downtime data
 router.get('/',[verifyToken],(req,res) => {
-    getDowntimeData().then((result) => {
+    let filterDates = {
+        to : req.query.to,
+        from : req.query.from
+    }
+    getDowntimeData(filterDates).then((result) => {
         res.status(200).json(result)
     }).catch((err) => {
         res.status(500).json(err)

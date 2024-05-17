@@ -61,7 +61,7 @@ const Home = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [filterDate]);
+  }, [filterDate,refresh]);
 
   return (
     <>

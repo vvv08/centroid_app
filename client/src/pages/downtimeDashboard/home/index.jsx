@@ -4,9 +4,16 @@ import { useNavigate } from "react-router-dom";
 import DowntimeDashboard from "../../../components/downtime/home";
 import Navbar from "../../../components/navbar/navbar";
 import { getDowntimeData } from "../../../repository/downtime";
-import { dateFormatter } from "../../../../../server/validations/validations";
+import { dateFormatter,padZero } from "../../../../../server/validations/validations";
 
 const DowntimeDashboardHome = () => {
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = padZero(currentDate.getMonth()+ 1); // Months are zero-based (0 = January)
+  const day = padZero(currentDate.getDate());
+  const curr_date = `${year}-${month}-${day}`;
+
+
   const [refresh,setRefresh] = useState(false)
   const [dashboardData, setDashboardData] = useState({
     dashboard: "",
@@ -14,9 +21,29 @@ const DowntimeDashboardHome = () => {
   });
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const [filterDate, setFilterDate] = useState({
+    fromDate: "2024-05-15",
+    toDate: curr_date,
+  });
+
+  const handleFilterChange = (e) => {
+    switch (e.target.id) {
+      case "fromDate": {
+        setFilterDate((state) => ({ ...state, fromDate: e.target.value }));
+        break;
+      }
+      case "toDate": {
+        setFilterDate((state) => ({ ...state, toDate: e.target.value }));
+        break;
+      }
+    }
+  };
+
+
   useEffect(() => {
     setLoading(true);
-     getDowntimeData()
+     getDowntimeData(filterDate)
        .then((result) => {
          setDashboardData({
            dashboard: result.dashboard,
@@ -35,7 +62,7 @@ const DowntimeDashboardHome = () => {
        .finally(() => {
          setLoading(false);
        });
-  }, [refresh]);
+  }, [filterDate,refresh]);
 
   return (
     <>
@@ -58,6 +85,39 @@ const DowntimeDashboardHome = () => {
             </button>
           </div>
         </div>
+        <div className="centroid_downtimeDateFilter">
+            <div className="centroid_downtimeDate">
+              <label htmlFor="fromDate">From</label>
+              <input
+                type="date"
+                id="fromDate"
+                value={filterDate.fromDate}
+                onChange={handleFilterChange}
+              />
+              <p>{dateFormatter(filterDate.fromDate)}</p>
+            </div>
+            <div className="centroid_downtimeDate">
+              <label htmlFor="toDate">To</label>
+              <input
+                type="date"
+                id="toDate"
+                value={filterDate.toDate}
+                onChange={handleFilterChange}
+              />
+              <p>{dateFormatter(filterDate.toDate)}</p>
+            </div>
+            <button
+              className="centroid_DeleteButton"
+              onClick={() => {
+                setFilterDate({
+                  fromDate: "2024-05-15",
+                  toDate: curr_date,
+                });
+              }}
+            >
+              Clear
+            </button>
+          </div>
         {dashboardData.dashboard && !loading ? <div className="centroid_DowntimeDashboardHomeDashboard">
           <DowntimeDashboard data={dashboardData} ref_state = {refresh} refresh = {setRefresh}/>
         </div> : <div className="centroid_homeLoading"><p>Loading...</p></div>}

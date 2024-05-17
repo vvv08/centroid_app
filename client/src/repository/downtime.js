@@ -1,9 +1,9 @@
 import makeRequest from "../utils/axios"
 
 //To fetch downtime data
-export const getDowntimeData = async () => {
+export const getDowntimeData = async ({fromDate,toDate}) => {
     try{
-        const result = await makeRequest.get('/downtime',{
+        const result = await makeRequest.get(`/downtime?to=${toDate}&from=${fromDate}`,{
             headers:{
                 authorization: "Bearer " + localStorage.getItem("token")
             }

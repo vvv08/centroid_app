@@ -26,6 +26,16 @@
             align-items: center;
         }
     }
+    .centroid_downtimeDateFilter{
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        .centroid_downtimeDate{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    }
     .centroid_homeLoading{
         height: 100px;
         display: flex;
