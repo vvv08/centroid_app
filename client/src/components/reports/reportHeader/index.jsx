@@ -22,14 +22,14 @@ const ReportHeader = () => {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = padZero(currentDate.getMonth() + 1); // Months are zero-based (0 = January)
-  const day = padZero(currentDate.getDate() + 1);
+  const day = padZero(currentDate.getDate());
   const curr_date = `${year}-${month}-${day}`;
 
   const [tabState, setTabState] = useState("G");
   const [loading, setLoading] = useState(true);
 
   const [filterDate, setFilterDate] = useState({
-    fromDate: "2019-01-01",
+    fromDate: "2024-05-15",
     toDate: curr_date,
   });
 
@@ -236,7 +236,7 @@ const ReportHeader = () => {
               className="centroid_DeleteButton"
               onClick={() => {
                 setFilterDate({
-                  fromDate: "2019-01-01",
+                  fromDate: "2024-05-15",
                   toDate: curr_date,
                 });
               }}

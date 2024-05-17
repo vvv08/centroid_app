@@ -25,7 +25,7 @@ const GraphMain = ({ closeNav }) => {
   const [printState, setPrintState] = useState(false);
 
   const [filterDate, setFilterDate] = useState({
-    fromDate: "2019-01-01",
+    fromDate: "2024-05-15",
     toDate: curr_date,
   });
 
@@ -176,7 +176,7 @@ const GraphMain = ({ closeNav }) => {
               className="centroid_DeleteButton"
               onClick={() => {
                 setFilterDate({
-                  fromDate: "2019-01-01",
+                  fromDate: "2024-05-15",
                   toDate: curr_date,
                 });
               }}
