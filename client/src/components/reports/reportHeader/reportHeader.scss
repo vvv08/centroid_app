@@ -4,13 +4,17 @@
     flex-direction: column;
     gap: 30px;
     .centroid_reportHeaderList{
+        display: flex;
+        justify-content: center;
         ul{
             list-style: none;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 30px;
-            height: 50px;
+            width: 90%;
+            min-height: 50px;
+            flex-wrap: wrap;
             .centroid_reportHeaderSelectedTab{
                 text-decoration: underline 3px;
                 text-underline-offset: 6px;
@@ -19,6 +23,7 @@
             li{
                 font-weight: 500;
                 cursor: pointer;
+                font-size: 16px;
             }
         }
     }

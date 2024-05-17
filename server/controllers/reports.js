@@ -31,6 +31,9 @@ export const getReports = ({from,to}) => {
              //Machine + Reason downtime
              const [res_machine_downtime] = await db.query(`select time_format(sum(timediff(d.idle_to , d.idle_from)),'%H') as time_loss, ml.description as reason, m.name as machine from downtime_dashboard d inner join machine_loss ml on d.machine_loss_id = ml.machine_loss_id inner join machines m on d.machine_id = m.machine_id where date_format(d.date,'%Y-%m-%d') between "${from}" and "${to}" group by d.machine_id , d.machine_loss_id;`);
 
+             //Shift + Machine rejection
+             const [res_shift_machine] = await db.query(`select sum(r.production_qty) as production, sum(r.rejection_qty) as rejection,sum(r.total_mix) as total_mix , m.name as machine, s.description as shift , (sum(r.total_mix) - sum(r.production_qty)) as material_loss from rejection_dashboard r inner join shifts s on r.shift_id = s.shift_id inner join machines m on r.machine_id = m.machine_id where date_format(r.date,'%Y-%m-%d') between "${from}" and "${to}" group by r.shift_id,r.machine_id;`)
+
             resolve({
                 date_wise : res_date_prod,
                 date_wise_total : res_date_prod_sum,
@@ -41,7 +44,8 @@ export const getReports = ({from,to}) => {
                 operation_reason  : res_operation_defect,
                 machine_wise : res_machine_rejection,
                 operator_wise : res_operator_operation,
-                machine_downtime : res_machine_downtime
+                machine_downtime : res_machine_downtime,
+                shift_machine : res_shift_machine 
             })
 
         }catch(err){

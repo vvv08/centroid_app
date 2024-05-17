@@ -14,6 +14,7 @@ import {
 } from "../../../../../server/validations/validations";
 import DateWiseReport from "../citeriaWiseReport/dateWise";
 import MachineDowntimeReport from "../citeriaWiseReport/machineDowntime";
+import ShiftMachineWiseReport from "../citeriaWiseReport/shiftMachine";
 
 const ReportHeader = () => {
   const navigate = useNavigate();
@@ -55,7 +56,8 @@ const ReportHeader = () => {
     operation_reason : "",
     machine_wise : "",
     operator_wise : "",
-    machine_downtime : ""
+    machine_downtime : "",
+    shift_machine : ""
   });
   const tabChange = (tab) => {
     setTabState(tab);
@@ -75,7 +77,8 @@ const ReportHeader = () => {
           operation_reason : result.operation_reason,
           machine_wise : result.machine_wise,
           operator_wise : result.operator_wise,
-          machine_downtime : result.machine_downtime
+          machine_downtime : result.machine_downtime,
+          shift_machine : result.shift_machine
         });
       })
       .catch((err) => {
@@ -194,7 +197,18 @@ const ReportHeader = () => {
               >
                 Machine Downtime
               </li>
-                           
+              <li
+                onClick={() => {
+                  tabChange("I");
+                }}
+                className={
+                  tabState === "I"
+                    ? "centroid_reportHeaderSelectedTab"
+                    : undefined
+                }
+              >
+                Shift Machine summary
+              </li>                           
             </ul>
           </div>
           <div className="centroid_reportHeaderDateFilter">
@@ -255,6 +269,9 @@ const ReportHeader = () => {
               )}
               {tabState === "H" && reportData.machine_downtime && (
                 <MachineDowntimeReport data={reportData.machine_downtime} sum_data = {reportData.date_downtime_sum}/>
+              )}
+              {tabState === "I" && reportData.shift_machine && (
+                <ShiftMachineWiseReport data={reportData.shift_machine} sum_data = {reportData.date_wise_total}/>
               )}
             </div>
           ) : (
