@@ -12,7 +12,7 @@ const EditUser = () => {
                 <div className="centroid_editUserPage_back">
                     <button className='centroid_DeleteButton' onClick={() => {navigate('/userList')}}>Back</button>
                 </div>
-                <h1>Edit {type}</h1>
+                <h1>Edit user</h1>
                 <EditUserForm id = {id} name = {name} type = {type}/>
         </div>
     </>
