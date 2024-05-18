@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./downtime.scss";
 import { useNavigate } from "react-router-dom";
 import DowntimeDashboard from "../../../components/downtime/home";
 import Navbar from "../../../components/navbar/navbar";
 import { getDowntimeData } from "../../../repository/downtime";
 import { dateFormatter,padZero } from "../../../../../server/validations/validations";
+import DowntimePrintTable from "../../../components/downtime/printDowntimeTable";
+import ReactToPrint from "react-to-print";
+import PrintIcon from "@mui/icons-material/Print";
+import DowntimePrintFormat from "../../../components/downtime/downtimePrintFormat";
 
 const DowntimeDashboardHome = () => {
   const currentDate = new Date();
@@ -12,6 +16,10 @@ const DowntimeDashboardHome = () => {
   const month = padZero(currentDate.getMonth()+ 1); // Months are zero-based (0 = January)
   const day = padZero(currentDate.getDate());
   const curr_date = `${year}-${month}-${day}`;
+
+  const [printState,setPrintState] = useState(false);
+  const [closeHead,setCloseHead] = useState(false);
+  const componentRef = useRef();
 
 
   const [refresh,setRefresh] = useState(false)
@@ -67,8 +75,8 @@ const DowntimeDashboardHome = () => {
   return (
     <>
       <div className="centroid_DowntimeDashboardHomeWrapper">
-        <Navbar current_tab={"downtime"}/>
-        <div className="centroid_DowntimeDashboardHomeHeader">
+        {!closeHead && <Navbar current_tab={"downtime"}/>}
+        {!closeHead && <div className="centroid_DowntimeDashboardHomeHeader">
           <h2>Downtime Dashboard</h2>
           <div className="centroid_DowntimeDashboardHomeUpdates">
             <p>Last Updated: </p>
@@ -84,7 +92,7 @@ const DowntimeDashboardHome = () => {
               Add entry
             </button>
           </div>
-        </div>
+        </div>}
         <div className="centroid_downtimeDateFilter">
             <div className="centroid_downtimeDate">
               <label htmlFor="fromDate">From</label>
@@ -117,9 +125,38 @@ const DowntimeDashboardHome = () => {
             >
               Clear
             </button>
+            {!printState && (
+              <PrintIcon
+                style={{ fontSize: "36px", cursor: "pointer" }}
+                onClick={() => {
+                  setPrintState(true);
+                  setCloseHead(true)
+                }}
+              />
+            )}
+            {printState && (
+              <ReactToPrint
+                trigger={() => (
+                  <PrintIcon style={{ fontSize: "36px", cursor: "pointer" }} />
+                )}
+                content={() => componentRef.current}
+              />
+            )}
+            {printState && (
+              <button
+                className="centroid_DeleteButton"
+                onClick={() => {
+                  setPrintState(false);
+                  setCloseHead(false)
+                }}
+              >
+                Back
+              </button>
+            )}
           </div>
-        {dashboardData.dashboard && !loading ? <div className="centroid_DowntimeDashboardHomeDashboard">
-          <DowntimeDashboard data={dashboardData} ref_state = {refresh} refresh = {setRefresh}/>
+        {dashboardData.dashboard && !loading ? <div className="centroid_DowntimeDashboardHomeDashboard" ref={componentRef}>
+          {!printState && <DowntimeDashboard data={dashboardData} ref_state = {refresh} refresh = {setRefresh}/>}
+          {printState && <DowntimePrintFormat data={dashboardData} dates={filterDate} today={curr_date} topic = {"Downtime Summary"}/>}
         </div> : <div className="centroid_homeLoading"><p>Loading...</p></div>}
       </div>
     </>

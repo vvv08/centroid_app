@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useRef } from "react";
 import "./home.scss";
 import Navbar from "../../components/navbar/navbar";
 import Dashboard from "../../components/dashboard";
 import { getDashboard } from "../../repository/dashboardRepository";
 import { useNavigate } from "react-router-dom";
-import { padZero,dateFormatter } from "../../../../server/validations/validations"
+import { padZero,dateFormatter } from "../../../../server/validations/validations";
+import ReactToPrint from "react-to-print";
+import PrintIcon from "@mui/icons-material/Print";
+import DashboardPrintFormat from "../../components/dashboard/printDashFormat";
 
 const Home = () => {
     //To get current date
@@ -15,12 +18,16 @@ const Home = () => {
     const curr_date = `${year}-${month}-${day}`;
 
   const [refresh,setRefresh] = useState(false)
+  const [printState, setPrintState] = useState(false);
+  const [closeHead,setCloseHead] = useState(false)
   const [dashboardData, setDashboardData] = useState({
     dashboard: "",
     latest: "",
   });
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const componentRef = useRef();
 
   const [filterDate, setFilterDate] = useState({
     fromDate: "2024-05-15",
@@ -66,8 +73,8 @@ const Home = () => {
   return (
     <>
       <div className="centroid_homeWrapper">
-        <Navbar current_tab={"dashboard"}/>
-        <div className="centroid_DashboardHeader">
+        {!closeHead && <Navbar current_tab={"dashboard"}/>}
+        {!closeHead && <div className="centroid_DashboardHeader">
           <h2>Dashboard</h2>
           <div className="centroid_DashboardUpdates">
             <p>Last Updated: </p>
@@ -83,7 +90,7 @@ const Home = () => {
               Add entry
             </button>
           </div>
-        </div>
+        </div>}
         <div className="centroid_dashboardDateFilter">
             <div className="centroid_dashboardDate">
               <label htmlFor="fromDate">From</label>
@@ -116,9 +123,43 @@ const Home = () => {
             >
               Clear
             </button>
+            {!printState && (
+              <PrintIcon
+                style={{ fontSize: "36px", cursor: "pointer" }}
+                onClick={() => {
+                  setPrintState(true);
+                  setCloseHead(true)
+                }}
+              />
+            )}
+            {printState && (
+              <ReactToPrint
+                trigger={() => (
+                  <PrintIcon style={{ fontSize: "36px", cursor: "pointer" }} />
+                )}
+                content={() => componentRef.current}
+              />
+            )}
+            {printState && (
+              <button
+                className="centroid_DeleteButton"
+                onClick={() => {
+                  setPrintState(false);
+                  setCloseHead(false);
+                }}
+              >
+                Back
+              </button>
+            )}
           </div>
-        {dashboardData.dashboard && !loading ? <div className="centroid_homeDashboard">
-          <Dashboard data={dashboardData} refresh = {setRefresh} ref_state = {refresh}/>
+        {dashboardData.dashboard && !loading ? <div className="centroid_homeDashboard" ref={componentRef}>
+        {
+          !printState && <Dashboard data={dashboardData} refresh = {setRefresh} ref_state = {refresh}/>
+        }
+        {
+          printState && <DashboardPrintFormat data = {dashboardData} dates = {filterDate} today = {curr_date} topic={"Rejection Summary"}/>
+        }
+          
         </div> : <div className="centroid_homeLoading">
           <p>Loading...</p>
         </div>}

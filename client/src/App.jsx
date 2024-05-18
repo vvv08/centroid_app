@@ -16,6 +16,7 @@ import AddDowntime from './pages/downtimeDashboard/addDowntime';
 import DowntimeDashboardHome from './pages/downtimeDashboard/home';
 import EditDowntime from './pages/downtimeDashboard/editDowntimeDashboard';
 import EditUser from './pages/users/editUser';
+import DashboardPrintTable from './components/dashboard/printTableDash';
 
 function App() {
   
@@ -83,6 +84,10 @@ function App() {
     {
       path:"/editUser/:id/:type/:name",
       element:<EditUser/>
+    },
+    {
+      path:"/print",
+      element:<DashboardPrintTable/>
     }
   ])
 
