@@ -1,0 +1,30 @@
+/* ErrorPage.css */
+.error-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .error-code {
+    font-size: 48px;
+    color: #ff6347; /* Tomato Red */
+    margin-bottom: 10px;
+  }
+  
+  .error-message {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .error-description {
+    font-size: 16px;
+    color: #666;
+  }
+  
