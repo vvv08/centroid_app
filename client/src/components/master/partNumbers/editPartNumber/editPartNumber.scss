@@ -1,0 +1,62 @@
+.centroid_editPartNumberWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 40px;
+    .centroid_editPartNumberContainer {
+      width: 60%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      form {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        padding: 10px 0px 10px 0px;
+        .centroid_editPartNumber_input {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          justify-content: center;
+          label {
+            flex: 1;
+            font-size: 18px;
+          }
+          input {
+            height: 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            flex: 1;
+          }
+        }
+        .centroid_editPartNumber_list {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          label {
+            color: var(--kssiaParaBold);
+            flex: 2;
+            font-size: 18px;
+          }
+          select {
+            flex: 1;
+            height: 30px;
+            font-size: 16px;
+            cursor: pointer;
+          }
+          p{
+            flex: 1;
+            color: var(--centroidBlue);
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+  

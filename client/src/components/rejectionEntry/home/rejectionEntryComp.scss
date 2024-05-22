@@ -1,0 +1,23 @@
+.centroid_rejectionEntryCompWrapper{
+    display: flex;
+    justify-content: center;
+    .centroid_rejectionEntryCompContainer{
+        width: 80%;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        table{
+            font-size: 14px;
+            th{
+                text-align: center;
+            }
+            td{
+                text-align: center;
+            }
+        }
+        .centroid_rejectionEntryCompAdd{
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

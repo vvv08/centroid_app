@@ -12,6 +12,7 @@ import {
 } from "recharts";
 
 const MultiLineFormat = ({ data }) => {
+  console.log(data)
   return (
     <>
       <LineChart

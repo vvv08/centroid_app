@@ -1,5 +1,5 @@
 import express from 'express';
-import { addDefectMaster, addInspectorMaster, addMachineLossMaster, addMachineMaster, addOperationMaster, addOperatorMaster, addShiftMaster, deleteDefectMaster, deleteInspectorMaster, deleteMachineLossMaster, deleteMachineMaster, deleteOperationMaster, deleteOperatorMaster, deleteShiftMaster, editDefectMaster, editInspectorMaster, editMachineLossMaster, editMachineMaster, editOperationMaster, editOperatorMaster, editShiftMaster, getDefectDetails, getInspectorDetails, getMachineDetails, getMachineLossDetails, getMasterData, getOperationDetails, getOperatorDetails, getShiftDetails } from '../controllers/master.js';
+import { addDefectMaster, addInspectorMaster, addMachineLossMaster, addMachineMaster, addOperationMaster, addOperatorMaster, addPartNumber, addShiftMaster, addWorkOrder, deleteDefectMaster, deleteInspectorMaster, deleteMachineLossMaster, deleteMachineMaster, deleteOperationMaster, deleteOperatorMaster, deleteShiftMaster, editDefectMaster, editInspectorMaster, editMachineLossMaster, editMachineMaster, editOperationMaster, editOperatorMaster, editPartNumber, editShiftMaster, editWorkOrder, getActivePartNumbers, getDefectDetails, getInspectorDetails, getMachineDetails, getMachineLossDetails, getMasterData, getOperationDetails, getOperatorDetails, getPartNumberDetails, getShiftDetails, getWorkOrderDetails } from '../controllers/master.js';
 import { verifyToken } from '../config/verify.js'
 
 const router = express.Router();
@@ -375,6 +375,107 @@ router.get('/singleShift',[verifyToken],(req,res) => {
         id:Number(req.query.id)
     }
     getShiftDetails(shift_details).then((result) => {
+        res.status(200).json(result)
+    }).catch((err) => {
+        res.status(500).json(err)
+    })
+})
+
+//Part Number
+router.get('/singlePartNumber',[verifyToken],(req,res) => {
+    let part_number_details = {
+        id:Number(req.query.id)
+    }
+    getPartNumberDetails(part_number_details).then((result) => {
+        res.status(200).json(result)
+    }).catch((err) => {
+        res.status(500).json(err)
+    })
+})
+
+//Work Order
+router.get('/singleWorkOrder',[verifyToken],(req,res) => {
+    let work_order = {
+        id:Number(req.query.id)
+    }
+    getWorkOrderDetails(work_order).then((result) => {
+        res.status(200).json(result)
+    }).catch((err) => {
+        res.status(500).json(err)
+    })
+})
+
+//Part Number
+//To add a Part number
+router.post('/partNumber/add',[verifyToken],(req,res) => {
+    let part = {
+        part_number : req.body.part_number,
+        part_name: req.body.part_name,
+        part_cost: parseFloat(req.body.part_cost),
+        status : req.body.status,
+        remarks:req.body.remarks
+    }
+    addPartNumber(part).then((result) => {
+        res.status(200).json(result)
+    }).catch((err) => {
+        res.status(500).json(err)
+    })
+})
+
+//To edit a part number
+router.post('/partNumber/edit',[verifyToken],(req,res) => {
+    let part_number = {
+        id : Number(req.body.id),
+        part_number : req.body.part_number,
+        part_name : req.body.part_name,
+        part_cost : parseFloat(req.body.part_cost),
+        status : req.body.status,
+        remarks : req.body.remarks 
+    }
+    editPartNumber(part_number).then((result) => {
+        res.status(200).json(result)
+    }).catch((err) => {
+        res.status(500).json(err)
+    })
+})
+
+//Work Order
+//To get all active part numbers
+router.get('/activePartNumbers',[verifyToken],(req,res) => {
+    getActivePartNumbers().then((result) => {
+        res.status(200).json(result)
+    }).catch((err) => {
+        res.status(500).json(err)
+    })
+})
+
+//To add a work order
+router.post('/workOrder/add',[verifyToken],(req,res) => {
+    let workOrder = {
+        work_order:req.body.work_order,
+        part_number:Number(req.body.part_number),
+        total_mix:req.body.total_mix,
+        remarks:req.body.remarks,
+        status:req.body.status
+    }
+    addWorkOrder(workOrder).then((result) => {
+        res.status(200).json(result)
+    }).catch((err) => {
+        res.status(500).json(err)
+    })
+})
+
+//To edit a work order
+router.post('/workOrder/edit',[verifyToken],(req,res) => {
+    let work_order_input = {
+        id:Number(req.body.id),
+        work_order:req.body.work_order,
+        part_number:Number(req.body.part_number),
+        status:req.body.status,
+        remarks:req.body.remarks,
+        total_mix:parseFloat(req.body.total_mix)
+    }
+    editWorkOrder(work_order_input).then((result) => {
         res.status(200).json(result)
     }).catch((err) => {
         res.status(500).json(err)

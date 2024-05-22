@@ -31,19 +31,12 @@ router.post('/addEntry',[verifyToken],(req,res) => {
     let entryInputs = {
         date:req.body.entry_date,
         shift:Number(req.body.shift),
-        machine:Number(req.body.machine),
-        operation:Number(req.body.operation),
-        operator:Number(req.body.operator),
         inspector:Number(req.body.inspector),
-        part_number:req.body.part_number,
-        batch_number:req.body.batch_number,
-        defect:Number(req.body.defect),
+        work_order:Number(req.body.work_order),
         production_qty:parseFloat(req.body.production_qty),
-        rejection_qty:parseFloat(req.body.rejection_qty),
         remarks:req.body.remarks,
         production_from:req.body.production_from,
-        production_to:req.body.production_to,
-        total_mix:parseFloat(req.body.total_mix)
+        production_to:req.body.production_to
     }
     addEntry(entryInputs).then((result) => {
         res.status(200).json(result)
@@ -82,19 +75,12 @@ router.post('/editEntry', [verifyToken], (req,res) => {
         id:Number(req.body.id),
         date: req.body.entry_date,
         shift: Number(req.body.shift),
-        machine: Number(req.body.machine),
-        operator: Number(req.body.operator),
-        operation: Number(req.body.operation),
         inspector: Number(req.body.inspector),
-        part_number: req.body.part_number,
-        batch_number: req.body.batch_number,
+        work_order: Number(req.body.work_order),
         production_qty: parseFloat(req.body.production_qty),
-        rejection_qty: parseFloat(req.body.rejection_qty),
-        defect: Number(req.body.defect),
         remarks:req.body.remarks,
         production_from:req.body.production_from,
         production_to:req.body.production_to,
-        total_mix:parseFloat(req.body.total_mix)
     }
     editEntry(edit_entry).then((result) => {
         res.status(200).json(result)

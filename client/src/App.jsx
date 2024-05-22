@@ -17,6 +17,9 @@ import DowntimeDashboardHome from './pages/downtimeDashboard/home';
 import EditDowntime from './pages/downtimeDashboard/editDowntimeDashboard';
 import EditUser from './pages/users/editUser';
 import DashboardPrintTable from './components/dashboard/printTableDash';
+import RejectionEntry from './pages/rejectionEntry';
+import AddRejectionEntryPage from './pages/rejectionEntry/addRejectionEntry';
+import EditRejectionEntryPage from './pages/rejectionEntry/editRejectionEntry';
 
 function App() {
   
@@ -88,6 +91,18 @@ function App() {
     {
       path:"/print",
       element:<DashboardPrintTable/>
+    },
+    {
+      path:"/rejectionEntry",
+      element:<RejectionEntry/>
+    },
+    {
+      path:"/addRejectionEntry/:id",
+      element:<AddRejectionEntryPage/>
+    },
+    {
+      path:"/editRejectionEntry/:id",
+      element:<EditRejectionEntryPage/>
     }
   ])
 

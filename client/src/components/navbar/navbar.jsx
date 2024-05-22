@@ -44,6 +44,7 @@ const Navbar = ({current_tab}) => {
           <div className="centroid_navBarList">
             <ul>
                 <Link to="/" style={{"textDecoration":"none", "fontWeight":"500",color:`var(${getColor("dashboard")})`}}><li>Dashboard</li></Link>
+                <Link to="/rejectionEntry" style={{"textDecoration":"none", "fontWeight":"500", color:`var(${getColor("rejectionEntry")})`}}><li>Rejection Entry</li></Link>
                 <Link to="/downtimeDashboard" style={{"textDecoration":"none", "fontWeight":"500", color:`var(${getColor("downtime")})`}}><li>Downtime</li></Link>
                 <Link to="/reports" style={{"textDecoration":"none", "fontWeight":"500", color:`var(${getColor("reports")})`}}><li>Reports</li></Link>
                 <Link to="/graphs" style={{"textDecoration":"none", "fontWeight":"500", color:`var(${getColor("graphs")})`}}><li>Graphs</li></Link>

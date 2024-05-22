@@ -9,11 +9,13 @@ import DefectsMaster from "../defects";
 import MachineLossMaster from "../machineLoss";
 import ShiftsMaster from "../shifts";
 import { getMasterData } from "../../../repository/master";
+import PartNumbersMaster from "../partNumbers";
+import WorkOrderMaster from "../workOrder";
 
 const MasterMain = () => {
   const navigate = useNavigate();
   const [masterData, setMasterData] = useState({});
-  const [tabState, setTabState] = useState("A");
+  const [tabState, setTabState] = useState("H");
   const [loading, setLoading] = useState(true);
 
   const tabChange = (tab) => {
@@ -46,6 +48,30 @@ const MasterMain = () => {
         <div className="centroid_masterMainContainer">
           <div className="centroid_masterMainList">
             <ul>
+            <li
+                onClick={() => {
+                  tabChange("H");
+                }}
+                className={
+                  tabState === "H"
+                    ? "centroid_masterMainSelectedTab"
+                    : undefined
+                }
+              >
+                Part Numbers
+              </li>
+              <li
+                onClick={() => {
+                  tabChange("I");
+                }}
+                className={
+                  tabState === "I"
+                    ? "centroid_masterMainSelectedTab"
+                    : undefined
+                }
+              >
+                Work Orders
+              </li>
               <li
                 onClick={() => {
                   tabChange("A");
@@ -132,7 +158,7 @@ const MasterMain = () => {
               </li>
             </ul>
           </div>
-          {!loading && masterData ? <div className="centroid_masterMainContent">
+          {!loading ? <div className="centroid_masterMainContent">
             {tabState === "A" && masterData.operators && <OperatorMaster data = {masterData.operators}/>}
             {tabState === "B" && masterData.operations &&  <OperationsMaster data = {masterData.operations}/>}
             {tabState === "C" && masterData.machines &&  <MachinesMaster data = {masterData.machines} />}
@@ -140,6 +166,8 @@ const MasterMain = () => {
             {tabState === "E" && masterData.defects &&  <DefectsMaster data = {masterData.defects} />}
             {tabState === "F" && masterData.machine_loss &&  <MachineLossMaster data = {masterData.machine_loss} />}
             {tabState === "G" && masterData.shifts &&  <ShiftsMaster data = {masterData.shifts}/>}
+            {tabState === "H" && masterData.part_numbers && <PartNumbersMaster data = {masterData.part_numbers}/>}
+            {tabState === "I" && masterData.work_orders && <WorkOrderMaster data={masterData.work_orders}/>}
           </div> : 
           <div className="centroid_masterMainContent">
               <p>Loading...</p>

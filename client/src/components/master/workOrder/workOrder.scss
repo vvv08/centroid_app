@@ -1,0 +1,22 @@
+.centroid_workOrderMasterWrapper{
+    display: flex;
+    justify-content: center;
+    .centroid_workOrderMasterContainer{
+        width: 60%;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        .centroid_workOrderMasterAdd{
+            display: flex;
+            justify-content: center;
+        }
+        table{
+            th{
+                text-align: center;
+            }
+            td{
+                text-align: center;
+            }
+        }
+    }
+}

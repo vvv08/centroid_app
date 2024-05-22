@@ -3,17 +3,26 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
     .centroid_DashboardContainer{
+        width: 90%;
         .centroid_DashboardContent{
-            width: 80%;
+            display: flex;
+            justify-content: center;
             table{
                 th{
-                    font-size: 12px;
+                    font-size: 10px;
                     text-align: center;
                 }
                 td{
-                    font-size: 12px;
+                    font-size: 10px;
                     text-align: center;
+                    ul{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 7px;
+                    }
                 }
             }
         }

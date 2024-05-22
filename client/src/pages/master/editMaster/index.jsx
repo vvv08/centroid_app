@@ -8,6 +8,8 @@ import EditInspectorMaster from '../../../components/master/inspectors/editInspe
 import EditDefectMaster from '../../../components/master/defects/editDefect';
 import EditMachineLossMaster from '../../../components/master/machineLoss/editMachineLoss';
 import EditShiftMaster from '../../../components/master/shifts/editShift';
+import EditPartNumberMaster from '../../../components/master/partNumbers/editPartNumber';
+import EditWorkOrderMaster from '../../../components/master/workOrder/editWorkOrder';
 
 const EditMaster = () => {
     const {type,id} = useParams();
@@ -26,6 +28,8 @@ const EditMaster = () => {
                 {type === "Defect" && <EditDefectMaster id = {id}/>}
                 {type === "Reason" && <EditMachineLossMaster id = {id}/>}
                 {type === "Shift" && <EditShiftMaster id = {id}/>}
+                {type === "Part Number" && <EditPartNumberMaster id = {id}/>}
+                {type === "Work Order" && <EditWorkOrderMaster id = {id}/>}
         </div>
     </>
   )

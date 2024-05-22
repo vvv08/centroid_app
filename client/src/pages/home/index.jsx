@@ -48,26 +48,26 @@ const Home = () => {
   };
 
   useEffect(() => {
-    setLoading(true);
-    getDashboard(filterDate)
-      .then((result) => {
-        setDashboardData({
-          dashboard: result.dashboard,
-          latest: result.latest[0],
-        });
-      })
-      .catch((err) => {
-        if (err.response.data.status === "authenticationError") {
-          alert(err.response.data.message);
-          navigate("/login");
-        } else {
-          alert(err.response.data.Message);
-          navigate("/maintenance");
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+     setLoading(true);
+     getDashboard(filterDate)
+       .then((result) => {
+         setDashboardData({
+           dashboard: result.dashboard,
+           latest: result.latest[0],
+         });
+       })
+       .catch((err) => {
+         if (err.response.data.status === "authenticationError") {
+           alert(err.response.data.message);
+           navigate("/login");
+         } else {
+           alert(err.response.data.Message);
+           navigate("/maintenance");
+         }
+       })
+       .finally(() => {
+         setLoading(false);
+       });
   }, [filterDate,refresh]);
 
   return (

@@ -17,10 +17,7 @@ const OperationReasonWiseReport = ({ data , sum_data }) => {
               <tr>
                 <th>Operation</th>
                 <th>Reason for rejection</th>
-                <th>Total supplied Qty (Kg)</th>
-                <th>Production (Kg)</th>
                 <th>Rejection Qty (Kg)</th>
-                <th>Material loss (Kg)</th>
               </tr>
             </thead>
             <tbody>
@@ -29,10 +26,7 @@ const OperationReasonWiseReport = ({ data , sum_data }) => {
                   <tr key={index}>
                     <td>{obj.operation}</td>
                     <td>{obj.reason}</td>
-                    <td>{obj.total_mix}</td>
-                    <td>{obj.production}</td>
                     <td>{obj.rejection}</td>
-                    <td>{obj.material_loss}</td>
                   </tr>
                 );
               })}
@@ -41,10 +35,7 @@ const OperationReasonWiseReport = ({ data , sum_data }) => {
               <tr>
                 <th>Total</th>
                 <th></th>
-                <th>{sum_data.total_mix}</th>
-                <th>{sum_data.production}</th>
                 <th>{sum_data.rejection}</th>
-                <th>{sum_data.material_loss}</th>
               </tr>
             </tfoot>
           </table>

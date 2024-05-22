@@ -8,6 +8,8 @@ import AddInspectorMaster from '../../../components/master/inspectors/addInspect
 import AddDefectMaster from '../../../components/master/defects/addDefect';
 import AddMachineLossMaster from '../../../components/master/machineLoss/addMachineLoss';
 import AddShiftMaster from '../../../components/master/shifts/addShift';
+import AddPartNumbersMaster from '../../../components/master/partNumbers/addPartNumber';
+import AddWorkOrderMaster from '../../../components/master/workOrder/addWorkOrder';
 
 const AddMaster = () => {
     const {type} = useParams();
@@ -26,6 +28,8 @@ const AddMaster = () => {
             {type === "Defect" && <AddDefectMaster/>}
             {type === "Reason" && <AddMachineLossMaster/>}
             {type === "Shift" && <AddShiftMaster/>}
+            {type === "Part Number" && <AddPartNumbersMaster/>}
+            {type === "Work Order" && <AddWorkOrderMaster/>}
         </div>
     </>
   )

@@ -12,6 +12,11 @@
             border-collapse: collapse; 
             background-color: #f6f6f6;
             font-size: 12px;
+            ul{
+              display: flex;
+              flex-direction: column;
+              gap: 7px;
+            }
           }/* Spacing */
           td, th {
             border: 1px solid #999;

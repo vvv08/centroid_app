@@ -16,10 +16,7 @@ const MachineWiseReport = ({ data,sum_data }) => {
             <thead>
               <tr>
                 <th>Machine</th>
-                <th>Total supplied Qty (Kg)</th>
-                <th>Production Qty (Kg)</th>
                 <th>Rejection Qty (Kg)</th>
-                <th>Material loss (Kg)</th>
               </tr>
             </thead>
             <tbody>
@@ -27,10 +24,7 @@ const MachineWiseReport = ({ data,sum_data }) => {
                 return (
                   <tr key={index}>
                     <td>{obj.machine}</td>
-                    <td>{obj.total_mix}</td>
-                    <td>{obj.production}</td>
                     <td>{obj.rejection}</td>
-                    <td>{obj.material_loss}</td>
                   </tr>
                 );
               })}
@@ -38,10 +32,7 @@ const MachineWiseReport = ({ data,sum_data }) => {
             <tfoot>
             <tr>
                 <th>Total</th>
-                <th>{sum_data.total_mix}</th>
-                <th>{sum_data.production}</th>
                 <th>{sum_data.rejection}</th>
-                <th>{sum_data.material_loss}</th>
             </tr>
         </tfoot>
           </table>
