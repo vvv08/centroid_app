@@ -42,7 +42,7 @@ const DateWiseReport = ({ data,sum_data }) => {
                 <th>{sum_data.total_mix}</th>
                 <th>{sum_data.production}</th>
                 <th>{sum_data.rejection}</th>
-                <th>{(sum_data.total_mix - sum_data.production)}</th>
+                <th>{(Math.round((sum_data.total_mix - sum_data.production) * 100) / 100)}</th>
             </tr>
         </tfoot>
           </table>
