@@ -160,7 +160,6 @@ const EditWorkOrderMaster = ({ id }) => {
               <input
                 id="remarks"
                 type="text"
-                required
                 value={inputs.remarks}
                 onChange={handleInputChange}
               />

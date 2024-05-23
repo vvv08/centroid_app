@@ -150,7 +150,6 @@ const AddWorkOrderMaster = () => {
                 id="remarks"
                 type="type"
                 value={inputs.remarks}
-                required
                 onChange={handleInputChange}
               />
             </div>

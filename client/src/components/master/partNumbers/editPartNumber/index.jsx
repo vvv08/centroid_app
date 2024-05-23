@@ -143,7 +143,6 @@ const EditPartNumberMaster = ({ id }) => {
               <input
                 id="remarks"
                 type="text"
-                required
                 value={inputs.remarks}
                 onChange={handleInputChange}
               />
