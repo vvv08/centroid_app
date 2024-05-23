@@ -4,7 +4,7 @@ export const getReports = ({ from, to }) => {
   return new Promise(async (resolve, reject) => {
     try {
       //Date wise rejection report summary
-      const [res_date_prod] = await db.query(`select result.date , SUM(result.total_mix) as total_mix, sum(result.production_qty) as production, sum(result.rejection_qty) as rejection , sum(result.total_mix - result.production_qty) as material_loss from (SELECT
+      const [res_date_prod] = await db.query(`select result.date , SUM(result.total_mix) as total_mix, sum(result.production_qty) as production, sum(result.rejection_qty) as rejection , round(sum(result.total_mix - result.production_qty),2) as material_loss from (SELECT
       r.Id as Id, 
       date_format(r.date,'%Y-%m-%d') as date,
       s.description AS shift,
