@@ -106,7 +106,7 @@ const EditWorkOrderMaster = ({ id }) => {
                 onChange={handleInputChange}
               />
             </div>
-            {partNumbers && partNumbers.filter(
+            {partNumbers[0] && partNumbers.filter(
                       (f) => f.value === Number(inputs.part_number)
                     )[0].label && <div className="centroid_editWorkOrder_search_list">
               <label htmlFor="part_number">Choose Part Number</label>
