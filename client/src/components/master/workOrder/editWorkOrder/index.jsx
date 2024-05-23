@@ -106,7 +106,9 @@ const EditWorkOrderMaster = ({ id }) => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="centroid_editWorkOrder_search_list">
+            {partNumbers && partNumbers.filter(
+                      (f) => f.value === Number(inputs.part_number)
+                    )[0].label && <div className="centroid_editWorkOrder_search_list">
               <label htmlFor="part_number">Choose Part Number</label>
               <Select
                 className="centroid_search_select"
@@ -127,7 +129,7 @@ const EditWorkOrderMaster = ({ id }) => {
                   }
                 </p>
               )}
-            </div>
+            </div>}
             <div className="centroid_editWorkOrder_input">
               <label htmlFor="total_mix">Total mix (Kg)</label>
               <input
