@@ -86,7 +86,7 @@ const EditIssuesComp = ({ cust_rej_id }) => {
               />
             </div>
             <div className="centroid_editIssue_input">
-              <label htmlFor="rejected_qty">Rejected Qty</label>
+              <label htmlFor="rejected_qty">Rejected Qty (Kg)</label>
               <input
                 id="rejected_qty"
                 type="number"

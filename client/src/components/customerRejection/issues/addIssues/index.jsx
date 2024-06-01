@@ -63,7 +63,7 @@ const AddIssuesComp = ({invoice_id}) => {
               />
             </div>
             <div className="centroid_addIssue_input">
-              <label htmlFor="rejected_qty">Rejected Qty</label>
+              <label htmlFor="rejected_qty">Rejected Qty (Kg)</label>
               <input
                 id="rejected_qty"
                 type="number"

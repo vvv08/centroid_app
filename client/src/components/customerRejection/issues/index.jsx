@@ -37,7 +37,7 @@ const RejectionIssues = ({ data,invoice_id }) => {
                 <th>Created date</th>
                 <th>Invoice number</th>
                 <th>Issue</th>
-                <th>Rejected quantity</th>
+                <th>Rejected quantity (Kg)</th>
                 <th>Last updated</th>
                 <th></th>
               </tr>
