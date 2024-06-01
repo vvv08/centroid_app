@@ -1,0 +1,14 @@
+.customerHomeWrapper{
+    h1{
+        display: flex;
+        justify-content: center;
+    }
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    .customerHomeContent{
+        display: flex;
+        flex-direction: column;
+        gap: 70px;
+    }
+}

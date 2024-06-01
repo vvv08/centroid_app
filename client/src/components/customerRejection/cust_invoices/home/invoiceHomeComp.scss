@@ -1,0 +1,22 @@
+.centroid_invoiceMasterWrapper{
+    display: flex;
+    justify-content: center;
+    .centroid_invoiceMasterContainer{
+        width: 60%;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        .centroid_invoiceMasterAdd{
+            display: flex;
+            justify-content: center;
+        }
+        table{
+            th{
+                text-align: center;
+            }
+            td{
+                text-align: center;
+            }
+        }
+    }
+}

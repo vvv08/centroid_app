@@ -1,0 +1,19 @@
+.centroid_invoiceWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    h2{
+        display: flex;
+        justify-content: center;
+    }
+    .centroid_invoiceLoading{
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        p{
+            font-size: 20px;
+            font-weight: 500;
+        }
+    }
+}

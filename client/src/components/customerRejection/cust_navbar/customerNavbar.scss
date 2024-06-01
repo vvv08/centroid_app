@@ -1,0 +1,147 @@
+//Animation using keyframes
+@keyframes customerNavbarBottomLineFade {
+    from {
+      background-color: var(--centroidBackground);
+    }
+    to {
+      background-color: var(--centroidRed);
+    }
+  }
+  // @keyframes navListFontOpacity{
+  //     from{
+  //         opacity: 0;
+  //     }
+  //     to{
+  //         opacity: 1;
+  //     }
+  // }
+  
+  .centroid_customerNavbarWrapper {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0px;
+    z-index: 999;
+    @media (max-width: 1180px) {
+      height: 200px;
+    }
+    .centroid_customerNavbarContainer {
+      width: 99%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      .centroid_customerNavbarTop {
+        background-color: var(--centroidWhite);
+        width: 100%;
+        flex: 10;
+        display: flex;
+        @media (max-width: 1180px) {
+          flex-direction: column;
+          flex: 35;
+        }
+        .centroid_customerNavbarLogo {
+          background-color: var(--centroidWhite);
+          flex: 1;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          @media (max-width: 1180px) {
+            order: 1;
+          }
+          img {
+            object-fit: contain;
+            height: 65px;
+            @media (max-width: 1180px) {
+              width: 60px;
+            }
+          }
+        }
+        .centroid_customerNavbarHeader {
+          flex: 3;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          @media (max-width: 1180px) {
+            display: none;
+          }
+        }
+        .centroid_customerNavbarList {
+          height: 100%;
+          flex: 5;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          @media (max-width: 1180px) {
+            flex: 10;
+            order: 3;
+          }
+          ul {
+            list-style: none;
+            padding: 0px;
+            width: 90%;
+            height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            //animation-name: customerNavbarList;
+            //animation-duration: 2s;
+            @media (max-width: 1180px) {
+              flex-wrap: wrap;
+              gap: 20px;
+            }
+            li {
+              // animation-name: navListFontOpacity;
+              // animation-duration: 2s;
+              font-size: 16px;
+              //color: var(--centroidBackground);
+              cursor: pointer;
+              @media (max-width: 1180px) {
+                font-size: 14px;
+              }
+            }
+          }
+        }
+        .centroid_customerNavbarUser {
+          height: 100%;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          @media (max-width: 1180px) {
+            flex: 10;
+            flex-direction: row;
+            order: 2;
+          }
+          .centroid_customerNavbarUserContent {
+            flex: 1;
+            //color: var(--centroidBlue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            span {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            p {
+              font-size: 14px;
+              text-align: center;
+            }
+          }
+        }
+      }
+      .centroid_customerNavbarBottomLine {
+        width: 100%;
+        flex: 1;
+        background-color: var(--centroidRed);
+        animation-name: customerNavbarBottomLineFade;
+        animation-duration: 6s;
+      }
+    }
+  }
+  

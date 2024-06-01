@@ -1,0 +1,39 @@
+.centroid_addIssueWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 40px;
+    .centroid_addIssueContainer {
+      width: 60%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      form {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        padding: 10px 0px 10px 0px;
+        .centroid_addIssue_input {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          justify-content: center;
+          label {
+            flex: 1;
+            font-size: 18px;
+          }
+          input {
+            height: 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            flex: 1;
+          }
+        }
+      }
+    }
+  }
+  

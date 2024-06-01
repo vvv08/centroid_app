@@ -1,0 +1,25 @@
+.centroid_preventiveActionsWrapper{
+    display: flex;
+    justify-content: center;
+    .centroid_preventiveActionsContainer{
+        width: 80%;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        table{
+            th{
+                font-size: 12px;
+                text-align: center;
+            }
+            td{
+                font-size: 12px;
+                text-align: center;
+            }
+        }
+        .centroid_preventiveActionsAdd{
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+    }
+}

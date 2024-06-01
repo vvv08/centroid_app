@@ -12,6 +12,9 @@ import userRoutes from '../server/routes/users.js';
 import graphRoutes from '../server/routes/graphs.js';
 import downtimeRoutes from '../server/routes/downtime.js';
 import rejectionEntryRoutes from '../server/routes/rejectionEntry.js';
+import customerRoutes from '../server/routes/customerRejection/customer.js';
+import invoiceRoutes from '../server/routes/customerRejection/invoices.js';
+import capaRoutes from '../server/routes/customerRejection/capa.js';
 
 const app = express();
 
@@ -48,6 +51,9 @@ app.use('/api/v1/userList',userRoutes);
 app.use('/api/v1/graphData',graphRoutes);
 app.use('/api/v1/downtime',downtimeRoutes);
 app.use('/api/v1/rejectionEntry',rejectionEntryRoutes);
+app.use('/api/v1/customer',customerRoutes);
+app.use('/api/v1/invoice',invoiceRoutes);
+app.use('/api/v1/capa',capaRoutes);
 
 app.listen(3001, () => {
     console.log("Server started")
