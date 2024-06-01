@@ -7,13 +7,13 @@ export const getDashboard = ({ from, to }) => {
       const result1 = await db.query(
         `SELECT
         r.Id as Id, 
-        date_format(r.date,'%Y-%m-%d') as date,
+        r.date as date,
         s.description AS shift,
         i.name AS inspector,
         r.remarks,
         r.production_qty,
-        date_format(r.production_from,'%Y-%m-%d') as production_from,
-        date_format(r.production_to,'%Y-%m-%d') as production_to,
+        r.production_from as production_from,
+        r.production_to as production_to,
         JSON_ARRAYAGG( d.description) AS reasons,
         w.work_order,
         w.total_mix,

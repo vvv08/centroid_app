@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./lossReasonReport.scss";
-import { dateFormatter } from "../../../../../../server/validations/validations";
+import { dateFormatter } from "../../../../validations/validations";
 
 const LossReasonWiseReport = ({ data,sum_data }) => {
   useEffect(() => {

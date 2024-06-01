@@ -1,7 +1,7 @@
 import React from "react";
 import "./printDashFormat.scss";
 import DashboardPrintTable from "../printTableDash";
-import { dateFormatter } from "../../../../../server/validations/validations";
+import { dateFormatter } from "../../../validations/validations";
 
 const DashboardPrintFormat = ({data,dates,today,topic}) => {
 

@@ -3,7 +3,7 @@ import "./editDowntimeComp.scss";
 import { useNavigate } from "react-router-dom";
 import { editDowntime, getDowntimeEntry } from "../../../repository/downtime";
 import { getInputData } from "../../../repository/dashboardRepository";
-import { dateFormatter,timeFormatter } from "../../../../../server/validations/validations";
+import { dateFormatter,timeFormatter } from "../../../validations/validations";
 
 const EditDowntimeData = ({id}) => {
   const navigate = useNavigate();

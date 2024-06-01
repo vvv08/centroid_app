@@ -7,7 +7,6 @@ import {
   getInspectorsCAPA,
 } from "../../../../repository/customerRejection/capa";
 import Select from 'react-select';
-import { dateFormatter } from "../../../../../../server/validations/validations";
 
 const EditCorrectiveComp = ({ corrective_id }) => {
   const navigate = useNavigate();

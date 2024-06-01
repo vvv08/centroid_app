@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./addShift.scss";
 import { useNavigate } from "react-router-dom";
-import { addOperatorMaster, addShiftMaster } from "../../../../repository/master";
+import { addShiftMaster } from "../../../../repository/master";
 
 const AddShiftMaster = () => {
   const navigate = useNavigate();

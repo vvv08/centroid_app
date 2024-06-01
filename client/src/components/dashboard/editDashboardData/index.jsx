@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./editDashboardData.scss";
 import { useNavigate } from "react-router-dom";
 import { editEntry, getEntryForEdit, getInputData } from "../../../repository/dashboardRepository";
-import { dateFormatter, timeFormatter } from "../../../../../server/validations/validations";
+import { dateFormatter,timeFormatter } from "../../../validations/validations";
 import Select from 'react-select';
 
 const EditDashboardData = ({id}) => {

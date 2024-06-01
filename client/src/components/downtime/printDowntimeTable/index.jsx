@@ -1,6 +1,6 @@
 import React from "react";
 import "./printDowntimeTable.scss";
-import { dateFormatter,timeFormatter } from "../../../../../server/validations/validations";
+import { dateFormatter,timeFormatter } from "../../../validations/validations";
 
 const DowntimePrintTable = ({data}) => {
   return (

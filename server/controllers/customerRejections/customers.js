@@ -14,7 +14,7 @@ const curr_date = `${year}-${month}-${day}`;
 export const getCustomers = () => {
     return new Promise(async(resolve,reject) => {
         try{
-            const [customers] = await db.query("select * , date_format(created_date , '%Y-%m-%d') as created_date, date_format(last_updated,'%Y-%m-%d') as last_updated from customers;")
+            const [customers] = await db.query("select * , created_date as created_date, last_updated as last_updated from customers;")
             resolve(customers)
         }catch(err){
             reject(err)
@@ -30,7 +30,7 @@ export const addCustomer = ({
 }) => {
     return new Promise (async(resolve,reject) => {
         try{
-            const [result] = await db.query(`insert into customers (name,status,remarks,created_date,last_updated) values ("${name}","${status}","${remarks}","${curr_date}","${curr_date}");;`)
+            const [result] = await db.query(`insert into customers (name,status,remarks,created_date,last_updated) values ("${name}","${status}","${remarks}","${curr_date}","${curr_date}");`)
             let insertedCustomer = {
                 id: result.insertId,
                 name,

@@ -15,7 +15,7 @@ export const getInvoices = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const [result] = await db.query(
-        "select i.invoice_id, i.invoice_number, date_format(i.created_date,'%Y-%m-%d') as created_date,date_format(i.last_updated,'%Y-%m-%d') as last_updated, c.name as customer, w.work_order as work_order, i.remarks, i.status  from invoices i inner join customers c on i.customer_id = c.customer_id inner join work_orders w on i.work_order_id = w.work_order_id;"
+        "select i.invoice_id, i.invoice_number, i.created_date as created_date,i.last_updated as last_updated, c.name as customer, w.work_order as work_order, i.remarks, i.status  from invoices i inner join customers c on i.customer_id = c.customer_id inner join work_orders w on i.work_order_id = w.work_order_id;"
       );
       resolve(result);
     } catch (err) {

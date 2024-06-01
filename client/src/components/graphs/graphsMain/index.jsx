@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./graphsMain.scss";
-import { padZero } from "../../../../../server/validations/validations";
+import { padZero } from "../../../validations/validations.js";
 import { getGraphData } from "../../../repository/graphs";
 import ReactToPrint from "react-to-print";
 import PrintIcon from "@mui/icons-material/Print";
-import { dateFormatter } from "../../../../../server/validations/validations.js";
+import { dateFormatter } from "../../../validations/validations.js";
 import PieChartPrintFormat from "../pieChart_print_format/index.jsx";
 import PieChartGraph from "../pieChart/index.jsx";
 import MultiLineFormat from "../multiLine/index.jsx";

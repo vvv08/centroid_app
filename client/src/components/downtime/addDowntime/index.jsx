@@ -3,7 +3,7 @@ import "./addDowntimeComp.scss";
 import { useNavigate } from "react-router-dom";
 import { getInputData } from "../../../repository/dashboardRepository";
 import { addDowntime } from "../../../repository/downtime";
-import { dateFormatter,timeFormatter } from "../../../../../server/validations/validations";
+import { dateFormatter,timeFormatter } from "../../../validations/validations";
 
 const AddDowntimeComp = () => {
   const navigate = useNavigate();

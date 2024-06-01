@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./preventiveActions.scss";
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router-dom";
-import { dateFormatter } from "../../../../../server/validations/validations";
+import { dateFormatter } from "../../../validations/validations";
 
 const PreventiveActions = ({ data ,invoice_id }) => {
   const navigate = useNavigate();

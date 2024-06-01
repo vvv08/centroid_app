@@ -4,9 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { deletedEntry } from "../../repository/dashboardRepository";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import {
-  dateFormatter
-} from "../../../../server/validations/validations";
+import { dateFormatter } from "../../validations/validations";
 
 const Dashboard = ({ data, refresh, ref_state }) => {
   const navigate = useNavigate();

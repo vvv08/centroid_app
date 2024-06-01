@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./workOrder.scss";
 import { useNavigate } from "react-router-dom";
 import EditIcon from '@mui/icons-material/Edit';
-import { dateFormatter,timeFormatter } from "../../../../../server/validations/validations";
+import { dateFormatter,timeFormatter } from "../../../validations/validations";
 
 const WorkOrderMaster = ({ data }) => {
   const navigate = useNavigate();

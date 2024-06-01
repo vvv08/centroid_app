@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./customersComp.scss";
 import { useNavigate } from "react-router-dom";
-import { dateFormatter } from "../../../../../server/validations/validations";
+import { dateFormatter } from "../../../validations/validations";
 import EditIcon from "@mui/icons-material/Edit";
 
 const CustomerMaster = ({ data }) => {

@@ -4,7 +4,7 @@ import Navbar from "../../components/navbar/navbar";
 import Dashboard from "../../components/dashboard";
 import { getDashboard } from "../../repository/dashboardRepository";
 import { useNavigate } from "react-router-dom";
-import { padZero,dateFormatter } from "../../../../server/validations/validations";
+import { padZero,dateFormatter } from "../../validations/validations";
 import ReactToPrint from "react-to-print";
 import PrintIcon from "@mui/icons-material/Print";
 import DashboardPrintFormat from "../../components/dashboard/printDashFormat";

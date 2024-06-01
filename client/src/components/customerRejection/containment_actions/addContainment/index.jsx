@@ -3,7 +3,7 @@ import "./addContainmentComp.scss";
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select';
 import { addContainment, getIssuesByInvoice } from "../../../../repository/customerRejection/capa";
-import { dateFormatter } from "../../../../../../server/validations/validations";
+import { dateFormatter } from "../../../../validations/validations";
 
 const AddContainmentComp = ({invoice_id}) => {
   const navigate = useNavigate();

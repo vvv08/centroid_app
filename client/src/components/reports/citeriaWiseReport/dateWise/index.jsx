@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./dateWiseReport.scss";
-import { dateFormatter } from "../../../../../../server/validations/validations";
+import { dateFormatter } from "../../../../validations/validations";
 
 const DateWiseReport = ({ data,sum_data }) => {
   useEffect(() => {

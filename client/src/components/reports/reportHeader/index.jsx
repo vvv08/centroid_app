@@ -8,10 +8,7 @@ import OperationWiseReport from "../citeriaWiseReport/operationWise";
 import OperatorWiseReport from "../citeriaWiseReport/operatorWise";
 import DefectWiseReport from "../citeriaWiseReport/defectWise";
 import LossReasonWiseReport from "../citeriaWiseReport/lossReason";
-import {
-  padZero,
-  dateFormatter,
-} from "../../../../../server/validations/validations";
+import { padZero,dateFormatter } from "../../../validations/validations";
 import DateWiseReport from "../citeriaWiseReport/dateWise";
 import MachineDowntimeReport from "../citeriaWiseReport/machineDowntime";
 import ShiftMachineWiseReport from "../citeriaWiseReport/shiftMachine";

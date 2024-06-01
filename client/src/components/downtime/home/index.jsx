@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { deleteDowntime } from "../../../repository/downtime";
-import { dateFormatter,timeFormatter } from "../../../../../server/validations/validations";
+import { dateFormatter,timeFormatter } from "../../../validations/validations";
 
 const DowntimeDashboard = ({data,ref_state,refresh }) => {
   const navigate = useNavigate();

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./editContainmentComp.scss";
 import { useNavigate } from "react-router-dom";
 import { editContainment, getContainmentDetails } from "../../../../repository/customerRejection/capa";
-import { dateFormatter } from "../../../../../../server/validations/validations";
+import { dateFormatter } from "../../../../validations/validations";
 
 const EditContainmentComp = ({ containment_id }) => {
   const navigate = useNavigate();

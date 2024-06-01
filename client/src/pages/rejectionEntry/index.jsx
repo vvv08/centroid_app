@@ -2,10 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import "./rejectionEntry.scss";
 import Navbar from "../../components/navbar/navbar";
 import { useNavigate } from "react-router-dom";
-import {
-  padZero,
-  dateFormatter,
-} from "../../../../server/validations/validations";
+import { padZero } from "../../validations/validations";
 import Select from "react-select";
 import {
   getRejectionEntry,

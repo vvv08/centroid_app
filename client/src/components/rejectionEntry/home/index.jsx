@@ -4,7 +4,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 import { deleteRejectionEntry } from "../../../repository/rejectionEntry";
-import { dateFormatter } from '../../../../../server/validations/validations'
+import { dateFormatter } from "../../../validations/validations";
 
 const RejectionEntryComp = ({ data, id }) => {
   const navigate = useNavigate();

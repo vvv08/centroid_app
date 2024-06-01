@@ -1,6 +1,6 @@
 import React from "react";
 import "./downtimePrintFormat.scss";
-import { dateFormatter } from "../../../../../server/validations/validations";
+import { dateFormatter } from "../../../validations/validations";
 import DowntimePrintTable from "../printDowntimeTable";
 
 const DowntimePrintFormat = ({data,dates,today,topic}) => {

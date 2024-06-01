@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import DowntimeDashboard from "../../../components/downtime/home";
 import Navbar from "../../../components/navbar/navbar";
 import { getDowntimeData } from "../../../repository/downtime";
-import { dateFormatter,padZero } from "../../../../../server/validations/validations";
+import { dateFormatter,padZero } from "../../../validations/validations";
 import DowntimePrintTable from "../../../components/downtime/printDowntimeTable";
 import ReactToPrint from "react-to-print";
 import PrintIcon from "@mui/icons-material/Print";

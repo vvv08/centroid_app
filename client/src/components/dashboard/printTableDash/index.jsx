@@ -1,8 +1,6 @@
 import React from "react";
 import "./dashboardPrintTable.scss";
-import {
-  dateFormatter
-} from "../../../../../server/validations/validations";
+import { dateFormatter } from "../../../validations/validations";
 
 const DashboardPrintTable = ({ data }) => {
   return (

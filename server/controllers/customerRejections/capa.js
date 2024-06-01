@@ -14,23 +14,23 @@ export const getCAPADetails = ({ id }) => {
   return new Promise(async (resolve, reject) => {
     try {
       const [issues] = await db.query(
-        `select r.cust_rej_id, i.invoice_number, r.description as problem, date_format(r.created_date,'%Y-%m-%d') as created_date , date_format(r.last_updated,'%Y-%m-%d') as last_updated, r.rejected_qty from cust_rejection_issues r inner join invoices i on r.invoice_id = i.invoice_id where r.invoice_id = ${id};`
+        `select r.cust_rej_id, i.invoice_number, r.description as problem, r.created_date as created_date , r.last_updated as last_updated, r.rejected_qty from cust_rejection_issues r inner join invoices i on r.invoice_id = i.invoice_id where r.invoice_id = ${id};`
       );
 
       const [containment] = await db.query(
-        `select date_format(c.created_date,'%Y-%m-%d') as created_date , date_format(c.last_updated,'%Y-%m-%d') as last_updated ,c.containment_id, c.stock_check_supplier, date_format(c.supplier_date,'%Y-%m-%d') as supplier_date, c.stock_check_customer , date_format(c.customer_date,'%Y-%m-%d') as customer_date , c.stock_check_production , date_format(c.production_date,'%Y-%m-%d') as production_date, c.stock_check_transit , date_format(c.transit_date,'%Y-%m-%d') as transit_date, c.remarks , r.description as problem from cust_containment_actions c inner join cust_rejection_issues r on c.cust_rej_id = r.cust_rej_id where c.cust_rej_id in (select cust_rej_id from cust_rejection_issues where invoice_id = ${id} group by cust_rej_id);`
+        `select c.created_date as created_date , c.last_updated as last_updated ,c.containment_id, c.stock_check_supplier, c.supplier_date as supplier_date, c.stock_check_customer , c.customer_date as customer_date , c.stock_check_production , c.production_date as production_date, c.stock_check_transit , c.transit_date as transit_date, c.remarks , r.description as problem from cust_containment_actions c inner join cust_rejection_issues r on c.cust_rej_id = r.cust_rej_id where c.cust_rej_id in (select cust_rej_id from cust_rejection_issues where invoice_id = ${id} group by cust_rej_id);`
       );
 
       const [root_causes] = await db.query(
-        `select rt.root_id, rt.description as root_cause, rt.remarks , date_format(rt.created_date,'%Y-%m-%d') as created_date , date_format(rt.last_updated,'%Y-%m-%d') as last_updated , r.description as problem from cust_root_causes rt inner join cust_rejection_issues r on rt.cust_rej_id = r.cust_rej_id where rt.cust_rej_id in (select cust_rej_id from cust_rejection_issues where invoice_id = ${id} group by cust_rej_id);`
+        `select rt.root_id, rt.description as root_cause, rt.remarks , rt.created_date as created_date , rt.last_updated as last_updated , r.description as problem from cust_root_causes rt inner join cust_rejection_issues r on rt.cust_rej_id = r.cust_rej_id where rt.cust_rej_id in (select cust_rej_id from cust_rejection_issues where invoice_id = ${id} group by cust_rej_id);`
       );
 
       const [corrective_actions] = await db.query(
-        `select c.corrective_id , c.description as corrective_action , date_format(c.created_date,'%Y-%m-%d') as created_date , date_format(c.last_updated,'%Y-%m-%d') as last_updated , c.remarks , i.name as inspector , rt.description as problem from cust_corrective_actions c inner join cust_rejection_issues rt on c.cust_rej_id = rt.cust_rej_id inner join inspectors i on c.inspector_id = i.inspector_id where c.cust_rej_id in (select cust_rej_id from cust_rejection_issues where invoice_id = ${id} group by cust_rej_id);`
+        `select c.corrective_id , c.description as corrective_action , c.created_date as created_date , c.last_updated as last_updated , c.remarks , i.name as inspector , rt.description as problem from cust_corrective_actions c inner join cust_rejection_issues rt on c.cust_rej_id = rt.cust_rej_id inner join inspectors i on c.inspector_id = i.inspector_id where c.cust_rej_id in (select cust_rej_id from cust_rejection_issues where invoice_id = ${id} group by cust_rej_id);`
       );
 
       const [preventive_actions] = await db.query(
-        `select p.preventive_id , p.description as preventive_action , date_format(p.created_date,'%Y-%m-%d') as created_date , date_format(p.last_updated,'%Y-%m-%d') as last_updated , p.remarks , i.name as inspector , r.description as problem from cust_preventive_actions p inner join cust_rejection_issues r on p.cust_rej_id = r.cust_rej_id inner join inspectors i on p.inspector_id = i.inspector_id where p.cust_rej_id in (select cust_rej_id from cust_rejection_issues where invoice_id = ${id} group by cust_rej_id);`
+        `select p.preventive_id , p.description as preventive_action , p.created_date as created_date , p.last_updated as last_updated , p.remarks , i.name as inspector , r.description as problem from cust_preventive_actions p inner join cust_rejection_issues r on p.cust_rej_id = r.cust_rej_id inner join inspectors i on p.inspector_id = i.inspector_id where p.cust_rej_id in (select cust_rej_id from cust_rejection_issues where invoice_id = ${id} group by cust_rej_id);`
       );
 
       resolve({
@@ -176,7 +176,7 @@ export const getContainmentDetails = ({ containment_id }) => {
   return new Promise(async (resolve, reject) => {
     try {
       const [[containment]] = await db.query(
-        `select c.containment_id, c.stock_check_supplier, date_format(c.supplier_date,'%Y-%m-%d') as supplier_date, c.stock_check_customer , date_format(c.customer_date,'%Y-%m-%d') as customer_date , c.stock_check_production , date_format(c.production_date,'%Y-%m-%d') as production_date, c.stock_check_transit , date_format(c.transit_date,'%Y-%m-%d') as transit_date, c.remarks , r.description as problem from cust_containment_actions c inner join cust_rejection_issues r on c.cust_rej_id = r.cust_rej_id where c.containment_id = ${containment_id}`
+        `select c.containment_id, c.stock_check_supplier, c.supplier_date as supplier_date, c.stock_check_customer , c.customer_date as customer_date , c.stock_check_production , c.production_date as production_date, c.stock_check_transit , c.transit_date as transit_date, c.remarks , r.description as problem from cust_containment_actions c inner join cust_rejection_issues r on c.cust_rej_id = r.cust_rej_id where c.containment_id = ${containment_id}`
       );
       resolve(containment);
     } catch (err) {
@@ -268,7 +268,7 @@ export const getCorrectiveDetails = ({ corrective_id }) => {
   return new Promise(async (resolve, reject) => {
     try {
       const [[corrective]] = await db.query(
-        `select c.corrective_id , c.description as corrective_action , date_format(c.created_date,'%Y-%m-%d') as created_date , date_format(c.last_updated,'%Y-%m-%d') as last_updated , c.remarks , i.name as inspector, c.inspector_id as inspector_id , rt.description as problem from cust_corrective_actions c inner join cust_rejection_issues rt on c.cust_rej_id = rt.cust_rej_id inner join inspectors i on c.inspector_id = i.inspector_id where c.corrective_id = ${corrective_id};`
+        `select c.corrective_id , c.description as corrective_action , c.created_date as created_date , c.last_updated as last_updated , c.remarks , i.name as inspector, c.inspector_id as inspector_id , rt.description as problem from cust_corrective_actions c inner join cust_rejection_issues rt on c.cust_rej_id = rt.cust_rej_id inner join inspectors i on c.inspector_id = i.inspector_id where c.corrective_id = ${corrective_id};`
       );
       resolve(corrective);
     } catch (err) {
@@ -333,7 +333,7 @@ export const getRootCausesDetails = ({ root_id }) => {
   return new Promise(async (resolve, reject) => {
     try {
       const [[rootCause]] = await db.query(
-        `select rt.root_id, rt.description as root_cause, rt.remarks , date_format(rt.created_date,'%Y-%m-%d') as created_date , date_format(rt.last_updated,'%Y-%m-%d') as last_updated , r.description as problem from cust_root_causes rt inner join cust_rejection_issues r on rt.cust_rej_id = r.cust_rej_id where rt.root_id = ${root_id};`
+        `select rt.root_id, rt.description as root_cause, rt.remarks , rt.created_date as created_date , rt.last_updated as last_updated , r.description as problem from cust_root_causes rt inner join cust_rejection_issues r on rt.cust_rej_id = r.cust_rej_id where rt.root_id = ${root_id};`
       );
       resolve(rootCause);
     } catch (err) {
@@ -398,7 +398,7 @@ export const addPreventiveAction = ({
 export const getPreventiveActionDetail = ({preventive_id}) => {
   return new Promise(async(resolve,reject) => {
     try{
-      const [[preventive_action]] = await db.query(`select p.preventive_id , p.description as preventive_action , date_format(p.created_date,'%Y-%m-%d') as created_date , date_format(p.last_updated,'%Y-%m-%d') as last_updated , p.remarks , i.name as inspector , r.description as problem , p.inspector_id as inspector_id from cust_preventive_actions p inner join cust_rejection_issues r on p.cust_rej_id = r.cust_rej_id inner join inspectors i on p.inspector_id = i.inspector_id where p.preventive_id = ${preventive_id};`)
+      const [[preventive_action]] = await db.query(`select p.preventive_id , p.description as preventive_action , p.created_date as created_date , p.last_updated as last_updated , p.remarks , i.name as inspector , r.description as problem , p.inspector_id as inspector_id from cust_preventive_actions p inner join cust_rejection_issues r on p.cust_rej_id = r.cust_rej_id inner join inspectors i on p.inspector_id = i.inspector_id where p.preventive_id = ${preventive_id};`)
       resolve(preventive_action)
     }catch(err){
       reject(err)
