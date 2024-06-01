@@ -31,6 +31,7 @@ export const getDetails = async () => {
 
 //To add a invoice
 export const addInvoice = async (invoice) => {
+    console.log(invoice)
     try{
         const result = await makeRequest.post('invoice/add',invoice,{
             headers:{

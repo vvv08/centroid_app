@@ -25,11 +25,11 @@ router.get('/details',[verifyToken],(req,res) => {
 //To add a invoice
 router.post('/add',[verifyToken],(req,res) => {
     let invoice = {
-        invoice_number : req.body.invoice_number,
-        work_order : Number(req.body.work_order),
-        customer : Number(req.body.customer),
-        remarks : req.body.remarks,
-        status : req.body.status
+        invoice_number : req.body.inputs.invoice_number,
+        work_order : req.body.selectedOptions,
+        customer : Number(req.body.inputs.customer),
+        remarks : req.body.inputs.remarks,
+        status : req.body.inputs.status
     }
     addInvoice(invoice).then((result) => {
         res.status(200).json(result)
@@ -53,12 +53,12 @@ router.get('/editDetails',[verifyToken],(req,res) => {
 //To edit a invoice
 router.post('/edit',[verifyToken],(req,res) => {
     let invoice = {
-        id : Number(req.body.invoice_id),
-        invoice_number : req.body.invoice_number,
-        work_order : Number(req.body.work_order),
-        customer : Number(req.body.customer),
-        status : req.body.status,
-        remarks : req.body.remarks
+        id : Number(req.body.inputs.invoice_id),
+        invoice_number : req.body.inputs.invoice_number,
+        work_order : req.body.selectedOptions,
+        customer : Number(req.body.inputs.customer),
+        status : req.body.inputs.status,
+        remarks : req.body.inputs.remarks
     }
     editInvoice(invoice).then((result) => {
         res.status(200).json(result)

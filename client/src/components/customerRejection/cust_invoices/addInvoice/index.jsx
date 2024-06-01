@@ -7,6 +7,7 @@ import Select from 'react-select';
 const AddInvoiceComp = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState([])
   const [selections, setSelections] = useState({
     customers:[],    
     work_orders:[]
@@ -15,9 +16,13 @@ const AddInvoiceComp = () => {
     invoice_number: "",
     status: "",
     remarks: "",
-    work_order: "",
-    customer: "",
+    customer: ""
   });
+
+  const handleChange = (options) => {
+    // Check if options is null or undefined, set to empty array if so
+    setSelectedOptions(options || []);
+  };
 
   const handleInputChange = (e) => {
     switch (e.target.id) {
@@ -43,7 +48,7 @@ const AddInvoiceComp = () => {
   const handleSubmit = (e) => {
       e.preventDefault();
       setLoading(true);
-      addInvoice(inputs)
+      addInvoice({inputs , selectedOptions})
         .then((result) => {
           alert("Invoice added");
           navigate("/invoice");
@@ -122,15 +127,18 @@ const AddInvoiceComp = () => {
               <label htmlFor="work_order">Work Order</label>
               <Select
                 className="centroid_search_select"
+                isMulti
                 options={selections.work_orders}
                 id="work_order"
-                value={selections.work_orders.find(
-                  (option) => option.value === inputs.work_order
-                )}
-                onChange={(option) => handleSelectChange(option, 'work_order')}
+                value={selectedOptions}
+                onChange={handleChange}
+                // value={selections.work_orders.find(
+                //   (option) => option.value === inputs.work_order
+                // )}
+                //  onChange={(option) => handleSelectChange(option, 'work_order')}
                 required
               />
-              {inputs.work_order && (
+              {/* {inputs.work_order && (
                 <p>
                   {
                     selections.work_orders.filter(
@@ -138,7 +146,7 @@ const AddInvoiceComp = () => {
                     )[0].label
                   }
                 </p>
-              )}
+              )} */}
             </div>
             <div className="centroid_addInvoice_list">
               <label htmlFor="status">Choose Status</label>

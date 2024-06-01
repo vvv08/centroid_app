@@ -10,18 +10,24 @@ import {
 const EditInvoiceComp = ({ id }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState([])
   const [selections, setSelections] = useState({
     customers: [],
-    work_orders: []
+    work_orders: [],
   });
   const [inputs, setInputs] = useState({
     invoice_id: "",
     invoice_number: "",
     status: "",
     remarks: "",
-    work_order: "",
     customer: "",
   });
+
+
+  const handleChange = (options) => {
+    // Check if options is null or undefined, set to empty array if so
+    setSelectedOptions(options || []);
+  };
 
   const handleInputChange = (e) => {
     switch (e.target.id) {
@@ -41,13 +47,13 @@ const EditInvoiceComp = ({ id }) => {
   };
 
   const handleSelectChange = (selectedOption, field) => {
-    setInputs((state) => ({ ...state, [field]: selectedOption.value || ""  }));
+    setInputs((state) => ({ ...state, [field]: selectedOption.value || "" }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    editInvoice(inputs)
+    editInvoice({inputs,selectedOptions})
       .then((result) => {
         alert("Invoice edited");
         navigate("/invoice");
@@ -72,15 +78,15 @@ const EditInvoiceComp = ({ id }) => {
         setInputs({
           invoice_id: result.invoice.invoice_id || "",
           invoice_number: result.invoice.invoice_number || "",
-          work_order: result.invoice.work_order_id || "",
           customer: result.invoice.customer_id || "",
           status: result.invoice.status || "",
           remarks: result.invoice.remarks || "",
         });
         setSelections({
-            customers: result.customers || "",
-            work_orders: result.work_orders || "",
-          });
+          customers: result.customers || "",
+          work_orders: result.work_orders || "",
+        });
+        setSelectedOptions(result.invoice_work_order || "")
       })
       .catch((err) => {
         if (err.response.data.status === "authenticationError") {
@@ -108,9 +114,6 @@ const EditInvoiceComp = ({ id }) => {
                 onChange={handleInputChange}
               />
             </div>
-            {selections.customers.filter(
-              (f) => f.value === Number(inputs.customer)
-            )[0] && (
               <div className="centroid_editInvoice_search_list">
                 <label htmlFor="customer">Customer</label>
                 <Select
@@ -133,30 +136,26 @@ const EditInvoiceComp = ({ id }) => {
                   </p>
                 )}
               </div>
-            )}
-            {selections.work_orders.filter(
-              (f) => f.value === Number(inputs.work_order)
+            {!selections.work_orders.filter((f) =>
+              selectedOptions.includes(f.value)
             )[0] && (
               <div className="centroid_editInvoice_search_list">
                 <label htmlFor="work_order">Work order</label>
                 <Select
+                  isMulti
                   className="centroid_search_select"
                   options={selections.work_orders}
                   id="work_order"
-                  value={selections.work_orders.find(
-                    (option) => option.value === inputs.work_order
-                  )}
-                  onChange={(option) => handleSelectChange(option, "work_order")}
+                  value={selectedOptions}
+                  onChange={handleChange}
                   required
                 />
-                {inputs.work_order && (
-                  <p>
-                    {
-                      selections.work_orders.filter(
-                        (f) => f.value === Number(inputs.work_order)
-                      )[0].label
-                    }
-                  </p>
+                {selectedOptions && (
+                  <>
+                    {selectedOptions.map((obj, index) => {
+                      return <p key={index}>{obj.label}</p>;
+                    })}
+                  </>
                 )}
               </div>
             )}

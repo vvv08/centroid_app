@@ -15,7 +15,7 @@ export const getInvoices = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const [result] = await db.query(
-        "select i.invoice_id, i.invoice_number, i.created_date as created_date,i.last_updated as last_updated, c.name as customer, w.work_order as work_order, i.remarks, i.status  from invoices i inner join customers c on i.customer_id = c.customer_id inner join work_orders w on i.work_order_id = w.work_order_id;"
+        "select i.invoice_id, i.invoice_number, i.created_date as created_date,i.last_updated as last_updated, c.name as customer, JSON_ARRAYAGG(w.work_order) as work_order, i.remarks, i.status  from invoices i inner join customers c on i.customer_id = c.customer_id inner join invoice_work_order iw on i.invoice_id = iw.invoice_id inner join work_orders w on iw.work_order_id = w.work_order_id group by i.invoice_id;"
       );
       resolve(result);
     } catch (err) {
@@ -55,16 +55,23 @@ export const addInvoice = ({
   return new Promise(async (resolve, reject) => {
     try {
       const [result] = await db.query(
-        `insert into invoices (invoice_number,work_order_id,customer_id,status,remarks,created_date,last_updated) values ("${invoice_number}", ${work_order},${customer},"${status}","${remarks}","${curr_date}","${curr_date}");`
+        `insert into invoices (invoice_number,customer_id,status,remarks,created_date,last_updated) values ("${invoice_number}",${customer},"${status}","${remarks}","${curr_date}","${curr_date}");`
       );
       let insertedInvoice = {
         id: result.insertId,
         invoice_number,
-        work_order,
+        work_order : [],
         customer,
         status,
         remarks,
       };
+      work_order.map(async ({value}) => {
+        const result = await db.query(
+          `INSERT INTO invoice_work_order (work_order_id,invoice_id) VALUES (${value},${insertedInvoice.id});`
+        );
+        //Not getting pushed
+        insertedInvoice.work_order.push(value);
+      });
       resolve(insertedInvoice);
     } catch (err) {
       reject(err);
@@ -77,8 +84,9 @@ export const getInvoiceDetails = ({ id }) => {
   return new Promise(async (resolve, reject) => {
     try {
       const [[invoice]] = await db.query(
-        `select * from invoices where invoice_id = ${id};`
+        `select * from invoices  where invoice_id = ${id};`
       );
+      const [invoice_work_order] = await db.query(`select iw.work_order_id as value , w.work_order as label from invoice_work_order iw inner join work_orders w on iw.work_order_id = w.work_order_id where iw.invoice_id = ${id} and w.status != "inactive"`);
       const [customers] = await db.query(
         "select customer_id as value, name as label from customers where status != 'inactive';"
       );
@@ -87,6 +95,7 @@ export const getInvoiceDetails = ({ id }) => {
       );
       resolve({
         invoice: invoice,
+        invoice_work_order : invoice_work_order,
         customers: customers,
         work_orders: work_orders,
       });
@@ -111,7 +120,7 @@ export const editInvoice = ({
         `select * from invoices where invoice_id = ${id};`
       );
       const [result] = await db.query(
-        `update invoices set invoice_number = "${invoice_number}", work_order_id = ${work_order}, customer_id = ${customer}, status = "${status}",remarks = "${remarks}", last_updated = "${curr_date}" where invoice_id = ${id};`
+        `update invoices set invoice_number = "${invoice_number}", customer_id = ${customer}, status = "${status}",remarks = "${remarks}", last_updated = "${curr_date}" where invoice_id = ${id};`
       );
       let editedInvoice = {
         id,
@@ -121,6 +130,11 @@ export const editInvoice = ({
         status,
         remarks,
       };
+      const [result2] = await db.query(`delete from invoice_work_order where invoice_id = ${id} and work_order_id in (select work_order_id from work_orders where status = "active");`)
+      
+      work_order.map(async ({value}) => {
+        const [result3] = await db.query(`insert into invoice_work_order (invoice_id,work_order_id) values (${id},${value})`)
+      });
       resolve({
         Before: invoice,
         After: editedInvoice,

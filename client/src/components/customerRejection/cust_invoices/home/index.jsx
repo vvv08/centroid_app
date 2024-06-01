@@ -42,15 +42,34 @@ const InvoiceMaster = ({ data }) => {
             <tbody>
               {data.map((obj) => {
                 return (
-                  <tr key={obj.invoice_id} className={obj.status === "inactive" ? "centroid_inactive_row" : ""}>
+                  <tr
+                    key={obj.invoice_id}
+                    className={
+                      obj.status === "inactive" ? "centroid_inactive_row" : ""
+                    }
+                  >
                     <td>{dateFormatter(obj.created_date)}</td>
                     <td>{obj.invoice_number}</td>
-                    <td>{obj.work_order}</td>
+
+                    <td>
+                      <ul>
+                        {obj.work_order.map((obj, index) => {
+                          return <li key={index}>{obj}</li>;
+                        })}
+                      </ul>
+                    </td>
                     <td>{obj.customer}</td>
                     <td>{obj.remarks}</td>
                     <td>{obj.status}</td>
                     <td>{dateFormatter(obj.last_updated)}</td>
-                    <td><EditIcon style={{"fontSize":"22px","cursor":"pointer"}} onClick = {() => {navigate(`/editInvoice/${obj.invoice_id}`)}}/></td>
+                    <td>
+                      <EditIcon
+                        style={{ fontSize: "22px", cursor: "pointer" }}
+                        onClick={() => {
+                          navigate(`/editInvoice/${obj.invoice_id}`);
+                        }}
+                      />
+                    </td>
                   </tr>
                 );
               })}
