@@ -124,7 +124,7 @@ const Dashboard = ({ data, refresh, ref_state }) => {
                         <td>{obj.remarks}</td>
                         <td>
                           <EditIcon
-                            style={{ fontSize: "22px", cursor: "pointer" }}
+                            style={{ fontSize: "16px", cursor: "pointer" }}
                             onClick={() => {
                               navigate(`/editEntry/${obj.Id}`);
                             }}
@@ -134,7 +134,7 @@ const Dashboard = ({ data, refresh, ref_state }) => {
                           <DeleteIcon
                             style={{
                               color: "var(--centroidDeleteRed)",
-                              fontSize: "22px",
+                              fontSize: "16px",
                               cursor: "pointer",
                             }}
                             onClick={() => {
