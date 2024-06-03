@@ -137,7 +137,7 @@ const AddContainmentComp = ({invoice_id}) => {
               )}
             </div>
             <div className="centroid_addContainment_list">
-              <label htmlFor="stock_check_supplier">Stock checked at Supplier</label>
+              <label htmlFor="stock_check_supplier">Stock checked at Centroid</label>
               <select
                 id="stock_check_supplier"
                 type="text"

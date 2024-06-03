@@ -648,3 +648,49 @@ export const editWorkOrder = async (work_order) => {
     throw err
   }
 }
+
+//UOM
+//To add a UOM
+export const addUOM = async (uom) => {
+  try{
+    const result = await makeRequest.post('/masterData/add/uom',uom,{
+      headers:{
+        authorization:"Bearer " + localStorage.getItem("token")
+      }
+    })
+    console.log(result.data)
+  }catch(err){
+    console.log("Error: ", err)
+    throw err
+  }
+}
+
+//To get a single UOM for edit
+export const getUOMDetails = async (uom_id) => {
+  try{
+    const result = await makeRequest.get(`/masterData/singleUOM?uom_id=${uom_id}`,{
+      headers:{
+        authorization:"Bearer " + localStorage.getItem("token")
+      }
+    })
+    return result.data
+  }catch(err){
+    console.log("Error: ", err)
+    throw err
+  }
+}
+
+//To edit a UOM
+export const editUOM = async (uom) => {
+  try{
+    const result = await makeRequest.post('/masterData/edit/uom',uom,{
+      headers:{
+        authorization:"Bearer " + localStorage.getItem("token")
+      }
+    })
+    console.log(result.data)
+  }catch(err){
+    console.log("Error: ", err)
+    throw err
+  }
+}

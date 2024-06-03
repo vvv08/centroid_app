@@ -1,5 +1,5 @@
 import express from 'express';
-import { addDefectMaster, addInspectorMaster, addMachineLossMaster, addMachineMaster, addOperationMaster, addOperatorMaster, addPartNumber, addShiftMaster, addWorkOrder, deleteDefectMaster, deleteInspectorMaster, deleteMachineLossMaster, deleteMachineMaster, deleteOperationMaster, deleteOperatorMaster, deleteShiftMaster, editDefectMaster, editInspectorMaster, editMachineLossMaster, editMachineMaster, editOperationMaster, editOperatorMaster, editPartNumber, editShiftMaster, editWorkOrder, getActivePartNumbers, getDefectDetails, getInspectorDetails, getMachineDetails, getMachineLossDetails, getMasterData, getOperationDetails, getOperatorDetails, getPartNumberDetails, getShiftDetails, getWorkOrderDetails } from '../controllers/master.js';
+import { addDefectMaster, addInspectorMaster, addMachineLossMaster, addMachineMaster, addOperationMaster, addOperatorMaster, addPartNumber, addShiftMaster, addUOM, addWorkOrder, deleteDefectMaster, deleteInspectorMaster, deleteMachineLossMaster, deleteMachineMaster, deleteOperationMaster, deleteOperatorMaster, deleteShiftMaster, editDefectMaster, editInspectorMaster, editMachineLossMaster, editMachineMaster, editOperationMaster, editOperatorMaster, editPartNumber, editShiftMaster, editUOM, editWorkOrder, getActivePartNumbers, getDefectDetails, getInspectorDetails, getMachineDetails, getMachineLossDetails, getMasterData, getOperationDetails, getOperatorDetails, getPartNumberDetails, getShiftDetails, getUOMDetails, getWorkOrderDetails } from '../controllers/master.js';
 import { verifyToken } from '../config/verify.js'
 
 const router = express.Router();
@@ -405,6 +405,18 @@ router.get('/singleWorkOrder',[verifyToken],(req,res) => {
     })
 })
 
+//UOM
+router.get('/singleUOM',[verifyToken],(req,res) => {
+    let uom = {
+        uom_id : Number(req.query.uom_id)
+    }
+    getUOMDetails(uom).then((result) => {
+        res.status(200).json(result)
+    }).catch((err) => {
+        res.status(500).json(err)
+    })
+})
+
 //Part Number
 //To add a Part number
 router.post('/partNumber/add',[verifyToken],(req,res) => {
@@ -476,6 +488,34 @@ router.post('/workOrder/edit',[verifyToken],(req,res) => {
         total_mix:parseFloat(req.body.total_mix)
     }
     editWorkOrder(work_order_input).then((result) => {
+        res.status(200).json(result)
+    }).catch((err) => {
+        res.status(500).json(err)
+    })
+})
+
+//UOM
+//To add a UOM
+router.post('/add/uom',[verifyToken],(req,res) => {
+    let uom = {
+        description:req.body.description,
+        status:req.body.status
+    }
+    addUOM(uom).then((result) => {
+        res.status(200).json(result)
+    }).catch((err) => {
+        res.status(500).json(err)
+    })
+})
+
+//To edit a UOM
+router.post('/edit/uom',[verifyToken],(req,res) => {
+    let uom = {
+        uom_id:Number(req.body.uom_id),
+        description:req.body.description,
+        status:req.body.status
+    }
+    editUOM(uom).then((result) => {
         res.status(200).json(result)
     }).catch((err) => {
         res.status(500).json(err)

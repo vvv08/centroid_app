@@ -1,0 +1,18 @@
+.centroid_correctiveWrapper{
+    width: 100%;
+    .centroid_correctiveContainer{
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            th{
+                border: 1px solid black;
+                height: 30px;
+            }
+            td{
+                border: 1px solid black;
+                height: 30px;
+                text-align: center;
+            }
+        }
+    }
+}

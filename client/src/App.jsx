@@ -38,6 +38,7 @@ import AddRootCausePage from './pages/customerRejection/rootCause/addRootCause';
 import EditRootCausePage from './pages/customerRejection/rootCause/editRootCause';
 import AddPreventiveActionPage from './pages/customerRejection/preventive/addPreventive';
 import EditPreventiveActionPage from './pages/customerRejection/preventive/editPreventive';
+import CustPrintReportPage from './pages/customerRejection/printReport';
 
 function App() {
   
@@ -193,6 +194,10 @@ function App() {
     {
       path:"/customer/editPreventiveAction/:preventive_id",
       element:<EditPreventiveActionPage/>
+    },
+    {
+      path:"/customer/printReport/:invoice_id/:invoice_number",
+      element:<CustPrintReportPage/>
     }
   ])
 

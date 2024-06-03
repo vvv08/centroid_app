@@ -12,7 +12,6 @@ export const padZero = (number) => {
 export const dateFormatter = (inputDate) => {
     let date = "";
     if (inputDate) {
-      if(inputDate.length < 11){
         if (inputDate.substr(5, 2) === "01") {
           date = `${inputDate.substr(8, 2)} Jan ${inputDate.substr(0, 4)}`;
         } else if (inputDate.substr(5, 2) === "02") {
@@ -38,36 +37,6 @@ export const dateFormatter = (inputDate) => {
         } else if (inputDate.substr(5, 2) === "12") {
           date = `${inputDate.substr(8, 2)} Dec ${inputDate.substr(0, 4)}`;
         }
-      }else{
-        // Convert to IST using Luxon
-        const istDate = DateTime.fromJSDate(new Date(inputDate), { zone: 'utc' }).setZone('Asia/Kolkata');
-        let newDate = istDate.toFormat('yyyy-MM-dd')
-        if (newDate.substr(5, 2) === "01") {
-          date = `${newDate.substr(8, 2)} Jan ${newDate.substr(0, 4)}`;
-        } else if (newDate.substr(5, 2) === "02") {
-          date = `${newDate.substr(8, 2)} Feb ${newDate.substr(0, 4)}`;
-        } else if (newDate.substr(5, 2) === "03") {
-          date = `${newDate.substr(8, 2)} Mar ${newDate.substr(0, 4)}`;
-        } else if (newDate.substr(5, 2) === "04") {
-          date = `${newDate.substr(8, 2)} Apr ${newDate.substr(0, 4)}`;
-        } else if (newDate.substr(5, 2) === "05") {
-          date = `${newDate.substr(8, 2)} May ${newDate.substr(0, 4)}`;
-        } else if (newDate.substr(5, 2) === "06") {
-          date = `${newDate.substr(8, 2)} Jun ${newDate.substr(0, 4)}`;
-        } else if (newDate.substr(5, 2) === "07") {
-          date = `${newDate.substr(8, 2)} Jul ${newDate.substr(0, 4)}`;
-        } else if (newDate.substr(5, 2) === "08") {
-          date = `${newDate.substr(8, 2)} Aug ${newDate.substr(0, 4)}`;
-        } else if (newDate.substr(5, 2) === "09") {
-          date = `${newDate.substr(8, 2)} Sept ${newDate.substr(0, 4)}`;
-        } else if (newDate.substr(5, 2) === "10") {
-          date = `${newDate.substr(8, 2)} Oct ${newDate.substr(0, 4)}`;
-        } else if (newDate.substr(5, 2) === "11") {
-          date = `${newDate.substr(8, 2)} Nov ${newDate.substr(0, 4)}`;
-        } else if (newDate.substr(5, 2) === "12") {
-          date = `${newDate.substr(8, 2)} Dec ${newDate.substr(0, 4)}`;
-        }
-      }
     }
     return date;
   };

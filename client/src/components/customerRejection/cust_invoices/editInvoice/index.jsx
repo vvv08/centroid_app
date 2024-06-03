@@ -10,7 +10,7 @@ import {
 const EditInvoiceComp = ({ id }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState([])
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [selections, setSelections] = useState({
     customers: [],
     work_orders: [],
@@ -22,7 +22,6 @@ const EditInvoiceComp = ({ id }) => {
     remarks: "",
     customer: "",
   });
-
 
   const handleChange = (options) => {
     // Check if options is null or undefined, set to empty array if so
@@ -53,7 +52,7 @@ const EditInvoiceComp = ({ id }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    editInvoice({inputs,selectedOptions})
+    editInvoice({ inputs, selectedOptions })
       .then((result) => {
         alert("Invoice edited");
         navigate("/invoice");
@@ -86,7 +85,7 @@ const EditInvoiceComp = ({ id }) => {
           customers: result.customers || "",
           work_orders: result.work_orders || "",
         });
-        setSelectedOptions(result.invoice_work_order || "")
+        setSelectedOptions(result.invoice_work_order || "");
       })
       .catch((err) => {
         if (err.response.data.status === "authenticationError") {
@@ -114,28 +113,28 @@ const EditInvoiceComp = ({ id }) => {
                 onChange={handleInputChange}
               />
             </div>
-              <div className="centroid_editInvoice_search_list">
-                <label htmlFor="customer">Customer</label>
-                <Select
-                  className="centroid_search_select"
-                  options={selections.customers}
-                  id="customer"
-                  value={selections.customers.find(
-                    (option) => option.value === inputs.customer
-                  )}
-                  onChange={(option) => handleSelectChange(option, "customer")}
-                  required
-                />
-                {inputs.customer && (
-                  <p>
-                    {
-                      selections.customers.filter(
-                        (f) => f.value === Number(inputs.customer)
-                      )[0].label
-                    }
-                  </p>
+            <div className="centroid_editInvoice_search_list">
+              <label htmlFor="customer">Customer</label>
+              <Select
+                className="centroid_search_select"
+                options={selections.customers}
+                id="customer"
+                value={selections.customers.find(
+                  (option) => option.value === inputs.customer
                 )}
-              </div>
+                onChange={(option) => handleSelectChange(option, "customer")}
+                required
+              />
+              {inputs.customer && (
+                <p>
+                  {
+                    selections.customers.filter(
+                      (f) => f.value === Number(inputs.customer)
+                    )[0].label
+                  }
+                </p>
+              )}
+            </div>
             {!selections.work_orders.filter((f) =>
               selectedOptions.includes(f.value)
             )[0] && (
@@ -150,12 +149,12 @@ const EditInvoiceComp = ({ id }) => {
                   onChange={handleChange}
                   required
                 />
-                {selectedOptions && (
-                  <>
+                {selectedOptions[0] && (
+                  <div className="centroid_editInvoice_work_orders">
                     {selectedOptions.map((obj, index) => {
                       return <p key={index}>{obj.label}</p>;
                     })}
-                  </>
+                  </div>
                 )}
               </div>
             )}

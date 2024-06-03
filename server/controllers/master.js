@@ -8,7 +8,10 @@ const istDate = new Date(currentDate.getTime() + istOffset);
 const year = currentDate.getFullYear();
 const month = padZero(istDate.getMonth() + 1); // Months are zero-based (0 = January)
 const day = padZero(istDate.getDate());
-const curr_date = `${year}-${month}-${day}`;
+const hours = padZero(istDate.getUTCHours());
+const minutes = padZero(istDate.getUTCMinutes());
+const seconds = padZero(istDate.getUTCSeconds());
+const curr_date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
 //To fetch all master data
 export const getMasterData = () => {
@@ -21,9 +24,14 @@ export const getMasterData = () => {
       const [shifts] = await db.query("select * from shifts;");
       const [machine_loss] = await db.query("select * from machine_loss;");
       const [inspectors] = await db.query("select * from inspectors;");
-      const [part_numbers] = await db.query("select * from part_numbers;");
+      const [part_numbers] = await db.query(
+        "select *, date_format(created_date, '%Y-%m-%d') as created_date, date_format(last_updated, '%Y-%m-%d') as last_updated from part_numbers;"
+      );
       const [work_orders] = await db.query(
-        "select w.*,p.part_number from work_orders w inner join part_numbers p on w.part_number_id = p.part_number_id;"
+        "select w.*, date_format(w.created_date, '%Y-%m-%d') as created_date, date_format(w.last_updated, '%Y-%m-%d') as last_updated ,p.part_number from work_orders w inner join part_numbers p on w.part_number_id = p.part_number_id;"
+      );
+      const [uom] = await db.query(
+        `select *, date_format(created_date, '%Y-%m-%d') as created_date, date_format(last_updated, '%Y-%m-%d') as last_updated from unit_of_measurements;`
       );
       resolve({
         operators: operators,
@@ -35,6 +43,7 @@ export const getMasterData = () => {
         inspectors: inspectors,
         part_numbers: part_numbers,
         work_orders: work_orders,
+        uom: uom
       });
     } catch (err) {
       reject(err);
@@ -617,7 +626,7 @@ export const getWorkOrderDetails = ({ id }) => {
   return new Promise(async (resolve, reject) => {
     try {
       const [[res_work_order]] = await db.query(
-        `select * from work_orders where work_order_id = ${id};`
+        `select *, date_format(created_date, '%Y-%m-%d') as created_date, date_format(last_updated, '%Y-%m-%d') as last_updated from work_orders where work_order_id = ${id};`
       );
       const [res_active_part_numbers] = await db.query(
         "select part_number_id as value,part_number as label from part_numbers where status != 'inactive';"
@@ -673,7 +682,7 @@ export const editPartNumber = ({
   return new Promise(async (resolve, reject) => {
     try {
       const [[res_part_number]] = await db.query(
-        `select * from part_numbers where part_number_id = ${id};`
+        `select *, date_format(created_date, '%Y-%m-%d') as created_date, date_format(last_updated, '%Y-%m-%d') as last_updated from part_numbers where part_number_id = ${id};`
       );
       const [result] = await db.query(
         `update part_numbers set part_number = "${part_number}", part_name = "${part_name}",part_cost = "${part_cost}",status = "${status}",remarks = "${remarks}", last_updated = "${curr_date}" where part_number_id = ${id};`
@@ -765,7 +774,65 @@ export const editWorkOrder = ({
         remarks,
       };
 
-      resolve({Before : res_work_order, After : editedWorkOrder})
+      resolve({ Before: res_work_order, After: editedWorkOrder });
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
+
+//To add a UOM
+export const addUOM = ({ description, status }) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const [result] = await db.query(
+        `insert into unit_of_measurements (description,status,created_date,last_updated) values ("${description}","${status}","${curr_date}","${curr_date}");`
+      );
+      let insertedUOM = {
+        id: result.insertId,
+        description,
+        status,
+      };
+      resolve(insertedUOM);
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
+
+//To get UOM detail for edit
+export const getUOMDetails = ({ uom_id }) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const [[uom]] = await db.query(
+        `select description, status from unit_of_measurements where uom_id = ${uom_id};`
+      );
+      resolve(uom);
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
+
+//To edit a UOM
+export const editUOM = ({ uom_id, description, status }) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const [[uom]] = await db.query(
+        `select * from unit_of_measurements where uom_id = ${uom_id};`
+      );
+      const [result] = await db.query(
+        `update unit_of_measurements set description = "${description}", status =  "${status}", last_updated = "${curr_date}" where uom_id = ${uom_id};`
+      );
+      let editUOM = {
+        uom_id,
+        description,
+        status,
+      };
+      resolve({
+        Before : uom,
+        After : editUOM
+      })
     } catch (err) {
       reject(err);
     }

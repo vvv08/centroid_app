@@ -1,80 +1,84 @@
 .centroid_editInvoiceWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 40px;
+  .centroid_editInvoiceContainer {
+    width: 60%;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    margin-top: 40px;
-    .centroid_editInvoiceContainer {
-      width: 60%;
+    form {
+      width: 90%;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      form {
-        width: 90%;
+      gap: 60px;
+      padding: 10px 0px 10px 0px;
+      .centroid_editInvoice_input {
+        width: 100%;
         display: flex;
-        flex-direction: column;
         align-items: center;
-        gap: 60px;
-        padding: 10px 0px 10px 0px;
-        .centroid_editInvoice_input {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          justify-content: center;
-          label {
-            flex: 1;
-            font-size: 18px;
-          }
-          input {
-            height: 30px;
-            border-radius: 5px;
-            font-size: 16px;
-            flex: 1;
-          }
+        gap: 10px;
+        justify-content: center;
+        label {
+          flex: 1;
+          font-size: 18px;
         }
-        .centroid_editInvoice_list {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          label {
-            color: var(--kssiaParaBold);
-            flex: 2;
-            font-size: 18px;
-          }
-          select {
-            flex: 1;
-            height: 30px;
-            font-size: 16px;
-            cursor: pointer;
-          }
-          p{
-            flex: 1;
-            color: var(--centroidBlue);
-            font-weight: 500;
-          }
+        input {
+          height: 30px;
+          border-radius: 5px;
+          font-size: 16px;
+          flex: 1;
         }
-        .centroid_editInvoice_search_list {
-          width: 100%;
+      }
+      .centroid_editInvoice_list {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        label {
+          color: var(--kssiaParaBold);
+          flex: 2;
+          font-size: 18px;
+        }
+        select {
+          flex: 1;
+          height: 30px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+        p {
+          flex: 1;
+          color: var(--centroidBlue);
+          font-weight: 500;
+        }
+      }
+      .centroid_editInvoice_search_list {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        label {
+          color: var(--kssiaParaBold);
+          flex: 2;
+          font-size: 18px;
+        }
+        .centroid_search_select {
+          flex: 3;
+          height: 30px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+        .centroid_editInvoice_work_orders {
+          flex: 1;
           display: flex;
+          flex-direction: column;
           align-items: center;
-          justify-content: center;
-          gap: 5px;
-          label {
-            color: var(--kssiaParaBold);
-            flex: 2;
-            font-size: 18px;
-          }
-          .centroid_search_select {
-            flex: 3;
-            height: 30px;
-            font-size: 16px;
-            cursor: pointer;
-          }
-          p{
-            flex: 1;
+          p {
             font-size: 12px;
             color: var(--centroidBlue);
             font-weight: 500;
@@ -83,4 +87,4 @@
       }
     }
   }
-  
+}

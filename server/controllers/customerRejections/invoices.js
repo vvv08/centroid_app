@@ -8,7 +8,11 @@ const istDate = new Date(currentDate.getTime() + istOffset);
 const year = currentDate.getFullYear();
 const month = padZero(istDate.getMonth() + 1); // Months are zero-based (0 = January)
 const day = padZero(istDate.getDate());
-const curr_date = `${year}-${month}-${day}`;
+const hours = padZero(istDate.getUTCHours());
+const minutes = padZero(istDate.getUTCMinutes());
+const seconds = padZero(istDate.getUTCSeconds());
+const curr_date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
 
 //To get invoices
 export const getInvoices = () => {

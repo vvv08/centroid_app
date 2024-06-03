@@ -18,6 +18,7 @@ export const getDashboard = ({ from, to }) => {
         w.work_order,
         w.total_mix,
         p.part_number,
+        p.part_name,
         JSON_ARRAYAGG(rs.rejection_qty) AS rejection_qty,
         round(SUM(rs.rejection_qty) * p.part_cost) AS total_cost,
         JSON_ARRAYAGG( m.name) AS machines,

@@ -100,7 +100,7 @@ const GraphMain = ({ closeNav }) => {
                 >
                   Rejection Summary
                 </li>
-                <li
+                {/* <li
                   onClick={() => {
                     tabChange("A");
                   }}
@@ -147,7 +147,7 @@ const GraphMain = ({ closeNav }) => {
                   }
                 >
                   Machine Downtime reason
-                </li>
+                </li> */}
               </ul>
             </div>
           )}

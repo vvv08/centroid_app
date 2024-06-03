@@ -1,0 +1,21 @@
+.centroid_containmentWrapper{
+    width: 100%;
+    .centroid_containmentContainer{
+        table{
+            width: 100%;
+            border-collapse: collapse;
+
+            th{
+                border: 1px solid black;
+                height: 30px;
+            }
+            td{
+                border: 1px solid black;
+                font-weight: 500;
+                height: 30px;
+                font-size: 12px;
+                text-align: center;
+            }
+        }
+    }
+}

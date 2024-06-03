@@ -1,4 +1,4 @@
-import React from "react";
+import React , { useState } from "react";
 import "./rejectionReport.scss";
 import CustomerHome from "../../../components/customerRejection/cust_home";
 import { useNavigate } from "react-router-dom";

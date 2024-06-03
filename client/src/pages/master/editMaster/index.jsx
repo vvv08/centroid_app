@@ -10,6 +10,7 @@ import EditMachineLossMaster from '../../../components/master/machineLoss/editMa
 import EditShiftMaster from '../../../components/master/shifts/editShift';
 import EditPartNumberMaster from '../../../components/master/partNumbers/editPartNumber';
 import EditWorkOrderMaster from '../../../components/master/workOrder/editWorkOrder';
+import EditUOMMaster from '../../../components/master/uom/editUom';
 
 const EditMaster = () => {
     const {type,id} = useParams();
@@ -30,6 +31,7 @@ const EditMaster = () => {
                 {type === "Shift" && <EditShiftMaster id = {id}/>}
                 {type === "Part Number" && <EditPartNumberMaster id = {id}/>}
                 {type === "Work Order" && <EditWorkOrderMaster id = {id}/>}
+                {type === "UOM" && <EditUOMMaster id = {id}/>}
         </div>
     </>
   )

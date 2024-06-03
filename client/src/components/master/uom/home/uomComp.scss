@@ -1,0 +1,14 @@
+.centroid_uomMasterWrapper{
+    display: flex;
+    justify-content: center;
+    .centroid_uomMasterContainer{
+        width: 60%;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        .centroid_uomMasterAdd{
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

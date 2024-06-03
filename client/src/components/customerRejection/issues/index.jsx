@@ -35,9 +35,9 @@ const RejectionIssues = ({ data,invoice_id }) => {
             <thead>
               <tr>
                 <th>Created date</th>
-                <th>Invoice number</th>
                 <th>Issue</th>
-                <th>Rejected quantity (Kg)</th>
+                <th>Rejected quantity</th>
+                <th>UOM</th>
                 <th>Last updated</th>
                 <th></th>
               </tr>
@@ -47,9 +47,9 @@ const RejectionIssues = ({ data,invoice_id }) => {
                 return (
                   <tr key={obj.cust_rej_id}>
                     <td>{dateFormatter(obj.created_date)}</td>
-                    <td>{obj.invoice_number}</td>
                     <td>{obj.problem}</td>
                     <td>{obj.rejected_qty}</td>
+                    <td>{obj.uom}</td>
                     <td>{dateFormatter(obj.last_updated)}</td>
                     <td><EditIcon style={{"fontSize":"22px","cursor":"pointer"}} onClick = {() => {navigate(`/customer/editIssue/${obj.cust_rej_id}`)}}/></td>
                   </tr>

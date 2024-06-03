@@ -11,6 +11,7 @@ import ShiftsMaster from "../shifts";
 import { getMasterData } from "../../../repository/master";
 import PartNumbersMaster from "../partNumbers";
 import WorkOrderMaster from "../workOrder";
+import UOMMaster from "../uom/home";
 
 const MasterMain = () => {
   const navigate = useNavigate();
@@ -156,6 +157,18 @@ const MasterMain = () => {
               >
                 Shifts
               </li>
+              <li
+                onClick={() => {
+                  tabChange("J");
+                }}
+                className={
+                  tabState === "J"
+                    ? "centroid_masterMainSelectedTab"
+                    : undefined
+                }
+              >
+                UOM
+              </li>
             </ul>
           </div>
           {!loading ? <div className="centroid_masterMainContent">
@@ -168,6 +181,7 @@ const MasterMain = () => {
             {tabState === "G" && masterData.shifts &&  <ShiftsMaster data = {masterData.shifts}/>}
             {tabState === "H" && masterData.part_numbers && <PartNumbersMaster data = {masterData.part_numbers}/>}
             {tabState === "I" && masterData.work_orders && <WorkOrderMaster data={masterData.work_orders}/>}
+            {tabState === "J" && masterData.uom && <UOMMaster data={masterData.uom}/>}
           </div> : 
           <div className="centroid_masterMainContent">
               <p>Loading...</p>

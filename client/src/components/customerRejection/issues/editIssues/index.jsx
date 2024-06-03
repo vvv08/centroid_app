@@ -4,15 +4,21 @@ import { useNavigate } from "react-router-dom";
 import {
   editIssue,
   getIssueDetails,
+  getUOMs,
 } from "../../../../repository/customerRejection/capa";
+import Select from 'react-select';
 
 const EditIssuesComp = ({ cust_rej_id }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [selections, setSelections] = useState({
+    uoms:[]
+  });
   const [inputs, setInputs] = useState({
     cust_rej_id: cust_rej_id,
     description: "",
     rejected_qty: "",
+    uom:""
   });
 
   const handleInputChange = (e) => {
@@ -26,6 +32,10 @@ const EditIssuesComp = ({ cust_rej_id }) => {
         break;
       }
     }
+  };
+
+  const handleSelectChange = (selectedOption, field) => {
+    setInputs((state) => ({ ...state, [field]: selectedOption.value }));
   };
 
   const handleSubmit = (e) => {
@@ -51,12 +61,31 @@ const EditIssuesComp = ({ cust_rej_id }) => {
   };
 
   useEffect(() => {
+   getUOMs()
+    .then((result) => {
+      setSelections({
+          uoms : result.uoms
+      })
+    })
+    .catch((err) => {
+            if (err.response.data.status === "authenticationError") {
+              alert(err.response.data.message);
+              navigate("/login");
+            } else {
+              alert("Internal server error");
+              navigate("/maintenance");
+            }
+    });
+  },[])
+
+  useEffect(() => {
     getIssueDetails(cust_rej_id)
       .then((result) => {
         setInputs({
           cust_rej_id: cust_rej_id,
           description: result.problem || "",
           rejected_qty: result.rejected_qty || "",
+          uom: result.uom || ""
         });
       })
       .catch((err) => {
@@ -86,7 +115,7 @@ const EditIssuesComp = ({ cust_rej_id }) => {
               />
             </div>
             <div className="centroid_editIssue_input">
-              <label htmlFor="rejected_qty">Rejected Qty (Kg)</label>
+              <label htmlFor="rejected_qty">Rejected Qty</label>
               <input
                 id="rejected_qty"
                 type="number"
@@ -95,6 +124,28 @@ const EditIssuesComp = ({ cust_rej_id }) => {
                 value={inputs.rejected_qty}
               />
             </div>
+            <div className="centroid_editIssue_search_list">
+                <label htmlFor="uom">UOM</label>
+                <Select
+                  className="centroid_search_select"
+                  options={selections.uoms}
+                  id="uom"
+                  value={selections.uoms.find(
+                    (option) => option.value === inputs.uom
+                  )}
+                  onChange={(option) => handleSelectChange(option, "uom")}
+                  required
+                />
+                {inputs.uom && (
+                  <p>
+                    {
+                      selections.uoms.filter(
+                        (f) => f.value === Number(inputs.uom)
+                      )[0].label
+                    }
+                  </p>
+                )}
+              </div>
             <div className="centroid_formSubmitContainer">
               <button
                 type="submit"

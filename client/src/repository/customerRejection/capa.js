@@ -30,6 +30,20 @@ export const getInvoicesCAPA = async () => {
     }
 }
 
+//To get active UOM
+export const getUOMs = async () => {
+    try{
+        const result = await makeRequest.get('/capa/ActiveUOM',{
+            headers:{
+                authorization:"Bearer " + localStorage.getItem("token")
+            }
+        })
+        return result.data
+    }catch(err){
+        console.log("Error: ", err)
+        throw err
+    }
+}
 //To add a issue
 export const addIssue = async (issue) => {
     try{
@@ -135,6 +149,24 @@ export const editContainment = async (containment) => {
     }
 }
 
+//To delete a containment
+export const deleteContainment = async (containment_id) => {
+    try{
+        const result = await makeRequest.post('/capa/deleteContainment',{
+            containment_id:containment_id
+        },{
+            headers:{
+                authorization:"Bearer " + localStorage.getItem("token")
+            }
+        })
+        console.log("Delete: ", result.data)
+        return result.data
+    }catch(err){
+        console.log("Error: ", err)
+        throw err
+    }
+}
+
 //To get inspectors
 export const getInspectorsCAPA = async () => {
     try{
@@ -195,6 +227,24 @@ export const editCorrective = async (corrective) => {
     }
 }
 
+//To delete a corractive action
+export const deleteCorrective = async (corrective_id) => {
+    try{
+        const result = await makeRequest.post('/capa/deleteCorrective',{
+            corrective_id:corrective_id
+        },{
+            headers:{
+                authorization:"Bearer " + localStorage.getItem("token")
+            }
+        })
+        console.log("Delete: ", result.data)
+        return result.data
+    }catch(err){
+        console.log("Error: ", err)
+        throw err
+    }
+} 
+
 //To add a root cause
 export const addRootCause = async (root_cause) => {
     try{
@@ -240,6 +290,24 @@ export const editRootCause = async (root_cause) => {
     }
 }
 
+//To delete a root cause
+export const deleteRootCause = async (root_id) => {
+    try{
+        const result = await makeRequest.post('/capa/deleteRootCause',{
+            root_id:root_id
+        },{
+            headers:{
+                authorization:"Bearer " + localStorage.getItem("token")
+            }
+        })
+        console.log("Deleted: ", result.data)
+        return result.data
+    }catch(err){
+        console.log("Error: ", err)
+        throw err
+    }
+}
+
 //To add preventive action
 export const addPreventiveAction = async (preventive_action) => {
     try{
@@ -278,6 +346,24 @@ export const editPreventiveAction = async (preventive_action) => {
                 authorization:"Bearer " + localStorage.getItem("token")
             }
         })
+        return result.data
+    }catch(err){
+        console.log("Error: ", err)
+        throw err
+    }
+}
+
+//To delete a preventive action
+export const deletePreventiveAction = async (preventive_id) => {
+    try{
+        const result =await makeRequest.post('/capa/deletePreventiveAction',{
+            preventive_id:preventive_id
+        },{
+            headers:{
+                authorization:"Bearer " + localStorage.getItem("token")
+            }
+        })
+        console.log("Deleted: ", result.data)
         return result.data
     }catch(err){
         console.log("Error: ", err)

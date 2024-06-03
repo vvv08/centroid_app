@@ -50,6 +50,7 @@ const Dashboard = ({ data, refresh, ref_state }) => {
                     <th>Production end</th>
                     <th>Work Order</th>
                     <th>Part No.</th>
+                    <th>Part Name</th>
                     <th>Machines</th>
                     <th>Operations</th>
                     <th>Total Supplied Qty (Kg)</th>
@@ -80,6 +81,7 @@ const Dashboard = ({ data, refresh, ref_state }) => {
                         )}</td>
                         <td>{obj.work_order}</td>
                         <td>{obj.part_number}</td>
+                        <td>{obj.part_name}</td>
                         <td>
                           <ul>
                             {obj.machines.map((e,index) => {

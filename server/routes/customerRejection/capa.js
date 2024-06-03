@@ -1,5 +1,5 @@
 import express from 'express';
-import { addContainment, addCorrective, addIssue, addPreventiveAction, addRootCause, editContainment, editCorrective, editIssue, editPreventiveAction, editRootCause, getCAPADetails, getContainmentDetails, getCorrectiveDetails, getInspectorsCAPA, getInvoices, getIssueForEdit, getIssuesByInvoice, getPreventiveActionDetail, getRootCausesDetails } from '../../controllers/customerRejections/capa.js';
+import { addContainment, addCorrective, addIssue, addPreventiveAction, addRootCause, deleteContainment, deleteCorrectiveAction, deletePreventiveAction, deleteRootCause, editContainment, editCorrective, editIssue, editPreventiveAction, editRootCause, getCAPADetails, getContainmentDetails, getCorrectiveDetails, getInspectorsCAPA, getInvoices, getIssueForEdit, getIssuesByInvoice, getPreventiveActionDetail, getRootCausesDetails, getUOMs } from '../../controllers/customerRejections/capa.js';
 import { verifyToken } from '../../config/verify.js';
 
 const router = express.Router();
@@ -25,12 +25,22 @@ router.get('/invoices',[verifyToken],(req,res) => {
     })
 })
 
+//To get active UOMs
+router.get('/ActiveUOM',[verifyToken],(req,res) => {
+    getUOMs().then((result) => {
+        res.status(200).json(result)
+    }).catch((err) => {
+        res.status(500).json(err)
+    })
+})
+
 //To add an issue
 router.post('/issue/add',[verifyToken],(req,res) => {
     let issue = {
         invoice:Number(req.body.invoice_id),
         description : req.body.description,
-        rejected_qty: parseFloat(req.body.rejected_qty)
+        rejected_qty: parseFloat(req.body.rejected_qty),
+        uom:Number(req.body.uom)
     }
     addIssue(issue).then((result) => {
         res.status(200).json(result)
@@ -56,7 +66,8 @@ router.post('/editIssue',[verifyToken],(req,res) => {
     let issue = {
         cust_rej_id : Number(req.body.cust_rej_id),
         description : req.body.description,
-        rejected_qty : parseFloat(req.body.rejected_qty)
+        rejected_qty : parseFloat(req.body.rejected_qty),
+        uom:Number(req.body.uom)
     }
     editIssue(issue).then((result) => {
         res.status(200).json(result)
@@ -132,6 +143,18 @@ router.post('/editContainment',[verifyToken],(req,res) => {
     })
 })
 
+//To delete a containment
+router.post('/deleteContainment',[verifyToken],(req,res) => {
+    let containment = {
+        containment_id:Number(req.body.containment_id)
+    }
+    deleteContainment(containment).then((result) => {
+        res.status(200).json(result)
+    }).catch((err) => {
+        res.status(500).json(err)
+    })
+})
+
 //To get Inspectors
 router.get('/inspectors',[verifyToken],(req,res) => {
     getInspectorsCAPA().then((result) => {
@@ -183,6 +206,18 @@ router.post('/editCorrective',[verifyToken],(req,res) => {
     })
 })
 
+//To delete a corrective action
+router.post('/deleteCorrective',[verifyToken],(req,res) => {
+    let corrective = {
+        corrective_id :Number(req.body.corrective_id)
+    }
+    deleteCorrectiveAction(corrective).then((result) => {
+        res.status(200).json(result)
+    }).catch((err) => {
+        res.status(500).json(err)
+    })
+})
+
 //To create root cause
 router.post('/addRootCause',[verifyToken],(req,res) => {
     let rootCause = {
@@ -217,6 +252,18 @@ router.post('/editRootCause',[verifyToken],(req,res) => {
         remarks:req.body.remarks
     }
     editRootCause(root_cause).then((result) => {
+        res.status(200).json(result)
+    }).catch((err) => {
+        res.status(500).json(err)
+    })
+})
+
+//TO delete a root cause
+router.post('/deleteRootCause',[verifyToken],(req,res) => {
+    let root_cause = {
+        root_id:Number(req.body.root_id)
+    }
+    deleteRootCause(root_cause).then((result) => {
         res.status(200).json(result)
     }).catch((err) => {
         res.status(500).json(err)
@@ -259,6 +306,18 @@ router.post('/editPreventiveAction',[verifyToken],(req,res) => {
         inspector:Number(req.body.inspector)
     }
     editPreventiveAction(preventive_action).then((result) => {
+        res.status(200).json(result)
+    }).catch((err) => {
+        res.status(500).json(err)
+    })
+})
+
+//To delete preventive action
+router.post('/deletePreventiveAction',[verifyToken],(req,res) => {
+    let preventive_action = {
+        preventive_id:Number(req.body.preventive_id)
+    }
+    deletePreventiveAction(preventive_action).then((result) => {
         res.status(200).json(result)
     }).catch((err) => {
         res.status(500).json(err)

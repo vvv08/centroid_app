@@ -10,6 +10,7 @@ import AddMachineLossMaster from '../../../components/master/machineLoss/addMach
 import AddShiftMaster from '../../../components/master/shifts/addShift';
 import AddPartNumbersMaster from '../../../components/master/partNumbers/addPartNumber';
 import AddWorkOrderMaster from '../../../components/master/workOrder/addWorkOrder';
+import AddUOMMaster from '../../../components/master/uom/addUom';
 
 const AddMaster = () => {
     const {type} = useParams();
@@ -30,6 +31,7 @@ const AddMaster = () => {
             {type === "Shift" && <AddShiftMaster/>}
             {type === "Part Number" && <AddPartNumbersMaster/>}
             {type === "Work Order" && <AddWorkOrderMaster/>}
+            {type === "UOM" && <AddUOMMaster/>}
         </div>
     </>
   )

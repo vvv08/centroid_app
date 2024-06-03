@@ -1,14 +1,21 @@
-.customerHomeWrapper{
-    h1{
-        display: flex;
-        justify-content: center;
+.customerHomeWrapper {
+  .customerHomeHeader {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: center;
+    h1 {
+      display: flex;
+      justify-content: center;
     }
+  }
+
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  .customerHomeContent {
     display: flex;
     flex-direction: column;
-    gap: 50px;
-    .customerHomeContent{
-        display: flex;
-        flex-direction: column;
-        gap: 70px;
-    }
+    gap: 70px;
+  }
 }

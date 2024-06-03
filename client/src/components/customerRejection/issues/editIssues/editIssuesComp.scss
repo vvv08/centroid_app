@@ -33,6 +33,30 @@
             flex: 1;
           }
         }
+        .centroid_editIssue_search_list {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+          label {
+            color: var(--kssiaParaBold);
+            flex: 2;
+            font-size: 18px;
+          }
+          .centroid_search_select {
+            flex: 3;
+            height: 30px;
+            font-size: 16px;
+            cursor: pointer;
+          }
+          p{
+            flex: 1;
+            font-size: 12px;
+            color: var(--centroidBlue);
+            font-weight: 500;
+          }
+        }
       }
     }
   }

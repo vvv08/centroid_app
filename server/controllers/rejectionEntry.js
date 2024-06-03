@@ -8,7 +8,10 @@ const istDate = new Date(currentDate.getTime() + istOffset);
 const year = currentDate.getFullYear();
 const month = padZero(istDate.getMonth() + 1); // Months are zero-based (0 = January)
 const day = padZero(istDate.getDate());
-const curr_date = `${year}-${month}-${day}`;
+const hours = padZero(istDate.getUTCHours());
+const minutes = padZero(istDate.getUTCMinutes());
+const seconds = padZero(istDate.getUTCSeconds());
+const curr_date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
 //To get all active work orders
 export const getWorkOrders = () => {
@@ -29,7 +32,7 @@ export const getRejectionEntry = ({ id }) => {
   return new Promise(async (resolve, reject) => {
     try {
       const [res_rej_entries] = await db.query(
-        `select r.rejection_id, w.work_order as work_order,r.rejection_qty as rejection_qty,r.created_date as created_date,r.last_updated as last_updated,m.name as machine,o.operation_description as operation,op.name as operator,d.description as reason, r.remarks as remarks from rejections r inner join work_orders w on r.work_order_id = w.work_order_id inner join machines m on r.machine_id = m.machine_id inner join operations o on r.operation_id = o.operation_id inner join operators op on r.operator_id = op.operator_id inner join defects d on r.defect_id = d.defect_id where r.work_order_id = ${id};`
+        `select r.rejection_id, w.work_order as work_order,r.rejection_qty as rejection_qty, date_format(r.created_date, '%Y-%m-%d') as created_date, date_format(r.last_updated, '%Y-%m-%d') as last_updated ,m.name as machine,o.operation_description as operation,op.name as operator,d.description as reason, r.remarks as remarks from rejections r inner join work_orders w on r.work_order_id = w.work_order_id inner join machines m on r.machine_id = m.machine_id inner join operations o on r.operation_id = o.operation_id inner join operators op on r.operator_id = op.operator_id inner join defects d on r.defect_id = d.defect_id where r.work_order_id = ${id};`
       );
       resolve(res_rej_entries);
     } catch (err) {

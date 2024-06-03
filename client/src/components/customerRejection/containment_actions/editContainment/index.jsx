@@ -128,7 +128,7 @@ const EditContainmentComp = ({ containment_id }) => {
               />
             </div>
           <div className="centroid_editContainment_list">
-              <label htmlFor="stock_check_supplier">Stock checked at Supplier</label>
+              <label htmlFor="stock_check_supplier">Stock checked at Centroid</label>
               <select
                 id="stock_check_supplier"
                 type="text"

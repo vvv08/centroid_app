@@ -1,0 +1,23 @@
+.centroid_generalWrapper{
+    width: 100%;
+    .centroid_generalContainer{
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            td{
+                border: 1px solid black;
+                font-weight: 500;
+                height: 50px;
+                padding: 0px 0px 0px 15px;
+                ul{
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 30px;
+                }
+            }
+            .centroid_generalTable_header{
+                width: 200px;
+            }
+        }
+    }
+}

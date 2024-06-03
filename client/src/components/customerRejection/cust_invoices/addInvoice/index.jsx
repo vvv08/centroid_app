@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from "react";
 import "./addInvoiceComp.scss";
 import { useNavigate } from "react-router-dom";
-import { addInvoice, getDetails } from "../../../../repository/customerRejection/invoice";
-import Select from 'react-select';
+import {
+  addInvoice,
+  getDetails,
+} from "../../../../repository/customerRejection/invoice";
+import Select from "react-select";
 
 const AddInvoiceComp = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState([])
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [selections, setSelections] = useState({
-    customers:[],    
-    work_orders:[]
+    customers: [],
+    work_orders: [],
   });
   const [inputs, setInputs] = useState({
     invoice_number: "",
     status: "",
     remarks: "",
-    customer: ""
+    customer: "",
   });
 
   const handleChange = (options) => {
@@ -46,43 +49,43 @@ const AddInvoiceComp = () => {
   };
 
   const handleSubmit = (e) => {
-      e.preventDefault();
-      setLoading(true);
-      addInvoice({inputs , selectedOptions})
-        .then((result) => {
-          alert("Invoice added");
-          navigate("/invoice");
-        })
-        .catch((err) => {
-          if (err.response.data.status === "authenticationError") {
-            alert(err.response.data.message);
-            navigate("/login");
-          } else {
-            alert("Internal server error");
-            navigate("/maintenance");
-          }
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+    e.preventDefault();
+    setLoading(true);
+    addInvoice({ inputs, selectedOptions })
+      .then((result) => {
+        alert("Invoice added");
+        navigate("/invoice");
+      })
+      .catch((err) => {
+        if (err.response.data.status === "authenticationError") {
+          alert(err.response.data.message);
+          navigate("/login");
+        } else {
+          alert("Internal server error");
+          navigate("/maintenance");
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
     getDetails()
       .then((result) => {
         setSelections({
-            customers : result.customers,
-            work_orders : result.work_orders
-        })
+          customers: result.customers,
+          work_orders: result.work_orders,
+        });
       })
       .catch((err) => {
-              if (err.response.data.status === "authenticationError") {
-                alert(err.response.data.message);
-                navigate("/login");
-              } else {
-                alert("Internal server error");
-                navigate("/maintenance");
-              }
+        if (err.response.data.status === "authenticationError") {
+          alert(err.response.data.message);
+          navigate("/login");
+        } else {
+          alert("Internal server error");
+          navigate("/maintenance");
+        }
       });
   }, []);
 
@@ -110,7 +113,7 @@ const AddInvoiceComp = () => {
                 value={selections.customers.find(
                   (option) => option.value === inputs.customer
                 )}
-                onChange={(option) => handleSelectChange(option, 'customer')}
+                onChange={(option) => handleSelectChange(option, "customer")}
                 required
               />
               {inputs.customer && (
@@ -138,15 +141,13 @@ const AddInvoiceComp = () => {
                 //  onChange={(option) => handleSelectChange(option, 'work_order')}
                 required
               />
-              {/* {inputs.work_order && (
-                <p>
-                  {
-                    selections.work_orders.filter(
-                      (f) => f.value === Number(inputs.work_order)
-                    )[0].label
-                  }
-                </p>
-              )} */}
+              {selectedOptions[0] && (
+                <div className="centroid_addInvoice_work_orders">
+                    {selectedOptions.map((obj, index) => {
+                      return <p key={index}>{obj.label}</p>;
+                    })}
+                </div>
+              )}
             </div>
             <div className="centroid_addInvoice_list">
               <label htmlFor="status">Choose Status</label>
