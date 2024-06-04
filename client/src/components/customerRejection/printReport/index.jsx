@@ -69,7 +69,7 @@ const CustPrintReportComp = ({ invoice_id }) => {
             </div>
           </div>
           <div className="centroid_custPrintReportName">
-            <h2>Customer and Preventive actions</h2>
+            <h2>Corrective and Preventive actions</h2>
           </div>
           <div className="centroid_custPrintReportComp_8D_headers">
             <h4>1D General Information</h4>
