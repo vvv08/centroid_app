@@ -85,6 +85,7 @@ const CustPrintReportComp = ({ invoice_id }) => {
           <Containment data = {entries.containment_actions}/>
           <div
             className="centroid_custPrintReportComp_8D_headers"
+            style={{ "marginTop": "300px" }}
           >
             <h4>4D Root Cause analysis</h4>
           </div>
