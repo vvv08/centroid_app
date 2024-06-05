@@ -24,7 +24,7 @@ const CustomerRejectionPage = () => {
     );
     if (selectedInvoice) {
       navigate(
-        `/customerRejectionReport/${inputs.invoice}/${selectedInvoice.label}`
+        `/customerRejectionReport/${inputs.invoice}/'${selectedInvoice.label}'`
       );
     }
   }
