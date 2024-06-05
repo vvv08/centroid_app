@@ -83,7 +83,7 @@ const CustomerRejectionPage = () => {
                   className="centroid_AddButton"
                   disabled={loading}
                 >
-                  {loading ? "searching" : "Report"}
+                  Report
                 </button>
               </div>
           </div>
