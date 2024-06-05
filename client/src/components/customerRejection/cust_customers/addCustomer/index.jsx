@@ -9,7 +9,7 @@ const AddCustomerComp = () => {
   const [inputs, setInputs] = useState({
     name: "",
     status: "",
-    reamrks : ""
+    remarks : ""
   });
 
   const handleInputChange = (e) => {
