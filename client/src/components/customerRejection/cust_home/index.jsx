@@ -55,10 +55,11 @@ const CustomerHome = () => {
           <PrintIcon
             style={{ fontSize: "36px", cursor: "pointer" }}
             onClick={() => {
-              navigate(`/customer/printReport/${invoice_id}/${number}`);
+              navigate(`/customer/printReport/${invoice_id}/${encodeURIComponent(number)}`);
             }}
           />
         </div>
+
 
         <div className="customerHomeContent">
           {!loading && entries.issues && (
