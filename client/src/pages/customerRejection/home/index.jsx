@@ -24,10 +24,11 @@ const CustomerRejectionPage = () => {
     );
     if (selectedInvoice) {
       navigate(
-        `/customerRejectionReport/${inputs.invoice}/"${selectedInvoice.label}"`
+        `/customerRejectionReport/${inputs.invoice}/${encodeURIComponent(selectedInvoice.label)}`
       );
     }
   }
+
 
   useEffect(() => {
     setLoading(true);
