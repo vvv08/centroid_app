@@ -21,6 +21,8 @@ const EditInvoiceComp = ({ id }) => {
     status: "",
     remarks: "",
     customer: "",
+    customer_status: "",
+    customer_name: "",
   });
 
   const handleChange = (options) => {
@@ -80,6 +82,8 @@ const EditInvoiceComp = ({ id }) => {
           customer: result.invoice.customer_id || "",
           status: result.invoice.status || "",
           remarks: result.invoice.remarks || "",
+          customer_status: result.invoice.customer_status || "",
+          customer_name: result.invoice.customer || "",
         });
         setSelections({
           customers: result.customers || "",
@@ -113,28 +117,48 @@ const EditInvoiceComp = ({ id }) => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="centroid_editInvoice_search_list">
-              <label htmlFor="customer">Customer</label>
-              <Select
-                className="centroid_search_select"
-                options={selections.customers}
-                id="customer"
-                value={selections.customers.find(
-                  (option) => option.value === inputs.customer
-                )}
-                onChange={(option) => handleSelectChange(option, "customer")}
-                required
-              />
-              {inputs.customer && (
-                <p>
-                  {
-                    selections.customers.filter(
-                      (f) => f.value === Number(inputs.customer)
-                    )[0].label
-                  }
-                </p>
-              )}
-            </div>
+            {inputs.customer_status === "inactive" ? (
+              <div className="centroid_editInvoice_input">
+                <label htmlFor="customer">Customer (Inactive)</label>
+                <input
+                  id="customer"
+                  type="text"
+                  required
+                  value={inputs.customer_name}
+                  disabled={true}
+                />
+              </div>
+            ) : (
+              selections.customers[0] &&
+              selections.customers.filter(
+                (f) => f.value === Number(inputs.customer)
+              )[0] && (
+                <div className="centroid_editInvoice_search_list">
+                  <label htmlFor="customer">Customer</label>
+                  <Select
+                    className="centroid_search_select"
+                    options={selections.customers}
+                    id="customer"
+                    value={selections.customers.find(
+                      (option) => option.value === inputs.customer
+                    )}
+                    onChange={(option) =>
+                      handleSelectChange(option, "customer")
+                    }
+                    required
+                  />
+                  {inputs.customer && (
+                    <p>
+                      {
+                        selections.customers.filter(
+                          (f) => f.value === Number(inputs.customer)
+                        )[0].label
+                      }
+                    </p>
+                  )}
+                </div>
+              )
+            )}
             {!selections.work_orders.filter((f) =>
               selectedOptions.includes(f.value)
             )[0] && (

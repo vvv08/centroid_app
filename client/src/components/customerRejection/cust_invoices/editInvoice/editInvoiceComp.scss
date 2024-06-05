@@ -73,6 +73,10 @@
           font-size: 16px;
           cursor: pointer;
         }
+        p {
+          color: var(--centroidBlue);
+          font-weight: 500;
+        }
         .centroid_editInvoice_work_orders {
           flex: 1;
           display: flex;

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./editPreventiveActionComp.scss";
 import { useNavigate } from "react-router-dom";
 import {
-    editPreventiveAction,
+  editPreventiveAction,
   getInspectorsCAPA,
   getpreventiveActionDetail,
 } from "../../../../repository/customerRejection/capa";
-import Select from 'react-select';
+import Select from "react-select";
 
 const EditPreventiveActionComp = ({ preventive_id }) => {
   const navigate = useNavigate();
@@ -18,6 +18,8 @@ const EditPreventiveActionComp = ({ preventive_id }) => {
     inspector: "",
     description: "",
     remarks: "",
+    inspector_status: "",
+    inspector_name: "",
   });
 
   const handleInputChange = (e) => {
@@ -34,29 +36,29 @@ const EditPreventiveActionComp = ({ preventive_id }) => {
   };
 
   const handleSelectChange = (selectedOption, field) => {
-    setInputs((state) => ({ ...state, [field]: selectedOption.value || ""  }));
+    setInputs((state) => ({ ...state, [field]: selectedOption.value || "" }));
   };
 
   const handleSubmit = (e) => {
-     e.preventDefault();
-     setLoading(true);
-     editPreventiveAction(inputs)
-       .then((result) => {
-         alert("Preventive action edited");
-         window.history.back();
-       })
-       .catch((err) => {
-         if (err.response.data.status === "authenticationError") {
-           alert(err.response.data.message);
-           navigate("/login");
-         } else {
-           alert("Internal server error");
-           navigate("/maintenance");
-         }
-       })
-       .finally(() => {
-         setLoading(false);
-       });
+    e.preventDefault();
+    setLoading(true);
+    editPreventiveAction(inputs)
+      .then((result) => {
+        alert("Preventive action edited");
+        window.history.back();
+      })
+      .catch((err) => {
+        if (err.response.data.status === "authenticationError") {
+          alert(err.response.data.message);
+          navigate("/login");
+        } else {
+          alert("Internal server error");
+          navigate("/maintenance");
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -68,6 +70,8 @@ const EditPreventiveActionComp = ({ preventive_id }) => {
           description: result.preventive_action || "",
           remarks: result.remarks || "",
           inspector: result.inspector_id || "",
+          inspector_status: result.inspector_status || "",
+          inspector_name: result.inspector || "",
         });
       })
       .catch((err) => {
@@ -109,31 +113,46 @@ const EditPreventiveActionComp = ({ preventive_id }) => {
                 disabled={true}
               />
             </div>
-            {inspectors.filter(
-              (f) => f.value === Number(inputs.inspector)
-            )[0] && (
-              <div className="centroid_editPreventiveAction_search_list">
-                <label htmlFor="inspector">Inspector</label>
-                <Select
-                  className="centroid_search_select"
-                  options={inspectors}
+            {inputs.inspector_status === "inactive" ? (
+              <div className="centroid_editPreventiveAction_input">
+                <label htmlFor="inspector">Inspector (Inactive)</label>
+                <input
                   id="inspector"
-                  value={inspectors.find(
-                    (option) => option.value === inputs.inspector
-                  )}
-                  onChange={(option) => handleSelectChange(option, "inspector")}
+                  type="text"
                   required
+                  value={inputs.inspector_name}
+                  disabled={true}
                 />
-                {inputs.inspector && (
-                  <p>
-                    {
-                      inspectors.filter(
-                        (f) => f.value === Number(inputs.inspector)
-                      )[0].label
-                    }
-                  </p>
-                )}
               </div>
+            ) : (
+              inspectors.filter(
+                (f) => f.value === Number(inputs.inspector)
+              )[0] && (
+                <div className="centroid_editPreventiveAction_search_list">
+                  <label htmlFor="inspector">Inspector</label>
+                  <Select
+                    className="centroid_search_select"
+                    options={inspectors}
+                    id="inspector"
+                    value={inspectors.find(
+                      (option) => option.value === inputs.inspector
+                    )}
+                    onChange={(option) =>
+                      handleSelectChange(option, "inspector")
+                    }
+                    required
+                  />
+                  {inputs.inspector && (
+                    <p>
+                      {
+                        inspectors.filter(
+                          (f) => f.value === Number(inputs.inspector)
+                        )[0].label
+                      }
+                    </p>
+                  )}
+                </div>
+              )
             )}
             <div className="centroid_editPreventiveAction_input">
               <label htmlFor="description">Preventive action</label>

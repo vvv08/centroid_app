@@ -13,6 +13,8 @@ const minutes = padZero(istDate.getUTCMinutes());
 const seconds = padZero(istDate.getUTCSeconds());
 const curr_date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
+console.log({IST : curr_date, current : currentDate})
+
 export const getCAPADetails = ({ id }) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -20,7 +22,7 @@ export const getCAPADetails = ({ id }) => {
       const [general] = await db.query(`select c.name as customer, i.invoice_number as invoice_number, i.invoice_id as invoice_id, json_arrayagg(w.work_order) as work_order, json_arrayagg(p.part_number) as part_number, json_arrayagg(p.part_name) as part_name from invoices i inner join invoice_work_order iw on i.invoice_id = iw.invoice_id inner join work_orders w on iw.work_order_id = w.work_order_id inner join part_numbers p on w.part_number_id = p.part_number_id inner join customers c on i.customer_id = c.customer_id where i.invoice_id = ${id} group by iw.invoice_id;`);
 
       const [issues] = await db.query(
-        `select u.description as uom, r.cust_rej_id, i.invoice_number, r.description as problem,  date_format(r.created_date, '%Y-%m-%d') as created_date, date_format(r.last_updated, '%Y-%m-%d') as last_updated , r.rejected_qty from cust_rejection_issues r inner join invoices i on r.invoice_id = i.invoice_id inner join unit_of_measurements u on r.uom_id = u.uom_id where r.invoice_id = ${id};`
+        `select u.description as uom , r.cust_rej_id, i.invoice_number, r.description as problem,  date_format(r.created_date, '%Y-%m-%d') as created_date, date_format(r.last_updated, '%Y-%m-%d') as last_updated , r.rejected_qty from cust_rejection_issues r inner join invoices i on r.invoice_id = i.invoice_id inner join unit_of_measurements u on r.uom_id = u.uom_id where r.invoice_id = ${id};`
       );
 
       const [containment] = await db.query(
@@ -108,7 +110,7 @@ export const getIssueForEdit = ({ cust_rej_id }) => {
   return new Promise(async (resolve, reject) => {
     try {
       const [[issue]] = await db.query(
-        `select cust_rej_id, description as problem, rejected_qty, uom_id as uom from cust_rejection_issues where cust_rej_id = ${cust_rej_id};`
+        `select r.cust_rej_id, r.description as problem, r.rejected_qty, r.uom_id as uom , u.description as uom_desc , u.status as uom_status from cust_rejection_issues r inner join unit_of_measurements u on r.uom_id = u.uom_id where cust_rej_id = ${cust_rej_id};`
       );
       resolve(issue);
     } catch (err) {
@@ -269,7 +271,7 @@ export const getInspectorsCAPA = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const [inspectors] = await db.query(
-        `select inspector_id as value, name as label from inspectors;`
+        `select inspector_id as value, name as label from inspectors where status != "inactive";`
       );
       resolve(inspectors);
     } catch (err) {
@@ -304,7 +306,7 @@ export const getCorrectiveDetails = ({ corrective_id }) => {
   return new Promise(async (resolve, reject) => {
     try {
       const [[corrective]] = await db.query(
-        `select c.corrective_id , c.description as corrective_action , c.created_date as created_date , c.last_updated as last_updated , c.remarks , i.name as inspector, c.inspector_id as inspector_id , rt.description as problem from cust_corrective_actions c inner join cust_rejection_issues rt on c.cust_rej_id = rt.cust_rej_id inner join inspectors i on c.inspector_id = i.inspector_id where c.corrective_id = ${corrective_id};`
+        `select c.corrective_id , c.description as corrective_action , c.created_date as created_date , c.last_updated as last_updated , c.remarks , i.name as inspector, i.status as inspector_status, c.inspector_id as inspector_id , rt.description as problem from cust_corrective_actions c inner join cust_rejection_issues rt on c.cust_rej_id = rt.cust_rej_id inner join inspectors i on c.inspector_id = i.inspector_id where c.corrective_id = ${corrective_id};`
       );
       resolve(corrective);
     } catch (err) {
@@ -460,7 +462,7 @@ export const addPreventiveAction = ({
 export const getPreventiveActionDetail = ({preventive_id}) => {
   return new Promise(async(resolve,reject) => {
     try{
-      const [[preventive_action]] = await db.query(`select p.preventive_id , p.description as preventive_action , p.created_date as created_date , p.last_updated as last_updated , p.remarks , i.name as inspector , r.description as problem , p.inspector_id as inspector_id from cust_preventive_actions p inner join cust_rejection_issues r on p.cust_rej_id = r.cust_rej_id inner join inspectors i on p.inspector_id = i.inspector_id where p.preventive_id = ${preventive_id};`)
+      const [[preventive_action]] = await db.query(`select p.preventive_id , p.description as preventive_action , p.created_date as created_date , p.last_updated as last_updated , p.remarks , i.name as inspector, i.status as inspector_status , r.description as problem , p.inspector_id as inspector_id from cust_preventive_actions p inner join cust_rejection_issues r on p.cust_rej_id = r.cust_rej_id inner join inspectors i on p.inspector_id = i.inspector_id where p.preventive_id = ${preventive_id};`)
       resolve(preventive_action)
     }catch(err){
       reject(err)

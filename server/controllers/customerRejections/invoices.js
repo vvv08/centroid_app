@@ -88,7 +88,7 @@ export const getInvoiceDetails = ({ id }) => {
   return new Promise(async (resolve, reject) => {
     try {
       const [[invoice]] = await db.query(
-        `select * from invoices  where invoice_id = ${id};`
+        `select i.* , c.status as customer_status, c.name as customer from invoices i inner join customers c on i.customer_id = c.customer_id  where i.invoice_id = ${id};`
       );
       const [invoice_work_order] = await db.query(`select iw.work_order_id as value , w.work_order as label from invoice_work_order iw inner join work_orders w on iw.work_order_id = w.work_order_id where iw.invoice_id = ${id} and w.status != "inactive"`);
       const [customers] = await db.query(

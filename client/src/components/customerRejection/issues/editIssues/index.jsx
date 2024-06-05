@@ -18,7 +18,9 @@ const EditIssuesComp = ({ cust_rej_id }) => {
     cust_rej_id: cust_rej_id,
     description: "",
     rejected_qty: "",
-    uom:""
+    uom:"",
+    uom_status:"",
+    uom_desc:""
   });
 
   const handleInputChange = (e) => {
@@ -85,7 +87,9 @@ const EditIssuesComp = ({ cust_rej_id }) => {
           cust_rej_id: cust_rej_id,
           description: result.problem || "",
           rejected_qty: result.rejected_qty || "",
-          uom: result.uom || ""
+          uom: result.uom || "",
+          uom_status:result.uom_status || "",
+          uom_desc:result.uom_desc || ""
         });
       })
       .catch((err) => {
@@ -124,6 +128,18 @@ const EditIssuesComp = ({ cust_rej_id }) => {
                 value={inputs.rejected_qty}
               />
             </div>
+            {inputs.uom_status === "inactive" ?
+            <div className="centroid_editIssue_input">
+              <label htmlFor="uom">UOM (Inactive)</label>
+              <input
+                id="uom"
+                type="text"
+                required
+                disabled={true}
+                value={inputs.uom_desc}
+              />
+            </div> 
+            :
             <div className="centroid_editIssue_search_list">
                 <label htmlFor="uom">UOM</label>
                 <Select
@@ -145,7 +161,7 @@ const EditIssuesComp = ({ cust_rej_id }) => {
                     }
                   </p>
                 )}
-              </div>
+              </div>}
             <div className="centroid_formSubmitContainer">
               <button
                 type="submit"

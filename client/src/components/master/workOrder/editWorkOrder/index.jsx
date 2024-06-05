@@ -108,7 +108,7 @@ const EditWorkOrderMaster = ({ id }) => {
             </div>
             {partNumbers[0] && partNumbers.filter(
                       (f) => f.value === Number(inputs.part_number)
-                    )[0].label && <div className="centroid_editWorkOrder_search_list">
+                    )[0] && <div className="centroid_editWorkOrder_search_list">
               <label htmlFor="part_number">Choose Part Number</label>
               <Select
                 className="centroid_search_select"
