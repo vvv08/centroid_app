@@ -14,8 +14,6 @@ const seconds = padZero(istDate.getUTCSeconds());
 // const curr_date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 const curr_date = `${year}-${month}-${day}`;
 
-console.log({IST : curr_date, current : currentDate})
-
 export const getCAPADetails = ({ id }) => {
   return new Promise(async (resolve, reject) => {
     try {

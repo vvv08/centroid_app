@@ -75,7 +75,7 @@ export const getDowntimeEntry = ({ id }) => {
   return new Promise(async (resolve, reject) => {
     try {
       const [[entry]] = await db.query(
-        `select *, DATE_FORMAT(date, '%Y-%m-%dT%H:%i') as date, DATE_FORMAT(idle_from, '%Y-%m-%dT%H:%i') as idle_time_from, DATE_FORMAT(idle_to, '%Y-%m-%dT%H:%i') as idle_time_to  from downtime_dashboard where downtime_id = ${id};`
+        `select d.*,m.name as machine,m.status as machine_status,ml.description as machine_loss, ml.status as machine_loss_status,i.name as inspector,i.status as inspector_status ,DATE_FORMAT(d.date, '%Y-%m-%dT%H:%i') as date, DATE_FORMAT(d.idle_from, '%Y-%m-%dT%H:%i') as idle_time_from, DATE_FORMAT(d.idle_to, '%Y-%m-%dT%H:%i') as idle_time_to  from downtime_dashboard d inner join machines m on d.machine_id = m.machine_id inner join machine_loss ml on d.machine_loss_id = ml.machine_loss_id inner join inspectors i on d.inspector_id = i.inspector_id where d.downtime_id = ${id};`
       );
       resolve(entry);
     } catch (err) {

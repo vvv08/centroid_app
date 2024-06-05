@@ -627,7 +627,7 @@ export const getWorkOrderDetails = ({ id }) => {
   return new Promise(async (resolve, reject) => {
     try {
       const [[res_work_order]] = await db.query(
-        `select *, date_format(created_date, '%Y-%m-%d') as created_date, date_format(last_updated, '%Y-%m-%d') as last_updated from work_orders where work_order_id = ${id};`
+        `select w.*, p.status as part_number_status,p.part_number as part_number,date_format(w.created_date, '%Y-%m-%d') as created_date, date_format(w.last_updated, '%Y-%m-%d') as last_updated from work_orders w inner join part_numbers p on w.part_number_id = p.part_number_id where w.work_order_id = ${id};`
       );
       const [res_active_part_numbers] = await db.query(
         "select part_number_id as value,part_number as label from part_numbers where status != 'inactive';"

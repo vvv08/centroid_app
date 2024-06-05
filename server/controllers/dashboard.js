@@ -165,7 +165,7 @@ export const getEntryForEdit = ({ id }) => {
   return new Promise(async (resolve, reject) => {
     try {
       const [[result]] = await db.query(
-        `select *, DATE_FORMAT(date, '%Y-%m-%dT%H:%i') as date, DATE_FORMAT(production_from, '%Y-%m-%dT%H:%i') as production_from, DATE_FORMAT(production_to, '%Y-%m-%dT%H:%i') as production_to  from rejection_dashboard where Id = ${id};`
+        `select r.*,s.status as shift_status, s.description as shift, i.status as inspector_status,i.name as inspector,w.status as work_order_status, w.work_order as work_order ,DATE_FORMAT(r.date, '%Y-%m-%dT%H:%i') as date, DATE_FORMAT(r.production_from, '%Y-%m-%dT%H:%i') as production_from, DATE_FORMAT(r.production_to, '%Y-%m-%dT%H:%i') as production_to from rejection_dashboard r inner join shifts s on r.shift_id = s.shift_id inner join inspectors i on r.inspector_id = i.inspector_id inner join work_orders w on r.work_order_id = w.work_order_id where r.Id = ${id};`
       );
       resolve(result);
     } catch (err) {

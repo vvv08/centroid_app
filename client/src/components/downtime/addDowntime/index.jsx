@@ -102,14 +102,14 @@ const AddDowntimeComp = () => {
                 value={inputs.machine}
                 required
               >
-                <option value={0}>Select</option>
+                <option value="">Select</option>
                 {dataLists.machines && dataLists.machines.map((obj) => {
                   return(
                     <option value={obj.machine_id} key={obj.machine_id}>{obj.name}</option>
                   )
                 })}
               </select>
-              {inputs.machine > 0 && <p>{dataLists.machines.filter((f) => f.machine_id === Number(inputs.machine))[0].name}</p>}
+              {inputs.machine && <p>{dataLists.machines.filter((f) => f.machine_id === Number(inputs.machine))[0].name}</p>}
             </div>
             <div className="centroid_addDowntimeComp_list">
               <label htmlFor="idle_time_from">Machine idle from</label>
@@ -143,14 +143,14 @@ const AddDowntimeComp = () => {
                 value={inputs.machine_loss}
                 required
               >
-                <option value={0}>Select</option>
+                <option value="">Select</option>
                 {dataLists.machine_loss && dataLists.machine_loss.map((obj) => {
                   return(
                     <option value={obj.machine_loss_id} key={obj.machine_loss_id}>{obj.description}</option>
                   )
                 })}
               </select>
-              {inputs.machine_loss > 0 && <p>{dataLists.machine_loss.filter((f) => f.machine_loss_id === Number(inputs.machine_loss))[0].description}</p>}
+              {inputs.machine_loss && <p>{dataLists.machine_loss.filter((f) => f.machine_loss_id === Number(inputs.machine_loss))[0].description}</p>}
             </div>
             <div className="centroid_addDowntimeComp_list">
               <label htmlFor="inspector">Choose Inspector</label>
@@ -161,14 +161,14 @@ const AddDowntimeComp = () => {
                 value={inputs.inspector}
                 required
               >
-                <option value={0}>Select</option>
+                <option value="">Select</option>
                 {dataLists.inspectors && dataLists.inspectors.map((obj) => {
                   return(
                     <option value={obj.inspector_id} key={obj.inspector_id}>{obj.name}</option>
                   )
                 })}
               </select>
-              {inputs.inspector > 0 && <p>{dataLists.inspectors.filter((f) => f.inspector_id === Number(inputs.inspector))[0].name}</p>}
+              {inputs.inspector && <p>{dataLists.inspectors.filter((f) => f.inspector_id === Number(inputs.inspector))[0].name}</p>}
             </div>
             <div className="centroid_addDowntimeComp_input">
               <label htmlFor="remarks">Remarks</label>

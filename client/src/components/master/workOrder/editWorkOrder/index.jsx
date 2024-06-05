@@ -5,12 +5,12 @@ import {
   editWorkOrder,
   getWorkOrderDetails,
 } from "../../../../repository/master";
-import Select from 'react-select';
+import Select from "react-select";
 
 const EditWorkOrderMaster = ({ id }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [partNumbers , setPartNumbers] = useState([])
+  const [partNumbers, setPartNumbers] = useState([]);
   const [inputs, setInputs] = useState({
     id: "",
     work_order: "",
@@ -18,6 +18,8 @@ const EditWorkOrderMaster = ({ id }) => {
     part_number: "",
     remarks: "",
     total_mix: "",
+    part_number_status: "",
+    part_number_desc: "",
   });
 
   const handleInputChange = (e) => {
@@ -77,6 +79,8 @@ const EditWorkOrderMaster = ({ id }) => {
           part_number: result.work_order.part_number_id || "",
           total_mix: result.work_order.total_mix || "",
           remarks: result.work_order.remarks || "",
+          part_number_status: result.work_order.part_number_status || "",
+          part_number_desc: result.work_order.part_number || "",
         });
         setPartNumbers(result.part_numbers);
       })
@@ -90,6 +94,8 @@ const EditWorkOrderMaster = ({ id }) => {
         }
       });
   }, []);
+
+  console.log(inputs)
 
   return (
     <>
@@ -106,30 +112,46 @@ const EditWorkOrderMaster = ({ id }) => {
                 onChange={handleInputChange}
               />
             </div>
-            {partNumbers[0] && partNumbers.filter(
-                      (f) => f.value === Number(inputs.part_number)
-                    )[0] && <div className="centroid_editWorkOrder_search_list">
-              <label htmlFor="part_number">Choose Part Number</label>
-              <Select
-                className="centroid_search_select"
-                options={partNumbers}
-                id="part_number"
-                value={partNumbers.find(
-                  (option) => option.value === inputs.part_number
-                )}
-                onChange={handleSelectChange}
-                required
-              />
-              {inputs.part_number && (
-                <p>
-                  {
-                    partNumbers.filter(
-                      (f) => f.value === Number(inputs.part_number)
-                    )[0].label
-                  }
-                </p>
-              )}
-            </div>}
+            {inputs.part_number_status === "inactive" ? (
+              <div className="centroid_editWorkOrder_input">
+                <label htmlFor="part_number">Part number (Inactive)</label>
+                <input
+                  id="part_number"
+                  type="text"
+                  required
+                  value={inputs.part_number_desc}
+                  disabled={true}
+                />
+              </div>
+            ) : (
+              partNumbers[0] &&
+              partNumbers.filter(
+                (f) => f.value === Number(inputs.part_number)
+              )[0] && (
+                <div className="centroid_editWorkOrder_search_list">
+                  <label htmlFor="part_number">Choose Part Number</label>
+                  <Select
+                    className="centroid_search_select"
+                    options={partNumbers}
+                    id="part_number"
+                    value={partNumbers.find(
+                      (option) => option.value === inputs.part_number
+                    )}
+                    onChange={handleSelectChange}
+                    required
+                  />
+                  {inputs.part_number && (
+                    <p>
+                      {
+                        partNumbers.filter(
+                          (f) => f.value === Number(inputs.part_number)
+                        )[0].label
+                      }
+                    </p>
+                  )}
+                </div>
+              )
+            )}
             <div className="centroid_editWorkOrder_input">
               <label htmlFor="total_mix">Total mix (Kg)</label>
               <input
@@ -153,7 +175,9 @@ const EditWorkOrderMaster = ({ id }) => {
                 <option value={"active"}>Active</option>
                 <option value={"inactive"}>Inactive</option>
               </select>
-              {inputs.status && <p>{inputs.status === "active" ? "Active" : "Inactive"}</p>}
+              {inputs.status && (
+                <p>{inputs.status === "active" ? "Active" : "Inactive"}</p>
+              )}
             </div>
             <div className="centroid_editWorkOrder_input">
               <label htmlFor="remarks">Remarks</label>
