@@ -11,7 +11,8 @@ const day = padZero(istDate.getDate());
 const hours = padZero(istDate.getUTCHours());
 const minutes = padZero(istDate.getUTCMinutes());
 const seconds = padZero(istDate.getUTCSeconds());
-const curr_date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+// const curr_date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+const curr_date = `${year}-${month}-${day}`;
 
 console.log({IST : curr_date, current : currentDate})
 
