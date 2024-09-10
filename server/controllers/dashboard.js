@@ -48,7 +48,7 @@ export const getDashboard = ({ from, to }) => {
         date_format(r.date,'%Y-%m-%d') between "${from}" and "${to}"
     GROUP BY 
         r.date, s.description, i.name, r.remarks, r.production_qty, r.production_from, r.production_to, w.work_order,p.part_number_id
-    ORDER BY r.date DESC   
+    ORDER BY r.Id DESC   
         ;`
       );
       const result2 = await db.query(
