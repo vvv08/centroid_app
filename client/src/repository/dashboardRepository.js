@@ -9,6 +9,7 @@ export const getDashboard = async ({fromDate,toDate}) => {
             authorization: "Bearer " + localStorage.getItem("token"),
           }
         })
+        console.log(result.data)
         return result.data
     }catch(err){
         console.log("Error: ", err)
