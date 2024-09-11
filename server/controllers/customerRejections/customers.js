@@ -1,23 +1,10 @@
 import { db } from "../../config/connection.js"
-import { padZero } from "../../validations/validations.js";
-
-//To get current date
-const currentDate = new Date();
-const istOffset = 5.5 * 60 * 60 * 1000;
-const istDate = new Date(currentDate.getTime() + istOffset);
-const year = currentDate.getFullYear();
-const month = padZero(istDate.getMonth() + 1); // Months are zero-based (0 = January)
-const day = padZero(istDate.getDate());
-const hours = padZero(istDate.getUTCHours());
-const minutes = padZero(istDate.getUTCMinutes());
-const seconds = padZero(istDate.getUTCSeconds());
-const curr_date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
 //To get all customers
 export const getCustomers = () => {
     return new Promise(async(resolve,reject) => {
         try{
-            const [customers] = await db.query("select * , created_date as created_date, last_updated as last_updated from customers;")
+            const [customers] = await db.query("select * , CONVERT_TZ(created_date, '+00:00', '+05:30') as created_date, CONVERT_TZ(last_updated, '+00:00', '+05:30') as last_updated from customers;")
             resolve(customers)
         }catch(err){
             reject(err)
@@ -33,7 +20,7 @@ export const addCustomer = ({
 }) => {
     return new Promise (async(resolve,reject) => {
         try{
-            const [result] = await db.query(`insert into customers (name,status,remarks,created_date,last_updated) values ("${name}","${status}","${remarks}","${curr_date}","${curr_date}");`)
+            const [result] = await db.query(`insert into customers (name,status,remarks,created_date,last_updated) values ("${name}","${status}","${remarks}",NOW(),NOW());`)
             let insertedCustomer = {
                 id: result.insertId,
                 name,
@@ -69,7 +56,7 @@ export const editCustomer = ({
     return new Promise(async(resolve,reject) => {
         try{
             const [customer] = await db.query(`select * from customers where customer_id = ${id};`)
-            const [result] = await db.query(`update customers set name = "${name}",status = "${status}", remarks = "${remarks}", last_updated = "${curr_date}" where customer_id = ${id};`)
+            const [result] = await db.query(`update customers set name = "${name}",status = "${status}", remarks = "${remarks}", last_updated = NOW() where customer_id = ${id};`)
             let editedCustomer = {
                 id,
                 name,

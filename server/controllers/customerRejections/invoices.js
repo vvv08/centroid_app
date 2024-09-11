@@ -1,25 +1,11 @@
 import { db } from "../../config/connection.js";
-import { padZero } from "../../validations/validations.js";
-
-//To get current date
-const currentDate = new Date();
-const istOffset = 5.5 * 60 * 60 * 1000;
-const istDate = new Date(currentDate.getTime() + istOffset);
-const year = currentDate.getFullYear();
-const month = padZero(istDate.getMonth() + 1); // Months are zero-based (0 = January)
-const day = padZero(istDate.getDate());
-const hours = padZero(istDate.getUTCHours());
-const minutes = padZero(istDate.getUTCMinutes());
-const seconds = padZero(istDate.getUTCSeconds());
-const curr_date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-
 
 //To get invoices
-export const getInvoices = () => {
+export const getInvoices = () => { 
   return new Promise(async (resolve, reject) => {
     try {
       const [result] = await db.query(
-        "select i.invoice_id, i.invoice_number, i.created_date as created_date,i.last_updated as last_updated, c.name as customer, JSON_ARRAYAGG(w.work_order) as work_order, i.remarks, i.status  from invoices i inner join customers c on i.customer_id = c.customer_id inner join invoice_work_order iw on i.invoice_id = iw.invoice_id inner join work_orders w on iw.work_order_id = w.work_order_id group by i.invoice_id;"
+        "select i.invoice_id, i.invoice_number, CONVERT_TZ(i.created_date, '+00:00', '+05:30') as created_date,CONVERT_TZ(i.last_updated, '+00:00', '+05:30') as last_updated, c.name as customer, JSON_ARRAYAGG(w.work_order) as work_order, i.remarks, i.status  from invoices i inner join customers c on i.customer_id = c.customer_id inner join invoice_work_order iw on i.invoice_id = iw.invoice_id inner join work_orders w on iw.work_order_id = w.work_order_id group by i.invoice_id;"
       );
       resolve(result);
     } catch (err) {
@@ -59,7 +45,7 @@ export const addInvoice = ({
   return new Promise(async (resolve, reject) => {
     try {
       const [result] = await db.query(
-        `insert into invoices (invoice_number,customer_id,status,remarks,created_date,last_updated) values ("${invoice_number}",${customer},"${status}","${remarks}","${curr_date}","${curr_date}");`
+        `insert into invoices (invoice_number,customer_id,status,remarks,created_date,last_updated) values ("${invoice_number}",${customer},"${status}","${remarks}",NOW(),NOW());`
       );
       let insertedInvoice = {
         id: result.insertId,
@@ -124,7 +110,7 @@ export const editInvoice = ({
         `select * from invoices where invoice_id = ${id};`
       );
       const [result] = await db.query(
-        `update invoices set invoice_number = "${invoice_number}", customer_id = ${customer}, status = "${status}",remarks = "${remarks}", last_updated = "${curr_date}" where invoice_id = ${id};`
+        `update invoices set invoice_number = "${invoice_number}", customer_id = ${customer}, status = "${status}",remarks = "${remarks}", last_updated = NOW() where invoice_id = ${id};`
       );
       let editedInvoice = {
         id,
