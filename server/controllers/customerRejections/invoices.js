@@ -5,7 +5,7 @@ export const getInvoices = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const [result] = await db.query(
-        "select i.invoice_id, i.invoice_number, CONVERT_TZ(i.created_date, '+00:00', '+05:30') as created_date,CONVERT_TZ(i.last_updated, '+00:00', '+05:30') as last_updated, c.name as customer, JSON_ARRAYAGG(w.work_order) as work_order, i.remarks, i.status  from invoices i inner join customers c on i.customer_id = c.customer_id inner join invoice_work_order iw on i.invoice_id = iw.invoice_id inner join work_orders w on iw.work_order_id = w.work_order_id group by i.invoice_id;"
+        "select i.invoice_id, i.invoice_number, CONVERT_TZ(i.created_date, '+00:00', '+05:30') as created_date,CONVERT_TZ(i.last_updated, '+00:00', '+05:30') as last_updated, c.name as customer, JSON_ARRAYAGG(w.work_order) as work_order, i.remarks, i.status  from invoices i inner join customers c on i.customer_id = c.customer_id inner join invoice_work_order iw on i.invoice_id = iw.invoice_id inner join work_orders w on iw.work_order_id = w.work_order_id group by i.invoice_id ORDER BY i.created_date DESC;"
       );
       resolve(result);
     } catch (err) {
